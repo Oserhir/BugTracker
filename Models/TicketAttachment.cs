@@ -33,7 +33,7 @@ namespace TheBugTracker.Models
         public string FileContentType { get; set; }
 
 
-        // public virtual Ticket Ticket { get; set; }
+        public virtual Ticket Ticket { get; set; }
         public virtual BTUser user { get; set; }
 
 
