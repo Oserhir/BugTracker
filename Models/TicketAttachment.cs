@@ -34,7 +34,7 @@ namespace TheBugTracker.Models
         public int TicketId { get; set; }
 
         public virtual Ticket Ticket { get; set; }
-        public virtual BTUser user { get; set; }
+        public virtual BTUser User { get; set; }
 
     }
 }
