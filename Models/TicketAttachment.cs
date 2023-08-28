@@ -6,11 +6,8 @@ namespace TheBugTracker.Models
 {
     public class TicketAttachment
     {
-
+        // Primary Key
         public int Id { get; set; }
-
-        [DisplayName("Ticket")]
-        public int TicketId { get; set; }
 
         [DisplayName("File Date")]
         public DateTimeOffset Created { get; set; }
@@ -32,10 +29,12 @@ namespace TheBugTracker.Models
         [DisplayName("File Extension")]
         public string FileContentType { get; set; }
 
+        // Foreign keys
+        [DisplayName("Ticket")]
+        public int TicketId { get; set; }
 
         public virtual Ticket Ticket { get; set; }
         public virtual BTUser user { get; set; }
-
 
     }
 }

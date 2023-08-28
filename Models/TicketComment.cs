@@ -4,7 +4,6 @@ namespace TheBugTracker.Models
 {
     public class TicketComment
     {
-
         public int Id { get; set; }
 
         [DisplayName("Member Commend")]
@@ -20,7 +19,7 @@ namespace TheBugTracker.Models
         public string UserId { get; set; }
 
         public virtual Ticket Ticket { get; set; }
-        public virtual BTUser user { get; set; }
+        public virtual BTUser User { get; set; }
 
     }
 }

@@ -6,18 +6,15 @@ namespace TheBugTracker.Models
 {
     public class Project
     {
-
+        // Primary Key
         public int Id { get; set; }
-
-        [DisplayName("Company")]
-        public int? CompanyId { get; set; }
-
+       
         [Required]
         [StringLength(50)]
         [DisplayName("Project Name")]
         public string Name { get; set; }
 
-        [DisplayName("Descrption")]
+        [DisplayName("Description")]
         public string Description { get; set; }
 
         [DisplayName("Start Date")]
@@ -26,8 +23,8 @@ namespace TheBugTracker.Models
         [DisplayName("End Date")]
         public DateTimeOffset EndDate { get; set; }
 
-        [DisplayName("Priority")]
-        public int? ProjectPriorityId { get; set; }
+        [DisplayName("Archived")]
+        public bool Archived { get; set; }
 
         // Image
         [NotMapped]
@@ -41,15 +38,17 @@ namespace TheBugTracker.Models
         [DisplayName("File Extension")]
         public string ImageContentType { get; set; }
 
-        [DisplayName("Archived")]
-        public bool Archived { get; set; }
+        // Foreign Keys
+        [DisplayName("Company")]
+        public int? CompanyId { get; set; }
 
+        [DisplayName("Priority")]
+        public int? ProjectPriorityId { get; set; }
 
         // -- Navigation Prop -- //
 
         public virtual Company Company { get; set; }
         public virtual ProjectPriority ProjectPriority { get; set; }
-
 
         public virtual ICollection<BTUser> Members { get; set; } = new HashSet<BTUser>();
         public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
