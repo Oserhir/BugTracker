@@ -18,7 +18,7 @@ namespace TheBugTracker.Models
         public string Name { get; set; }
 
         [DisplayName("Descrption")]
-        public string Descrption { get; set; }
+        public string Description { get; set; }
 
         [DisplayName("Start Date")]
         public DateTimeOffset StartDate { get; set; }
@@ -47,7 +47,7 @@ namespace TheBugTracker.Models
 
         // -- Navigation Prop -- //
 
-        // public virtual Company Company { get; set; }
+        public virtual Company Company { get; set; }
         public virtual ProjectPriority ProjectPriority { get; set; }
 
 
