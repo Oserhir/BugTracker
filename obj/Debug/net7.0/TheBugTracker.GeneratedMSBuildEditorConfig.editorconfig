@@ -176,12 +176,112 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Companies/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFuaWVzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Companies/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFuaWVzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Companies/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFuaWVzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Companies/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFuaWVzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Companies/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFuaWVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Invites/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52aXRlc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Invites/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52aXRlc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Invites/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52aXRlc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Invites/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52aXRlc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Invites/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52aXRlc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Notifications/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Notifications/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Notifications/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Notifications/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Notifications/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/ProjectPriorities/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFByaW9yaXRpZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/ProjectPriorities/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFByaW9yaXRpZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/ProjectPriorities/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFByaW9yaXRpZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/ProjectPriorities/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFByaW9yaXRpZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/ProjectPriorities/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFByaW9yaXRpZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Projects/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdHNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Projects/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdHNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Projects/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Projects/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdHNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Projects/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Shared/Error.cshtml]
@@ -194,6 +294,146 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketAttachments/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0QXR0YWNobWVudHNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketAttachments/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0QXR0YWNobWVudHNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketAttachments/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0QXR0YWNobWVudHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketAttachments/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0QXR0YWNobWVudHNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketAttachments/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0QXR0YWNobWVudHNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketComments/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0Q29tbWVudHNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketComments/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0Q29tbWVudHNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketComments/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0Q29tbWVudHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketComments/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0Q29tbWVudHNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketComments/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0Q29tbWVudHNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketHistories/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0SGlzdG9yaWVzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketHistories/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0SGlzdG9yaWVzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketHistories/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0SGlzdG9yaWVzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketHistories/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0SGlzdG9yaWVzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketHistories/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0SGlzdG9yaWVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketPriorities/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0UHJpb3JpdGllc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketPriorities/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0UHJpb3JpdGllc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketPriorities/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0UHJpb3JpdGllc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketPriorities/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0UHJpb3JpdGllc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketPriorities/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0UHJpb3JpdGllc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketStatus/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0U3RhdHVzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketStatus/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0U3RhdHVzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketStatus/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0U3RhdHVzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketStatus/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0U3RhdHVzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketStatus/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0U3RhdHVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Tickets/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Tickets/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Tickets/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Tickets/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Tickets/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketTypes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0VHlwZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketTypes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0VHlwZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketTypes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0VHlwZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketTypes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0VHlwZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/TicketTypes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0VHlwZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/YUSSEF/source/repos/TheBugTracker/Views/_ViewImports.cshtml]
