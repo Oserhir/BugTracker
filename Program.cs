@@ -20,6 +20,7 @@ builder.Services.AddIdentity<BTUser , IdentityRole>(options => options.SignIn.Re
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IBTRolesService, BTRolesService>();
+builder.Services.AddScoped<IBTCompanyInfoService, BTCompanyInfoService>();
 
 builder.Services.AddControllersWithViews();
 
