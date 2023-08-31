@@ -27,9 +27,17 @@ namespace TheBugTracker.Services
             }
         }
 
-        public Task UpdateTicketAsync(Ticket ticket)
+        public async Task UpdateTicketAsync(Ticket ticket)
         {
-           
+            try
+            {
+                _context.Update(ticket);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Task AddTicketAttachmentAsync(TicketAttachment ticketAttachment)
