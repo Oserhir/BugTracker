@@ -159,9 +159,33 @@ namespace TheBugTracker.Services
             }
         }
 
-        public Task<List<Ticket>> GetAllTicketsByTypeAsync(int companyId, string typeName)
+        public async Task<List<Ticket>> GetAllTicketsByTypeAsync(int companyId, string typeName)
         {
-            throw new NotImplementedException();
+            int ticketTypeId = (await LookupTicketTypeIdAsync(typeName)).Value;
+
+            try
+            {
+                List<Ticket> tickets = await _context.Projects
+                                                        .Where(p => p.CompanyId == companyId)
+                                                        .SelectMany(p => p.Tickets)
+                                                            .Include(t => t.Attachments)
+                                                            .Include(t => t.Comments)
+                                                            .Include(t => t.DeveloperUser)
+                                                            .Include(t => t.History)
+                                                            .Include(t => t.OwnerUser)
+                                                            .Include(t => t.TicketPriority)
+                                                            .Include(t => t.TicketStatus)
+                                                            .Include(t => t.TicketType)
+                                                            .Include(t => t.Project)
+                                                        .Where(t => t.TicketTypeId == ticketTypeId)
+                                                        .ToListAsync();
+
+                return tickets;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Task<List<Ticket>> GetArchivedTicketsAsync(int companyId)
