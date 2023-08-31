@@ -1,13 +1,35 @@
-﻿using TheBugTracker.Models;
+﻿using TheBugTracker.Data;
+using TheBugTracker.Models;
 using TheBugTracker.Services.Interfaces;
 
 namespace TheBugTracker.Services
 {
     public class BTTicketService : IBTTicketService
     {
-        public Task AddNewTicketAsync(Ticket ticket)
+        private readonly ApplicationDbContext _context;
+
+        public BTTicketService(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+
+
+        public async Task AddNewTicketAsync(Ticket ticket)
+        {
+            try
+            {
+                _context.Add(ticket);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Task UpdateTicketAsync(Ticket ticket)
+        {
+           
         }
 
         public Task AddTicketAttachmentAsync(TicketAttachment ticketAttachment)
@@ -130,9 +152,6 @@ namespace TheBugTracker.Services
             throw new NotImplementedException();
         }
 
-        public Task UpdateTicketAsync(Ticket ticket)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
