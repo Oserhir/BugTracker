@@ -232,9 +232,27 @@ namespace TheBugTracker.Services
             return await _context.Tickets.FirstOrDefaultAsync(t => t.Id == ticketId);
         }
 
-        public Task<BTUser> GetTicketDeveloperAsync(int ticketId, int companyId)
+        public async Task<BTUser> GetTicketDeveloperAsync(int ticketId, int companyId)
         {
-            throw new NotImplementedException();
+            BTUser developer = new();
+
+            try
+            {
+                Ticket ticket = (await GetAllTicketsByCompanyAsync(companyId)).FirstOrDefault(t => t.Id == ticketId);
+
+                if( ticket?.DeveloperUserId != null  )
+                {
+                    developer = ticket.DeveloperUser;
+                }
+
+                return developer;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         public async Task<List<Ticket>> GetTicketsByRoleAsync(string role, string userId, int companyId)
