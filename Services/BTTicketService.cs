@@ -1,4 +1,5 @@
-﻿using TheBugTracker.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using TheBugTracker.Data;
 using TheBugTracker.Models;
 using TheBugTracker.Services.Interfaces;
 
@@ -115,9 +116,9 @@ namespace TheBugTracker.Services
             throw new NotImplementedException();
         }
 
-        public Task<Ticket> GetTicketByIdAsync(int ticketId)
+        public async Task<Ticket> GetTicketByIdAsync(int ticketId)
         {
-            throw new NotImplementedException();
+            return await _context.Tickets.FirstOrDefaultAsync(t => t.Id == ticketId);
         }
 
         public Task<BTUser> GetTicketDeveloperAsync(int ticketId, int companyId)
