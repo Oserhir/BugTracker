@@ -145,9 +145,17 @@ namespace TheBugTracker.Services
             throw new NotImplementedException();
         }
 
-        public Task<int?> LookupTicketPriorityIdAsync(string priorityName)
+        public async Task<int?> LookupTicketPriorityIdAsync(string priorityName)
         {
-            throw new NotImplementedException();
+           try
+            {
+                TicketPriority ticketPriority = (await _context.TicketPriorities.FirstOrDefaultAsync(t => t.Name == priorityName));
+                return ticketPriority?.Id;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Task<int?> LookupTicketStatusIdAsync(string statusName)
