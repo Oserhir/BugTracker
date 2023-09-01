@@ -171,7 +171,7 @@ namespace TheBugTracker.Services
 
         }
 
-        public async Task<List<TicketHistory>> GetCompanyTicketsHistoriesAsync(int compnayId)
+        public async Task<List<TicketHistory>> GetCompanyTicketsHistoriesAsync(int companyId)
         {
             try
             {
@@ -180,7 +180,7 @@ namespace TheBugTracker.Services
                                                             .ThenInclude(p => p.Tickets)
                                                                 .ThenInclude(t => t.History)
                                                                     .ThenInclude(h => h.User)
-                                                        .FirstOrDefaultAsync(c => c.Id == compnayId)).Projects.ToList();
+                                                        .FirstOrDefaultAsync(c => c.Id == companyId)).Projects.ToList();
 
                 List<Ticket> tickets = projects.SelectMany(p => p.Tickets).ToList();
 
@@ -195,9 +195,30 @@ namespace TheBugTracker.Services
             }
         }
 
-        public Task<List<TicketHistory>> GetProjectTicketsHistoriesAsync(int projectId, int companyId)
+        public async Task<List<TicketHistory>> GetProjectTicketsHistoriesAsync(int projectId, int companyId)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                Project project = await _context.Projects.Where( p => p.CompanyId == companyId)
+                                                 .Include(p => p.Tickets)
+                                                    .ThenInclude(t => t.History)
+                                                    .ThenInclude(h => h.User)
+                                                 .FirstOrDefaultAsync( p => p.Id == projectId);
+
+                List<TicketHistory> ticketHistory = project.Tickets.SelectMany(t => t.History).ToList();
+
+                return ticketHistory;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
         }
     }
 }
