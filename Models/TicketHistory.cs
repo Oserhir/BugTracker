@@ -7,19 +7,19 @@ namespace TheBugTracker.Models
         public int Id { get; set; }
 
         [DisplayName("Updated Item")]
-        public int Property { get; set; }
+        public string Property { get; set; }
 
         [DisplayName("Previous")]
-        public int OldValue { get; set; }
+        public string OldValue { get; set; }
 
         [DisplayName("Current")]
-        public int NewValue { get; set; }
+        public string NewValue { get; set; }
 
         [DisplayName("Date Modified")]
         public DateTimeOffset Created { get; set; }
 
         [DisplayName("Description of Change")]
-        public int Description { get; set; }
+        public string Description { get; set; }
 
         // Foreign keys
         [DisplayName("Ticket")]
