@@ -1,4 +1,6 @@
-﻿namespace TheBugTracker.Services.Interfaces
+﻿using TheBugTracker.Models;
+
+namespace TheBugTracker.Services.Interfaces
 {
     public interface IBTNotificationService
     {
