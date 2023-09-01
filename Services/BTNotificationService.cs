@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.Design;
 using TheBugTracker.Data;
 using TheBugTracker.Models;
 using TheBugTracker.Services.Interfaces;
@@ -101,14 +102,40 @@ namespace TheBugTracker.Services
 
         }
 
-        public Task SendEmailNotificationsByRoleAsync(Notification notification, int companyId, string role)
+        public async Task SendEmailNotificationsByRoleAsync(Notification notification, int companyId, string role)
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<BTUser> members = await _rolesService.GetUsersInRoleAsync(role, companyId);
+
+                foreach (BTUser member in members)
+                {
+                    notification.RecipientId = member.Id;
+                    await SendEmailNotificationAsync(notification, notification.Title);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public Task SendMembersEmailNotificationsAsync(Notification notification, List<BTUser> members)
+        public async Task SendMembersEmailNotificationsAsync(Notification notification, List<BTUser> members)
         {
-            throw new NotImplementedException();
+            try
+            {
+                foreach (BTUser member in members)
+                {
+                    notification.RecipientId = member.Id;
+                    await SendEmailNotificationAsync(notification, notification.Title);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
