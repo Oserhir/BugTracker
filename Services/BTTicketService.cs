@@ -16,8 +16,16 @@ namespace TheBugTracker.Services
 
         public BTTicketService(ApplicationDbContext context, IBTRolesService rolesService)
         {
-            _context = context;
-            _rolesService = rolesService;
+            try
+            {
+               _context = context;
+               _rolesService = rolesService;
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+          
         }
 
         public async Task AddNewTicketAsync(Ticket ticket)
@@ -58,10 +66,18 @@ namespace TheBugTracker.Services
 
         public async Task ArchiveTicketAsync(Ticket ticket)
         {
-            ticket.Archived = true;
+            try
+            {
+                ticket.Archived = true;
 
-            _context.Update(ticket);
-            await _context.SaveChangesAsync();
+                _context.Update(ticket);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
 
         }
 
@@ -145,10 +161,6 @@ namespace TheBugTracker.Services
                 throw;
             }
 
-            
-
-           
-
 
             
         }
@@ -174,7 +186,8 @@ namespace TheBugTracker.Services
                                             .Where(t => t.TicketStatusId == ticketStatusId)
                                             .ToListAsync();
                 return tickets;
-            }catch(Exception)
+            }
+            catch(Exception)
             {
                 throw;
             }
