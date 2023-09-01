@@ -5,6 +5,7 @@ using TheBugTracker.Data;
 using TheBugTracker.Models;
 using TheBugTracker.Services.Interfaces;
 using TheBugTracker.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,9 @@ builder.Services.AddScoped<IBTCompanyInfoService, BTCompanyInfoService>();
 builder.Services.AddScoped<IBTProjectService, BTProjectService>();
 builder.Services.AddScoped<IBTTicketService, BTTicketService>();
 builder.Services.AddScoped<IBTTicketHistoryService, BTTicketHistoryService>();
+
+builder.Services.AddScoped<IEmailSender, BTEmailService>();
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 
 builder.Services.AddControllersWithViews();
 
