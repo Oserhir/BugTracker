@@ -53,9 +53,24 @@ namespace TheBugTracker.Services
             }
         }
 
-        public Task<List<Notification>> GetSentNotificationsAsync(string userId)
+        public async Task<List<Notification>> GetSentNotificationsAsync(string userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                List<Notification> notifications = await _context.Notifications
+                                                                    .Include(n => n.Recipient)
+                                                                    .Include(n => n.Sender)
+                                                                    .Include(n => n.Ticket)
+                                                                        .ThenInclude(t => t.Project)
+                                                            .Where(t => t.SenderId == userId).ToListAsync();
+
+                return notifications;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Task<bool> SendEmailNotificationAsync(Notification notification, string emailSubject)
