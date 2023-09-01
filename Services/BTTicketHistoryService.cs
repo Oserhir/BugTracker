@@ -1,4 +1,5 @@
-﻿using TheBugTracker.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using TheBugTracker.Data;
 using TheBugTracker.Models;
 using TheBugTracker.Services.Interfaces;
 
@@ -170,9 +171,28 @@ namespace TheBugTracker.Services
 
         }
 
-        public Task<List<TicketHistory>> GetCompanyTicketsHistoriesAsync(int compnayId)
+        public async Task<List<TicketHistory>> GetCompanyTicketsHistoriesAsync(int compnayId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<Project> projects = (await _context.Companies
+                                                       .Include(c => c.Projects)
+                                                            .ThenInclude(p => p.Tickets)
+                                                                .ThenInclude(t => t.History)
+                                                                    .ThenInclude(h => h.User)
+                                                        .FirstOrDefaultAsync(c => c.Id == compnayId)).Projects.ToList();
+
+                List<Ticket> tickets = projects.SelectMany(p => p.Tickets).ToList();
+
+                List<TicketHistory> ticketHistories = tickets.SelectMany(t => t.History).ToList();
+
+                return ticketHistories;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public Task<List<TicketHistory>> GetProjectTicketsHistoriesAsync(int projectId, int companyId)
