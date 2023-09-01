@@ -73,9 +73,32 @@ namespace TheBugTracker.Services
             }
         }
 
-        public Task<bool> SendEmailNotificationAsync(Notification notification, string emailSubject)
+        public async Task<bool> SendEmailNotificationAsync(Notification notification, string emailSubject)
         {
-            throw new NotImplementedException();
+            BTUser Btuser = await _context.Users.FirstOrDefaultAsync( u => u.Id == notification.RecipientId);
+
+            if(Btuser != null)
+            {
+                string userEmail = Btuser.Email;
+                string message = notification.Message;
+
+                // Send email
+                try
+                {
+                    await _emailSender.SendEmailAsync(userEmail, emailSubject, message);
+                    return true;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         public Task SendEmailNotificationsByRoleAsync(Notification notification, int companyId, string role)
