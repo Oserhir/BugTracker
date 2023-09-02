@@ -6,6 +6,7 @@ using TheBugTracker.Models;
 using TheBugTracker.Services.Interfaces;
 using TheBugTracker.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using TheBugTracker.Services.Factories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentity<BTUser , IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddClaimsPrincipalFactory<BTUserClaimsPrincipalFactory>()
     .AddDefaultUI()
     .AddDefaultTokenProviders();
 
