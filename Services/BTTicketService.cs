@@ -380,6 +380,7 @@ namespace TheBugTracker.Services
 
                 if( await _rolesService.IsUserInRoleAsync(user, Roles.Admin.ToString()) )
                 {
+                 
                     tickets = ( await _projectService.GetAllProjectsByCompanyAsync(companyId) ).SelectMany( t => t.Tickets ).ToList();
                 }
                 else if (await _rolesService.IsUserInRoleAsync(user, Roles.Developer.ToString()))

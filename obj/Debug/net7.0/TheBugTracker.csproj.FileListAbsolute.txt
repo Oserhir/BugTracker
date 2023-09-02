@@ -263,3 +263,8 @@ C:\Users\YUSSEF\source\repos\TheBugTracker\obj\Debug\net7.0\refint\TheBugTracker
 C:\Users\YUSSEF\source\repos\TheBugTracker\obj\Debug\net7.0\TheBugTracker.pdb
 C:\Users\YUSSEF\source\repos\TheBugTracker\obj\Debug\net7.0\TheBugTracker.genruntimeconfig.cache
 C:\Users\YUSSEF\source\repos\TheBugTracker\obj\Debug\net7.0\ref\TheBugTracker.dll
+C:\Users\YUSSEF\source\repos\TheBugTracker\bin\Debug\net7.0\BouncyCastle.Cryptography.dll
+C:\Users\YUSSEF\source\repos\TheBugTracker\bin\Debug\net7.0\MailKit.dll
+C:\Users\YUSSEF\source\repos\TheBugTracker\bin\Debug\net7.0\MimeKit.dll
+C:\Users\YUSSEF\source\repos\TheBugTracker\bin\Debug\net7.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\YUSSEF\source\repos\TheBugTracker\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll
