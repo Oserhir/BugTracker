@@ -79,7 +79,7 @@ namespace TheBugTracker.Services
         {
             try
             {
-                Invite invite = await _context.Invites.Where( i => i.CompanyId == companyId)
+                Invite invite = await _context.Invites.Where( i => i.CompanyId == companyId )
                                                   .Include(i => i.Company)
                                                   .Include(i => i.Project)
                                                   .Include(i => i.Invitor)
@@ -93,9 +93,24 @@ namespace TheBugTracker.Services
             }
         }
 
-        public Task<Invite> GetInviteAsync(Guid token, string email, int companyId)
+        public async Task<Invite> GetInviteAsync(Guid token, string email, int companyId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Invite invite = await _context.Invites.Where(i => i.CompanyId == companyId)
+                                            .Include(i => i.Company)
+                                            .Include(i => i.Project)
+                                            .Include(i => i.Invitor)
+                                            .FirstOrDefaultAsync(i => i.CompanyToken == token && i.InviteeEmail == email);
+
+
+                return invite;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Task<bool> ValidateInviteCodeAsync(Guid? token)
