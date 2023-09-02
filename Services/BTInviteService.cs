@@ -44,9 +44,18 @@ namespace TheBugTracker.Services
 
         }
 
-        public Task AddNewInviteAsync(Invite invite)
+        public async Task AddNewInviteAsync(Invite invite)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _context.Invites.AddAsync(invite);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public Task<bool> AnyInviteAsync(Guid token, string email, int companyId)
