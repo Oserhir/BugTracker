@@ -113,9 +113,36 @@ namespace TheBugTracker.Services
             }
         }
 
-        public Task<bool> ValidateInviteCodeAsync(Guid? token)
+        public async Task<bool> ValidateInviteCodeAsync(Guid? token)
         {
-            throw new NotImplementedException();
+
+            if(token == null)
+            {
+                return false;
+            }
+
+            bool result = false;
+
+            Invite invite = await _context.Invites.FirstOrDefaultAsync(i => i.CompanyToken == token);
+
+            if(invite != null)
+            {
+
+                DateTime dateTime = invite.InviteDate.DateTime;
+
+                // Custom validation of invite based on the date it was issued, in this case, it will be valid for 7 days.
+                bool ValidDate = (DateTime.Now - dateTime).TotalDays > 7;
+
+                if(ValidDate)
+                {
+                    result = invite.IsValid;
+                }
+
+            }
+
+
+
+            return true;
         }
     }
 }
