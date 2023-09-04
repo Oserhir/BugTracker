@@ -12,10 +12,10 @@ namespace TheBugTracker.Models
         [Required]
         [StringLength(50)]
         [DisplayName("Project Name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [DisplayName("Description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [DisplayName("Start Date")]
         public DateTimeOffset StartDate { get; set; }
@@ -29,14 +29,14 @@ namespace TheBugTracker.Models
         // Image
         [NotMapped]
         [DataType(DataType.Upload)]
-        public IFormFile ImageFormFile { get; set; }
+        public IFormFile? ImageFormFile { get; set; }
 
         [DisplayName("File Name")]
-        public string ImageFileName { get; set; }
-        public byte[] ImageFileData { get; set; }
+        public string? ImageFileName { get; set; }
+        public byte[]? ImageFileData { get; set; }
 
         [DisplayName("File Extension")]
-        public string ImageContentType { get; set; }
+        public string? ImageContentType { get; set; }
 
         // Foreign Keys
         [DisplayName("Company")]

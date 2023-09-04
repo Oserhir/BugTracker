@@ -12,11 +12,11 @@ namespace TheBugTracker.Models
         [Required]
         [StringLength(50)]
         [DisplayName("Title")]
-        public  string Title { get; set; }
+        public  string? Title { get; set; }
 
         [Required]
         [DisplayName("Description")]
-        public  string Description { get; set; }
+        public  string? Description { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayName("Created")]
@@ -45,18 +45,18 @@ namespace TheBugTracker.Models
         public  int TicketStatusId { get; set; }
 
         [DisplayName("Ticket Owner")]
-        public string OwnerUserId { get; set; }
+        public string? OwnerUserId { get; set; }
 
         [DisplayName("Ticket Developer")]
-        public string DeveloperUserId { get; set; }
+        public string? DeveloperUserId { get; set; }
 
         // Navigation Properties
-        public virtual Project Project { get; set; }
-        public virtual TicketType TicketType { get; set; }
-        public virtual TicketPriority TicketPriority { get; set; }
-        public virtual TicketStatus TicketStatus { get; set; }
-        public virtual BTUser OwnerUser { get; set; }
-        public virtual BTUser DeveloperUser { get; set; }
+        public virtual Project? Project { get; set; }
+        public virtual TicketType? TicketType { get; set; }
+        public virtual TicketPriority? TicketPriority { get; set; }
+        public virtual TicketStatus? TicketStatus { get; set; }
+        public virtual BTUser? OwnerUser { get; set; }
+        public virtual BTUser? DeveloperUser { get; set; }
 
         // 1 to many relationships with Ticket
         public virtual ICollection<TicketComment> Comments { get; set; } = new HashSet<TicketComment>();

@@ -13,21 +13,21 @@ namespace TheBugTracker.Models
         public DateTimeOffset Created { get; set; }
 
         [DisplayName("Team Member")]
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         [DisplayName("File Description")]
         public string Description { get; set; }
 
         [NotMapped]
         [DataType(DataType.Upload)]
-        public IFormFile FormFile { get; set; }
+        public IFormFile? FormFile { get; set; }
 
         [DisplayName("File Name")]
-        public string FileName { get; set; }
-        public Byte[] FileData { get; set; }
+        public string? FileName { get; set; }
+        public Byte[]? FileData { get; set; }
 
         [DisplayName("File Extension")]
-        public string FileContentType { get; set; }
+        public string? FileContentType { get; set; }
 
         // Foreign keys
         [DisplayName("Ticket")]

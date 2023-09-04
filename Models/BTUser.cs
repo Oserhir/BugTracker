@@ -9,27 +9,29 @@ namespace TheBugTracker.Models
     {
         [Required]
         [Display(Name = "First Name")]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [Required]
         [Display(Name = "Last Name")]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         [Required]
         [Display(Name = "Full Name")]
-        public string FullName { get { return $"{FirstName} {LastName}"; } }
+        public string? FullName { get { return $"{FirstName} {LastName}"; } }
 
         // Avatar
         [NotMapped]
         [DataType(DataType.Upload)]
-        public IFormFile AvatarFormFile { get; set; }
+        public IFormFile? AvatarFormFile { get; set; }
 
         [DisplayName( "Avatar")]
-        public string AvatarFileName { get; set; }
-        public byte[] AvatarFileData { get; set; }
+        public string? AvatarFileName { get; set; }
+
+        public byte[]? AvatarFileData { get; set; }
 
         [Display(Name = "File Extension")]
-        public string AvatarContentType { get; set; }
+        //public string? AvatarContentType { get; set; }
+        public string? AvatarContentType { get; set; }
 
         // Foreign Key
         public int? CompanyId { get; set; }

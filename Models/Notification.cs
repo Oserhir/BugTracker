@@ -12,11 +12,11 @@ namespace TheBugTracker.Models
 
         [Required]
         [DisplayName("Title")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         [Required]
         [DisplayName("Message")]
-        public string Message { get; set; }
+        public string? Message { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayName("Date")]
@@ -24,11 +24,11 @@ namespace TheBugTracker.Models
 
         [Required]
         [DisplayName("Recipient")]
-        public string RecipientId { get; set; }
+        public string? RecipientId { get; set; }
 
         [Required]
         [DisplayName("Sender")]
-        public string SenderId { get; set; }
+        public string? SenderId { get; set; }
 
         [DisplayName("Has been viewed")]
         public bool Viewed { get; set; }

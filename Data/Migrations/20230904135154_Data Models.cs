@@ -16,22 +16,19 @@ namespace TheBugTracker.Data.Migrations
                 name: "AvatarContentType",
                 table: "AspNetUsers",
                 type: "text",
-                nullable: false,
-                defaultValue: "");
+                nullable: true);
 
             migrationBuilder.AddColumn<byte[]>(
                 name: "AvatarFileData",
                 table: "AspNetUsers",
                 type: "bytea",
-                nullable: false,
-                defaultValue: new byte[0]);
+                nullable: true);
 
             migrationBuilder.AddColumn<string>(
                 name: "AvatarFileName",
                 table: "AspNetUsers",
                 type: "text",
-                nullable: false,
-                defaultValue: "");
+                nullable: true);
 
             migrationBuilder.AddColumn<int>(
                 name: "CompanyId",
@@ -45,8 +42,8 @@ namespace TheBugTracker.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -59,7 +56,7 @@ namespace TheBugTracker.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,7 +69,7 @@ namespace TheBugTracker.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<int>(type: "integer", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -85,7 +82,7 @@ namespace TheBugTracker.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -98,7 +95,7 @@ namespace TheBugTracker.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -112,13 +109,13 @@ namespace TheBugTracker.Data.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     StartDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     EndDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     Archived = table.Column<bool>(type: "boolean", nullable: false),
-                    ImageFileName = table.Column<string>(type: "text", nullable: false),
-                    ImageFileData = table.Column<byte[]>(type: "bytea", nullable: false),
-                    ImageContentType = table.Column<string>(type: "text", nullable: false),
+                    ImageFileName = table.Column<string>(type: "text", nullable: true),
+                    ImageFileData = table.Column<byte[]>(type: "bytea", nullable: true),
+                    ImageContentType = table.Column<string>(type: "text", nullable: true),
                     CompanyId = table.Column<int>(type: "integer", nullable: true),
                     ProjectPriorityId = table.Column<int>(type: "integer", nullable: true)
                 },
@@ -172,11 +169,11 @@ namespace TheBugTracker.Data.Migrations
                     CompanyToken = table.Column<Guid>(type: "uuid", nullable: false),
                     CompanyId = table.Column<int>(type: "integer", nullable: false),
                     ProjectId = table.Column<int>(type: "integer", nullable: false),
-                    InvitorId = table.Column<string>(type: "text", nullable: false),
-                    InviteeId = table.Column<string>(type: "text", nullable: false),
-                    InviteeEmail = table.Column<string>(type: "text", nullable: false),
-                    InviteeFirstName = table.Column<string>(type: "text", nullable: false),
-                    InviteeLastName = table.Column<string>(type: "text", nullable: false),
+                    InvitorId = table.Column<string>(type: "text", nullable: true),
+                    InviteeId = table.Column<string>(type: "text", nullable: true),
+                    InviteeEmail = table.Column<string>(type: "text", nullable: true),
+                    InviteeFirstName = table.Column<string>(type: "text", nullable: true),
+                    InviteeLastName = table.Column<string>(type: "text", nullable: true),
                     IsValid = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -186,14 +183,12 @@ namespace TheBugTracker.Data.Migrations
                         name: "FK_Invites_AspNetUsers_InviteeId",
                         column: x => x.InviteeId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Invites_AspNetUsers_InvitorId",
                         column: x => x.InvitorId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Invites_Companies_CompanyId",
                         column: x => x.CompanyId,
@@ -219,12 +214,13 @@ namespace TheBugTracker.Data.Migrations
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     Updated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     Archived = table.Column<bool>(type: "boolean", nullable: false),
+                    ArchivedByProject = table.Column<bool>(type: "boolean", nullable: false),
                     ProjectId = table.Column<int>(type: "integer", nullable: false),
                     TicketTypeId = table.Column<int>(type: "integer", nullable: false),
                     TicketPriorityId = table.Column<int>(type: "integer", nullable: false),
                     TicketStatusId = table.Column<int>(type: "integer", nullable: false),
-                    OwnerUserId = table.Column<string>(type: "text", nullable: false),
-                    DeveloperUserId = table.Column<string>(type: "text", nullable: false)
+                    OwnerUserId = table.Column<string>(type: "text", nullable: true),
+                    DeveloperUserId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -233,14 +229,12 @@ namespace TheBugTracker.Data.Migrations
                         name: "FK_Tickets_AspNetUsers_DeveloperUserId",
                         column: x => x.DeveloperUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Tickets_AspNetUsers_OwnerUserId",
                         column: x => x.OwnerUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Tickets_Projects_ProjectId",
                         column: x => x.ProjectId,
@@ -311,11 +305,11 @@ namespace TheBugTracker.Data.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    UserId = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    FileName = table.Column<string>(type: "text", nullable: false),
-                    FileData = table.Column<byte[]>(type: "bytea", nullable: false),
-                    FileContentType = table.Column<string>(type: "text", nullable: false),
+                    FileName = table.Column<string>(type: "text", nullable: true),
+                    FileData = table.Column<byte[]>(type: "bytea", nullable: true),
+                    FileContentType = table.Column<string>(type: "text", nullable: true),
                     TicketId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -325,8 +319,7 @@ namespace TheBugTracker.Data.Migrations
                         name: "FK_TicketAttachments_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TicketAttachments_Tickets_TicketId",
                         column: x => x.TicketId,
@@ -341,10 +334,10 @@ namespace TheBugTracker.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Commend = table.Column<string>(type: "text", nullable: false),
+                    Commend = table.Column<string>(type: "text", nullable: true),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     TicketId = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<string>(type: "text", nullable: false)
+                    UserId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -353,8 +346,7 @@ namespace TheBugTracker.Data.Migrations
                         name: "FK_TicketComments_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TicketComments_Tickets_TicketId",
                         column: x => x.TicketId,
@@ -369,11 +361,11 @@ namespace TheBugTracker.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Property = table.Column<int>(type: "integer", nullable: false),
-                    OldValue = table.Column<int>(type: "integer", nullable: false),
-                    NewValue = table.Column<int>(type: "integer", nullable: false),
+                    Property = table.Column<string>(type: "text", nullable: true),
+                    OldValue = table.Column<string>(type: "text", nullable: true),
+                    NewValue = table.Column<string>(type: "text", nullable: true),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    Description = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     TicketId = table.Column<int>(type: "integer", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: false)
                 },

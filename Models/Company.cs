@@ -8,10 +8,10 @@ namespace TheBugTracker.Models
         public int Id { get; set; }
 
         [DisplayName("Company Name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [DisplayName("Company Description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         //----- Navigation properties
         public virtual ICollection<BTUser> Members { get; set; } = new HashSet<BTUser>();

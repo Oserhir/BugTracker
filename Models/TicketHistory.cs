@@ -7,19 +7,19 @@ namespace TheBugTracker.Models
         public int Id { get; set; }
 
         [DisplayName("Updated Item")]
-        public string Property { get; set; }
+        public string? Property { get; set; }
 
         [DisplayName("Previous")]
-        public string OldValue { get; set; }
+        public string? OldValue { get; set; }
 
         [DisplayName("Current")]
-        public string NewValue { get; set; }
+        public string? NewValue { get; set; }
 
         [DisplayName("Date Modified")]
         public DateTimeOffset Created { get; set; }
 
         [DisplayName("Description of Change")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         // Foreign keys
         [DisplayName("Ticket")]
@@ -29,8 +29,8 @@ namespace TheBugTracker.Models
         public string UserId { get; set; }
 
         // Navigation properties
-        public virtual Ticket Ticket { get; set; }
-        public virtual BTUser User { get; set; }
+        public virtual Ticket? Ticket { get; set; }
+        public virtual BTUser? User { get; set; }
 
     }
 }

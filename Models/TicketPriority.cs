@@ -7,7 +7,7 @@ namespace TheBugTracker.Models
         public int Id { get; set; }
 
         [DisplayName("Priority Name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
     }
 }
