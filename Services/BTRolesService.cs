@@ -7,6 +7,7 @@ using TheBugTracker.Services.Interfaces;
 
 namespace TheBugTracker.Services
 {
+
     public class BTRolesService : IBTRolesService
     {
         private readonly ApplicationDbContext _context;
