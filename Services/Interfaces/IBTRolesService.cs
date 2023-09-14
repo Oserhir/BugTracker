@@ -7,7 +7,7 @@ namespace TheBugTracker.Services.Interfaces
     {
         public Task<bool> IsUserInRoleAsync(BTUser user, string roleName);
 
-        // public Task<List<IdentityRole>> GetRolesAsync();
+        public Task<List<IdentityRole>> GetRolesAsync();
 
         public Task<IEnumerable<string>> GetUserRolesAsync(BTUser user);
 

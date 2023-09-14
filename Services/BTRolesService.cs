@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using TheBugTracker.Data;
 using TheBugTracker.Models;
+using TheBugTracker.Models.Enums;
 using TheBugTracker.Services.Interfaces;
 
 namespace TheBugTracker.Services
@@ -32,6 +34,27 @@ namespace TheBugTracker.Services
             IdentityRole role = _context.Roles.Find(roleId);
             string result = await _roleManager.GetRoleNameAsync(role);
             return result;
+        }
+
+        public async Task<List<IdentityRole>> GetRolesAsync()
+        {
+            try
+            {
+                List<IdentityRole> result = new();
+
+                result = await _context.Roles.ToListAsync();
+
+                // Remove Site Admin
+                //IdentityRole siteAdmin = result.Single(r => r.Name == nameof(Roles.SiteAdmin));
+                // result.Remove(siteAdmin);
+
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<IEnumerable<string>> GetUserRolesAsync(BTUser user)
