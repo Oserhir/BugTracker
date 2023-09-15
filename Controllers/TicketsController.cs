@@ -24,10 +24,11 @@ namespace TheBugTracker.Controllers
         private readonly IBTLookupService _lookupService;
 
 
-        public TicketsController(ApplicationDbContext context, UserManager<BTUser> userManager)
+        public TicketsController(ApplicationDbContext context, UserManager<BTUser> userManager, IBTLookupService lookupService)
         {
             _context = context;
             _userManager = userManager;
+            _lookupService = lookupService;
         }
 
         // GET: Tickets

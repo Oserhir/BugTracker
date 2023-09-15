@@ -79,7 +79,5 @@ namespace TheBugTracker.Services
         }
         #endregion
 
-
-
     }
 }
