@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TheBugTracker.Extensions;
@@ -8,6 +9,7 @@ using TheBugTracker.Services.Interfaces;
 
 namespace TheBugTracker.Controllers
 {
+    [Authorize]
     public class UserRolesController : Controller
     {
         private readonly IBTRolesService _rolesService;
@@ -23,6 +25,7 @@ namespace TheBugTracker.Controllers
             _userManager = userManager;
         }
 
+        [HttpGet]
         public async Task<IActionResult> ManageUserRoles()
         {
             // Add instance of the ViewModel as a list
@@ -48,9 +51,43 @@ namespace TheBugTracker.Controllers
                 model.Add(viewModel);
             }
 
-            // Return the model to the View
+
+           // Return the model to the View
             return View(model);
 
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ManageUserRoles(ManageUserRolesViewModel member)
+        {
+
+            // Get the company Id
+            int companyId = User.Identity.GetCompanyId().Value;
+
+            // Instantiate the BTUser
+            BTUser user = (await _companyInfoService.GetAllMembersAsync(companyId)).FirstOrDefault(u => u.Id == member.BTUser.Id);
+
+            // Get Roles for the user
+            IEnumerable<string> roles = await _rolesService.GetUserRolesAsync(user);
+
+            if (member.SelectedRoles != null)
+            {
+                // Remove user from their roles
+                if (await _rolesService.RemoveUserFromRolesAsync(user, roles))
+                {
+                    // Add user to the new selected role(s)
+                    foreach (string role in member.SelectedRoles)
+                    {
+                        await _rolesService.AddUserToRoleAsync(user, role);
+                    }
+                }
+            }
+
+            // Navigate back to the view
+            return RedirectToAction(nameof(ManageUserRoles));
+        }
+
+
     }
 }
