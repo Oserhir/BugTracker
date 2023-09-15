@@ -37,13 +37,16 @@ namespace TheBugTracker.Controllers
             _projectService = projectService;
         }
 
+        #region  // GET: Tickets
         // GET: Tickets
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Tickets.Include(t => t.DeveloperUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
             return View(await applicationDbContext.ToListAsync());
         }
+        #endregion
 
+        #region // GET: Tickets/Details/5
         // GET: Tickets/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -66,8 +69,10 @@ namespace TheBugTracker.Controllers
             }
 
             return View(ticket);
-        }
+        } 
+        #endregion
 
+        #region // GET: Tickets/Create
         // GET: Tickets/Create
         public async Task<IActionResult> Create()
         {
@@ -89,8 +94,10 @@ namespace TheBugTracker.Controllers
             ViewData["TicketTypeId"] = new SelectList(await _lookupService.GetTicketTypesAsync(), "Id", "Name");
 
             return View();
-        }
+        } 
+        #endregion
 
+        #region // POST: Tickets/Create
         // POST: Tickets/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -127,8 +134,10 @@ namespace TheBugTracker.Controllers
             ViewData["TicketTypeId"] = new SelectList(await _lookupService.GetTicketTypesAsync(), "Id", "Name");
 
             return View(ticket);
-        }
+        } 
+        #endregion
 
+        #region // GET: Tickets/Edit/5
         // GET: Tickets/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -150,8 +159,10 @@ namespace TheBugTracker.Controllers
 
 
             return View(ticket);
-        }
+        } 
+        #endregion
 
+        #region // POST: Tickets/Edit/5
         // POST: Tickets/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -199,7 +210,9 @@ namespace TheBugTracker.Controllers
             return View(ticket);
 
         }
+        #endregion
 
+        #region // GET: Tickets/Archive/5
         // GET: Tickets/Archive/5
         public async Task<IActionResult> Archive(int? id)
         {
@@ -217,8 +230,9 @@ namespace TheBugTracker.Controllers
 
             return View(ticket);
         }
+        #endregion
 
-        // POST: Tickets/Archive/5
+        #region // POST: Tickets/Archive/5
         [HttpPost, ActionName("Archive")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ArchiveConfirmed(int id)
@@ -236,17 +250,56 @@ namespace TheBugTracker.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        #endregion
 
+        #region // GET: Tickets/Restore/5
+        // GET: Tickets/Restore/5
+        public async Task<IActionResult> Restore(int? id)
+        {
+            if (id == null || _context.Tickets == null)
+            {
+                return NotFound();
+            }
 
+            Ticket ticket = await _ticketService.GetTicketByIdAsync(id.Value);
 
+            if (ticket == null)
+            {
+                return NotFound();
+            }
 
+            return View(ticket);
+        } 
+        #endregion
+
+        #region // POST: Tickets/Restore/5
+        [HttpPost, ActionName("Restore")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RestoreConfirmed(int id)
+        {
+            if (_context.Tickets == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Tickets'  is null.");
+            }
+
+            Ticket ticket = await _ticketService.GetTicketByIdAsync(id);
+
+            ticket.Archived = false;
+
+            await _ticketService.UpdateTicketAsync(ticket);
+
+            return RedirectToAction(nameof(Index));
+        } 
+        #endregion
+
+        #region TicketExists
         private async Task<bool> TicketExists(int id)
         {
             int companyId = User.Identity.GetCompanyId().Value;
 
             return (await _ticketService.GetAllTicketsByCompanyAsync(companyId)).Any(t => t.Id == id);
 
-          // return (_context.Tickets?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+        } 
+        #endregion
     }
 }
