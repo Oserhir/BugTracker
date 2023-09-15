@@ -145,7 +145,7 @@ namespace TheBugTracker.Services
             try
             {
                 List<Project> results = await _context.Projects.Where(p => p.CompanyId == companyId && p.Archived == false)
-                                                    // navigation items 'eager loaded' otherwise navigation items won't be avilable in results
+                                                    //// navigation items 'eager loaded' otherwise navigation items won't be avilable in results
                                                     .Include(p => p.Members)
                                                     .Include(p => p.Tickets)
                                                         .ThenInclude(t => t.Comments)
@@ -170,9 +170,9 @@ namespace TheBugTracker.Services
 
                 return results;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Console.WriteLine($"**** ERROR **** - Error getting user from GetAllProjectsByCompanyAsync list. --> {ex.Message}");
                 throw;
             }
         }
