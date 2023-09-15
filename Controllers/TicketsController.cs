@@ -16,6 +16,7 @@ using TheBugTracker.Services.Interfaces;
 
 namespace TheBugTracker.Controllers
 {
+    [Authorize]
     public class TicketsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -144,14 +145,19 @@ namespace TheBugTracker.Controllers
 
             if (ModelState.IsValid)
             {
+
+                BTUser btUser = await _userManager.GetUserAsync(User);
+
                 try
                 {
-                    _context.Update(ticket);
-                    await _context.SaveChangesAsync();
+                    ticket.Updated = DateTimeOffset.Now;
+
+                    await _ticketService.UpdateTicketAsync(ticket);
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TicketExists(ticket.Id))
+                    if (!await TicketExists(ticket.Id))
                     {
                         return NotFound();
                     }
@@ -160,15 +166,17 @@ namespace TheBugTracker.Controllers
                         throw;
                     }
                 }
+
+                // TODO: Add Ticket History
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DeveloperUserId"] = new SelectList(_context.Users, "Id", "Id", ticket.DeveloperUserId);
-            ViewData["OwnerUserId"] = new SelectList(_context.Users, "Id", "Id", ticket.OwnerUserId);
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Name", ticket.ProjectId);
-            ViewData["TicketPriorityId"] = new SelectList(_context.TicketPriorities, "Id", "Id", ticket.TicketPriorityId);
-            ViewData["TicketStatusId"] = new SelectList(_context.TicketStatuses, "Id", "Id", ticket.TicketStatusId);
-            ViewData["TicketTypeId"] = new SelectList(_context.TicketTypes, "Id", "Id", ticket.TicketTypeId);
+
+            ViewData["TicketPriorityId"] = new SelectList(await _lookupService.GetTicketPrioritiesAsync(), "Id", "Name", ticket.TicketPriorityId);
+            ViewData["TicketStatusId"] = new SelectList(await _lookupService.GetTicketStatusesAsync(), "Id", "Name", ticket.TicketStatusId);
+            ViewData["TicketTypeId"] = new SelectList(await _lookupService.GetTicketTypesAsync(), "Id", "Name", ticket.TicketTypeId);
+
             return View(ticket);
+
         }
 
         // GET: Tickets/Delete/5
@@ -214,9 +222,13 @@ namespace TheBugTracker.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TicketExists(int id)
+        private async Task<bool> TicketExists(int id)
         {
-          return (_context.Tickets?.Any(e => e.Id == id)).GetValueOrDefault();
+            int companyId = User.Identity.GetCompanyId().Value;
+
+            return (await _ticketService.GetAllTicketsByCompanyAsync(companyId)).Any(t => t.Id == id);
+
+          // return (_context.Tickets?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
