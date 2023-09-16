@@ -47,7 +47,6 @@ namespace TheBugTracker.Controllers
         }
         #endregion
 
-
         #region //GET: MyTickets
         //GET: MyTickets
         public async Task<IActionResult> MyTickets()
@@ -59,7 +58,27 @@ namespace TheBugTracker.Controllers
             tickets = await _ticketService.GetTicketsByUserIdAsync(bTUser.Id, bTUser.CompanyId);
 
             return View(tickets);
-        } 
+        }
+        #endregion
+
+        #region //GET: AllTickets
+        //GET: AllTickets
+        public async Task<IActionResult> AllTickets()
+        {
+            int companyId = User.Identity.GetCompanyId().Value;
+
+            List<Ticket> tickets = await _ticketService.GetAllTicketsByCompanyAsync(companyId);
+
+            if(  User.IsInRole(nameof(Roles.Developer)) || User.IsInRole(nameof(Roles.Submitter)))
+            {
+                return View(tickets.Where( t => t.Archived == false  )    );
+            }
+            else
+            {
+                return View(tickets);
+            }
+           
+        }
         #endregion
 
         #region // GET: Tickets/Details/5
