@@ -28,7 +28,8 @@ namespace TheBugTracker.Controllers
 
 
 
-        public TicketsController(ApplicationDbContext context, UserManager<BTUser> userManager, IBTLookupService lookupService, IBTTicketService ticketService, IBTProjectService projectService)
+        public TicketsController(ApplicationDbContext context, UserManager<BTUser> userManager, 
+            IBTLookupService lookupService, IBTTicketService ticketService, IBTProjectService projectService)
         {
             _context = context;
             _userManager = userManager;
@@ -44,6 +45,21 @@ namespace TheBugTracker.Controllers
             var applicationDbContext = _context.Tickets.Include(t => t.DeveloperUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
             return View(await applicationDbContext.ToListAsync());
         }
+        #endregion
+
+
+        #region //GET: MyTickets
+        //GET: MyTickets
+        public async Task<IActionResult> MyTickets()
+        {
+            BTUser bTUser = new();
+            List<Ticket> tickets = new();
+
+            bTUser = await _userManager.GetUserAsync(User);
+            tickets = await _ticketService.GetTicketsByUserIdAsync(bTUser.Id, bTUser.CompanyId);
+
+            return View(tickets);
+        } 
         #endregion
 
         #region // GET: Tickets/Details/5
