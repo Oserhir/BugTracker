@@ -94,6 +94,33 @@
                     <div class="card-body" style="overflow-y:auto;max-height:300px;">
                         <ul class="right_chat list-unstyled mb-0">
                            
+                                @foreach (TicketComment comment in Model.Comments.Reverse())
+                                {
+                                    <li class="online mb-4">
+                                        <div class="media px-2">
+                                            <!--TODO - Add link to user-->
+                                        <a href="javascript:void(0);">
+                                                @if (btUser?.AvatarFileData != null)
+                                                {
+                                                        <img class="media-object" src="data:image/*;base64,@(Convert.ToBase64String(btUser.AvatarFileData))" alt="" />
+                                                }
+                                                else
+                                                {
+                                                        <img class="media-object" style="width:60px;height:60px;" src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="" />
+                                                }
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="text-muted" style="font-size:x-small;">
+                                                    @@ @comment.User.FullName
+                                                    <small class="float-right">@comment.Created.ToString("dd/MM/yyyy hh:ss tt")</small>:
+                                                </span>
+                                            </div>
+                                            <span class="message text-primary">@Html.Raw(comment.Comment)</span>
+                                        </div>
+                                        <hr>
+                                    </li>
+                                }
+
                            
                         </ul>
                     </div>
@@ -151,7 +178,8 @@
                 </div>
             </div>
         </div>
-        <!-- Add Attachments -->
+        
+            <!-- Add Attachments -->
         <div class="">
             <div class="col col-md-6 mt-2 mb-4">
                 <div class="card col shadow">
@@ -162,7 +190,20 @@
                     <div class="card-body px-2">
                         <div class="row clearfix">
                             <div>
-                                
+                                <form asp-action="AddTicketAttachment" asp-controller="Tickets" enctype="multipart/form-data" method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="@Model.Id" name="TicketId">
+                                    <div class="media-body ml-3">
+                                        <label>
+                                            Description
+                                            <input asp-for="@Model.Attachments.FirstOrDefault().Description" type="text" class="form-control" />
+                                        </label><br />
+                                        <label class="btn btn-outline-primary btn-sm mt-2">
+                                            <input asp-for="@Model.Attachments.FirstOrDefault().FormFile" type="file" class="form-control-file" />
+                                        </label>
+                                        <button type="submit" class="btn btn-outline-secondary btn-sm mt-2">Submit</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -170,6 +211,7 @@
             </div>
         </div>
     </div>
+
     <!-- Ticket Activity-->
     <div class="col-12 col-md-4 mb-4">
         <div class="col">

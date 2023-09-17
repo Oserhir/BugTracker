@@ -60,9 +60,17 @@ namespace TheBugTracker.Services
             throw new NotImplementedException();
         }
 
-        public Task AddTicketCommentAsync(TicketComment ticketComment)
+        public async Task AddTicketCommentAsync(TicketComment ticketComment)
         {
-            throw new NotImplementedException();
+            try
+            {
+               await _context.AddAsync(ticketComment);
+               await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task ArchiveTicketAsync(Ticket ticket)

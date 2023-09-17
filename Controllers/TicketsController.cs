@@ -20,15 +20,16 @@ namespace TheBugTracker.Controllers
     [Authorize]
     public class TicketsController : Controller
     {
+        #region Properties
         private readonly ApplicationDbContext _context;
         private readonly UserManager<BTUser> _userManager;
         private readonly IBTProjectService _projectService;
         private readonly IBTLookupService _lookupService;
-        private readonly IBTTicketService _ticketService;
+        private readonly IBTTicketService _ticketService; 
+        #endregion
 
-
-
-        public TicketsController(ApplicationDbContext context, UserManager<BTUser> userManager, 
+        #region Constructor
+        public TicketsController(ApplicationDbContext context, UserManager<BTUser> userManager,
             IBTLookupService lookupService, IBTTicketService ticketService, IBTProjectService projectService)
         {
             _context = context;
@@ -36,7 +37,8 @@ namespace TheBugTracker.Controllers
             _lookupService = lookupService;
             _ticketService = ticketService;
             _projectService = projectService;
-        }
+        } 
+        #endregion
 
         #region  // GET: Tickets
         // GET: Tickets
@@ -296,9 +298,40 @@ namespace TheBugTracker.Controllers
         }
         #endregion
 
+        #region Add Ticket Comment
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddTicketComment([Bind("Id, TicketId , Comment")] TicketComment ticketComment)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    ticketComment.UserId = _userManager.GetUserId(User);
+                    ticketComment.Created = DateTimeOffset.Now;
+
+                    await _ticketService.AddTicketCommentAsync(ticketComment);
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+
+            return RedirectToAction("Details", new { id = ticketComment.TicketId });
+
+        }
+
+   
+    #endregion
+
         #region // GET: Tickets/Restore/5
-        // GET: Tickets/Restore/5
-        public async Task<IActionResult> Restore(int? id)
+    // GET: Tickets/Restore/5
+    public async Task<IActionResult> Restore(int? id)
         {
             if (id == null || _context.Tickets == null)
             {
