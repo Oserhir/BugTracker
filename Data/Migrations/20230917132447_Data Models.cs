@@ -34,7 +34,8 @@ namespace TheBugTracker.Data.Migrations
                 name: "CompanyId",
                 table: "AspNetUsers",
                 type: "integer",
-                nullable: true);
+                nullable: false,
+                defaultValue: 0);
 
             migrationBuilder.CreateTable(
                 name: "Companies",
@@ -334,7 +335,7 @@ namespace TheBugTracker.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Commend = table.Column<string>(type: "text", nullable: true),
+                    Comment = table.Column<string>(type: "text", nullable: true),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     TicketId = table.Column<int>(type: "integer", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: true)
@@ -506,7 +507,8 @@ namespace TheBugTracker.Data.Migrations
                 table: "AspNetUsers",
                 column: "CompanyId",
                 principalTable: "Companies",
-                principalColumn: "Id");
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />

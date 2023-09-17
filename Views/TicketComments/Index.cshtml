@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Commend)
+                @Html.DisplayNameFor(model => model.Comment)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Created)
@@ -31,7 +31,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Commend)
+                    @Html.DisplayFor(modelItem => item.Comment)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Created)

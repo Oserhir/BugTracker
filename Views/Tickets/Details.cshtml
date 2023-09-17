@@ -110,6 +110,23 @@
                     </div>
                     <div class="card-body">
                         @*Form and Logic for authorized users to add comments*@
+
+                        <form class="form-horizontal form-bordered" asp-action="AddTicketComment" asp-controller="Tickets" method="post">
+                            <input type="hidden" asp-for="Id" name="TicketId" />
+                                @if (Model.DeveloperUserId == btUser.Id || Model.OwnerUserId == btUser.Id || projectManager?.Id == btUser.Id || User.IsInRole(nameof(Roles.Admin)))
+                                {
+                                    <div class="form-group">
+                                            <textarea asp-for="@(new TicketComment().Comment)" rows="4" class="form-control" required placeholder="Add comment ..."></textarea>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary mt-2">Submit</button>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <textarea disabled asp-for="@(new TicketComment().Comment)" rows="8" class="form-control" required placeholder="Add comment ..."></textarea>
+                                    </div>
+                                }
+                        </form>
                         
                     </div>
                 </div>

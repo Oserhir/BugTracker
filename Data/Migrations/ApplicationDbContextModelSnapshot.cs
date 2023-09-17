@@ -186,7 +186,7 @@ namespace TheBugTracker.Data.Migrations
                     b.Property<string>("AvatarFileName")
                         .HasColumnType("text");
 
-                    b.Property<int?>("CompanyId")
+                    b.Property<int>("CompanyId")
                         .HasColumnType("integer");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -548,7 +548,7 @@ namespace TheBugTracker.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Commend")
+                    b.Property<string>("Comment")
                         .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("Created")
@@ -726,7 +726,9 @@ namespace TheBugTracker.Data.Migrations
                 {
                     b.HasOne("TheBugTracker.Models.Company", "Company")
                         .WithMany("Members")
-                        .HasForeignKey("CompanyId");
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Company");
                 });
