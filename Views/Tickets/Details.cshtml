@@ -1,84 +1,170 @@
 ﻿@model TheBugTracker.Models.Ticket
+ 
+@using TheBugTracker.Models.Enums
+@using TheBugTracker.Services.Interfaces
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<BTUser> UserManager
+@inject IBTProjectService ProjectService
+@inject IBTTicketHistoryService TicketHistoryService
+@inject IBTFileService FileService
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Ticket Details";
+    BTUser btUser = await UserManager.GetUserAsync(User);
+    BTUser projectManager = await ProjectService.GetProjectManagerAsync(Model.ProjectId);
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>Ticket</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Created)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Updated)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Updated)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Archived)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Archived)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Project)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Project.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TicketType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TicketType.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TicketPriority)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TicketPriority.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TicketStatus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TicketStatus.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OwnerUser)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OwnerUser.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DeveloperUser)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DeveloperUser.Id)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<h3 class="mt-2">Ticket Details</h3>
+<div class="mb-4">
+  
+
+<div class="row mt-2">
+    <div class="col-12 col-md-8">
+        <!-- Details -->
+        <div class="row">
+            <div class="col">
+                <div class="card col shadow">
+                    <div class="card-header">
+                        <i class="fas fa-info-circle text-secondary"></i>
+                        <strong>@Model.Title</strong                  <!-- Title -->
+                    </div>
+                    <div class="card-body px-2" style="overflow-y:auto;max-height:300px;">
+                        <p>@Model.Description</p>                     <!-- Description -->
+                        <div class="progress-container progress-info m-b-25">
+                            @*Project Name and information*@
+                            <strong class="progress-badge" style="font-size:small">Project: </strong><a style="text-decoration:none" asp-controller="Projects" asp-action="Details" asp-route-id="@Model.ProjectId">@Model.Project.Name</a>  <!-- Project -->
+                            <br />
+                            <strong class="progress-badge" style="font-size:small">Developer: </strong>
+                            @if (Model.DeveloperUserId != null)
+                            {
+                                <span>@Model.DeveloperUser?.FullName</span>
+                            }
+                            else
+                            {
+                                if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
+                                {
+                                    <a class="badge bg-info text-white" style="text-decoration:none" asp-action="AssignDeveloper" asp-controller="Tickets" asp-route-id="@Model.Id">Assign Developer</a>
+                                }
+
+                            }
+                            <br />
+
+                            <div class="progress mt-2">
+                                @*Progress bar logic*@
+                                @{
+                                    var start = Model.Project.StartDate.DateTime;
+                                    var end = Model.Project.EndDate.DateTime;
+                                    var today = DateTime.Now;
+                                    var percent = today >= end ? 100 : today < start ? 0 : Math.Round((today.Subtract(start)) / (end.Subtract(start)) * 100);
+                                }
+                                @*Variable from razor logic*@
+                                <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: @percent%;">
+                                    @*Variable from razor logic*@
+                                    <span class="progress-value">@percent%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <ul class="list-unstyled">
+                            @*Ticket date*@
+                            <li><strong>Date Entered:</strong> <span class="">  @Model.Created.ToString("dd MMM, yyyy")</</span></li>
+                            @*Project end date*@
+                            <li><strong>Deadline:</strong> <span class="">  @Model.Project.EndDate.ToString("dd MMM, yyyy")</</span></li>
+                            @*Ticket type*@
+                            <li><strong>Type:</strong> <span class="">  @Model.TicketType.Name</span></li>
+                            @*Ticket priority*@
+                            <li><strong>Priority:</strong> <span class="">  @Model.TicketPriority.Name</span></li>
+                            @*Ticket status*@
+                            <li><strong>Status:</strong> <span class="">  @Model.TicketStatus.Name</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Comments -->
+        <div class="">
+            <div class="col mt-4">
+                <div class="card col shadow">
+                    <div class="card-header">
+                        <i class="far fa-comments text-secondary"></i>
+                        <strong>Comments</strong>
+                    </div>
+                    <div class="card-body" style="overflow-y:auto;max-height:300px;">
+                        <ul class="right_chat list-unstyled mb-0">
+                           
+                           
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Add Comment -->
+        <div class="">
+            <div class="col col-md-6 mt-2">
+                <div class="card col shadow">
+                    <div class="card-header">
+                        <i class="far fa-comment text-secondary"></i>
+                        <strong>Add Comment</strong>
+                    </div>
+                    <div class="card-body">
+                        @*Form and Logic for authorized users to add comments*@
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Attachments -->
+        <div class="">
+            <div class="col mt-4">
+                <div class="card col shadow">
+                    <div class="card-header">
+                        <i class="fas fa-paperclip text-secondary"></i>
+                        <strong>Attachments</strong>
+                    </div>
+                    <div class="card-body" style="overflow-y:auto;max-height:300px;">
+                        
+                        <div class="container">
+                            <div class="row">
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Add Attachments -->
+        <div class="">
+            <div class="col col-md-6 mt-2 mb-4">
+                <div class="card col shadow">
+                    <div class="card-header">
+                        <i class="fas fa-paperclip text-secondary"></i>
+                        <strong>Add Attachment</strong>
+                    </div>
+                    <div class="card-body px-2">
+                        <div class="row clearfix">
+                            <div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ticket Activity-->
+    <div class="col-12 col-md-4 mb-4">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header">
+                    <i class="fas fa-history text-secondary"></i>
+                    <strong>Ticket Activity</strong>
+                </div>
+                <div class="card-body ticket-activity px-2">
+                     
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
