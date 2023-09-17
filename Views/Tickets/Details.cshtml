@@ -242,7 +242,40 @@
                     <strong>Ticket Activity</strong>
                 </div>
                 <div class="card-body ticket-activity px-2">
-                     
+                        @if (Model.History.Count == 0)
+                        {
+                            <p class="text-secondary">&nbsp;No Activity</p>
+                        }
+                        @*Loop to show the history entries for the Ticket*@
+                        @foreach (TicketHistory tH in Model.History.Reverse())
+                        {
+                            <div class="">
+                                <span class="date"><strong>@tH.Created.ToString("dd MMM yyyy")</strong></span>
+                                <br>
+                                <span>@tH.Description</span>
+                                <br>
+                                <span>By: <a href="" style="text-decoration: none">@tH.User?.FullName</a></span>
+                                <p></p>
+                                <div class="">
+                                    @if (tH.Description.Contains("New Ticket Created"))
+                                    {
+                                            <p>&nbsp;&nbsp;A ticket was added.</p>
+                                    }
+                                    else if (tH.Property.Equals("TicketComment") || tH.Property.Equals("TicketAttachment"))
+                                    {
+                                            <p>&nbsp;&nbsp;A <b>@tH.Property</b> was added.</p>
+                                    }
+                                    else
+                                    {
+                                            <p>&nbsp;&nbsp;The ticket <b>@tH.Property</b> was edited</p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;@($"Previous {tH.Property}:  ") <span class="text-danger">@tH.OldValue</span></p>
+                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;@($"Current {tH.Property}:   ") <span class="text-success">@tH.NewValue</span></p>
+                                    }
+
+                                </div>
+                            </div>
+                            <hr />
+                        }
                 </div>
             </div>
         </div>
