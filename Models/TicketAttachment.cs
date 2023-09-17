@@ -13,8 +13,7 @@ namespace TheBugTracker.Models
         [DisplayName("File Date")]
         public DateTimeOffset Created { get; set; }
 
-        [DisplayName("Team Member")]
-        public string? UserId { get; set; }
+       
 
         [DisplayName("File Description")]
         public string Description { get; set; }
@@ -37,8 +36,11 @@ namespace TheBugTracker.Models
         [DisplayName("Ticket")]
         public int TicketId { get; set; }
 
-        public virtual Ticket Ticket { get; set; }
-        public virtual BTUser User { get; set; }
+        [DisplayName("Team Member")]
+        public string? UserId { get; set; }
+
+        public virtual Ticket? Ticket { get; set; }
+        public virtual BTUser? User { get; set; }
 
     }
 }

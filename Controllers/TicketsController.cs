@@ -25,19 +25,23 @@ namespace TheBugTracker.Controllers
         private readonly UserManager<BTUser> _userManager;
         private readonly IBTProjectService _projectService;
         private readonly IBTLookupService _lookupService;
-        private readonly IBTTicketService _ticketService; 
+        private readonly IBTTicketService _ticketService;
+        private readonly IBTFileService _fileService;
+        private readonly IBTTicketHistoryService _ticketHistoryService;
         #endregion
 
         #region Constructor
         public TicketsController(ApplicationDbContext context, UserManager<BTUser> userManager,
-            IBTLookupService lookupService, IBTTicketService ticketService, IBTProjectService projectService)
+            IBTLookupService lookupService, IBTTicketService ticketService, IBTProjectService projectService, IBTFileService fileService, IBTTicketHistoryService ticketHistoryService)
         {
             _context = context;
             _userManager = userManager;
             _lookupService = lookupService;
             _ticketService = ticketService;
             _projectService = projectService;
-        } 
+            _fileService = fileService;
+            _ticketHistoryService = ticketHistoryService;
+        }
         #endregion
 
         #region  // GET: Tickets
@@ -326,12 +330,68 @@ namespace TheBugTracker.Controllers
 
         }
 
-   
-    #endregion
+
+        #endregion
+
+        #region Add Ticket Attachment
+        // POST: Tickets/AddTicketAttachment
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddTicketAttachment([Bind("Id,FormFile,Description,TicketId")] TicketAttachment ticketAttachment)
+        {
+
+            string statusMessage;
+
+            if (ModelState.IsValid && ticketAttachment.FormFile != null)
+            {
+                try
+                {
+                    ticketAttachment.FileData = await _fileService.ConvertFileToByteArrayAsync(ticketAttachment.FormFile);
+                    ticketAttachment.FileName = ticketAttachment.FormFile.FileName;
+                    ticketAttachment.FileContentType = ticketAttachment.FormFile.ContentType;
+
+                    ticketAttachment.Created = DateTimeOffset.Now;
+                    ticketAttachment.UserId = _userManager.GetUserId(User);
+
+                    await _ticketService.AddTicketAttachmentAsync(ticketAttachment);
+
+                    // TODO : Ticket history
+                   
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+                statusMessage = "Success: New attachment added to Ticket.";
+            }
+            else
+            {
+                statusMessage = "Error: Invalid data.";
+
+            }
+
+            return RedirectToAction("Details", new { id = ticketAttachment.TicketId, message = statusMessage });
+        }
+        #endregion
+
+        #region Show File
+        public async Task<IActionResult> ShowFile(int id)
+        {
+            TicketAttachment ticketAttachment = await _ticketService.GetTicketAttachmentByIdAsync(id);
+            string fileName = ticketAttachment.FileName;
+            byte[] fileData = ticketAttachment.FileData;
+            string ext = Path.GetExtension(fileName).Replace(".", "");
+
+            Response.Headers.Add("Content-Disposition", $"inline; filename={fileName}");
+            return File(fileData, $"application/{ext}");
+        }
+        #endregion
 
         #region // GET: Tickets/Restore/5
-    // GET: Tickets/Restore/5
-    public async Task<IActionResult> Restore(int? id)
+        // GET: Tickets/Restore/5
+        public async Task<IActionResult> Restore(int? id)
         {
             if (id == null || _context.Tickets == null)
             {

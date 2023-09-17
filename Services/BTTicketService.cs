@@ -55,9 +55,17 @@ namespace TheBugTracker.Services
             }
         }
 
-        public Task AddTicketAttachmentAsync(TicketAttachment ticketAttachment)
+        public async Task AddTicketAttachmentAsync(TicketAttachment ticketAttachment)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _context.AddAsync(ticketAttachment);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task AddTicketCommentAsync(TicketComment ticketComment)
@@ -323,9 +331,20 @@ namespace TheBugTracker.Services
             throw new NotImplementedException();
         }
 
-        public Task<TicketAttachment> GetTicketAttachmentByIdAsync(int ticketAttchmentId)
+        public async Task<TicketAttachment> GetTicketAttachmentByIdAsync(int ticketAttachmentId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                TicketAttachment ticketAttachment = await _context.TicketAttachments
+                                                                  .Include(t => t.User)
+                                                                  .FirstOrDefaultAsync(t => t.Id == ticketAttachmentId);
+                return ticketAttachment;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<Ticket> GetTicketByIdAsync(int ticketId)

@@ -159,7 +159,9 @@
                 </div>
             </div>
         </div>
-        <!-- Attachments -->
+        
+
+            <!-- Attachments -->
         <div class="">
             <div class="col mt-4">
                 <div class="card col shadow">
@@ -168,17 +170,36 @@
                         <strong>Attachments</strong>
                     </div>
                     <div class="card-body" style="overflow-y:auto;max-height:300px;">
-                        
+                            @if (Model.Attachments.Count == 0)
+                            {
+                                <p class="text-secondary">&nbsp;No Attachments</p>
+                            }
                         <div class="container">
                             <div class="row">
-                               
+                                    @foreach (TicketAttachment item in Model.Attachments)
+                                    {
+                                        <div class="col col-sm-2">
+                                            <a asp-action="ShowFile" asp-controller="Tickets" asp-route-Id="@item.Id" target="_blank">
+                                                <div class="icon">
+                                                    <img src="@FileService.GetFileIcon(item.FileName)" style="height:50px;width:50px" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="@item.FileName" />
+                                                </div>
+                                            </a>
+                                            <div style="font-size:x-small">
+                                                <div class="file-name">
+                                                    <strong>@item.Description</strong>
+                                                </div>
+                                                <small>Size: @FileService.FormatFileSize(item.FileData.Length) </small>
+                                            </div>
+                                        </div>
+                                    }
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
+
             <!-- Add Attachments -->
         <div class="">
             <div class="col col-md-6 mt-2 mb-4">

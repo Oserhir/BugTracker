@@ -13,6 +13,178 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\3ds.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\3ds.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\aac.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\aac.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\ai.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\ai.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\avi.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\avi.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\bmp.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\bmp.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\cad.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\cad.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\cdr.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\cdr.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\css.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\css.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\dat.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\dat.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\default.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\default.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\dll.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\dll.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\dmg.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\dmg.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\doc.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\doc.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\docx.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\docx.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\eps.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\eps.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\fla.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\fla.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\flv.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\flv.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\gif.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\gif.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\html.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\html.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\indd.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\indd.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\iso.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\iso.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\jpg.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\jpg.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\js.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\js.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\midi.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\midi.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\mov.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\mov.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\mp3.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\mp3.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\mpg.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\mpg.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\pdf.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\pdf.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\php.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\php.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\png.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\png.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\ppt.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\ppt.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\ps.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\ps.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\psd.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\psd.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\raw.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\raw.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\sql.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\sql.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\svg.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\svg.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\tif.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\tif.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\txt.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\txt.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\wmv.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\wmv.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\xls.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\xls.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\xlsx.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\xlsx.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\xml.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\xml.png"
+    },
+    {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\zip.png",
+      "PackagePath": "staticwebassets\\img\\contenttype\\zip.png"
+    },
+    {
       "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

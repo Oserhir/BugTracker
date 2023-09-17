@@ -3,6 +3,7 @@
 namespace BugTracker.Extensions
 {
 
+    #region MaxFileSizeAttribute
     public class MaxFileSizeAttribute : ValidationAttribute
     {
         private readonly int _maxFileSize;
@@ -34,8 +35,10 @@ namespace BugTracker.Extensions
             return $"Maximum allowed file size is {_maxFileSize} bytes.";
         }
     }
+    #endregion
 
 
+    #region AllowedExtensionsAttribute
     public class AllowedExtensionsAttribute : ValidationAttribute
     {
         private readonly string[] _extensions;
@@ -67,5 +70,7 @@ namespace BugTracker.Extensions
         {
             return $"The file extension {ext} is not allowed!";
         }
-    }
+    } 
+    #endregion
+
 }
