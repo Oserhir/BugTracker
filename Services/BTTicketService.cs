@@ -328,7 +328,23 @@ namespace TheBugTracker.Services
 
         public Task<Ticket> GetTicketAsNoTrackingAsync(int ticketId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Keeps entity framework from tracking the entity
+                return await _context.Tickets
+                        .Include(t => t.DeveloperUser)
+                        .Include(t => t.Project)
+                        .Include(t => t.TicketPriority)
+                        .Include(t => t.TicketStatus)
+                        .Include(t => t.TicketType)
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync(t => t.Id == ticketId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<TicketAttachment> GetTicketAttachmentByIdAsync(int ticketAttachmentId)
