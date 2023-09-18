@@ -408,6 +408,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xBcmNoaXZlZFRpY2tldHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Tickets/AssignDeveloper.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xBc3NpZ25EZXZlbG9wZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Tickets/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

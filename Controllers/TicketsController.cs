@@ -135,7 +135,7 @@ namespace TheBugTracker.Controllers
         }
         #endregion
 
-        #region AssignDeveloper
+        #region //GET: AssignDeveloper
         //GET: AssignDeveloper
         [HttpGet]
 
@@ -149,6 +149,35 @@ namespace TheBugTracker.Controllers
                                                 "Id", "FullName");
 
             return View(model);
+        }
+        #endregion
+
+        #region //POST: AssignDeveloper
+        //POST: AssignDeveloper
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AssignDeveloper(AssignDeveloperViewModel model)
+        {
+
+            if (model.DeveloperId != null)
+            {
+
+                try
+                {
+                    await _ticketService.AssignTicketAsync(model.Ticket.Id, model.DeveloperId);
+                    return RedirectToAction(nameof(Details), new { id = model.Ticket.Id });
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+                
+            }
+
+            return RedirectToAction(nameof(AssignDeveloper), new { id = model.Ticket.Id });
         } 
         #endregion
 
