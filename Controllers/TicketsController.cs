@@ -425,6 +425,9 @@ namespace TheBugTracker.Controllers
 
                     await _ticketService.AddTicketCommentAsync(ticketComment);
 
+                    // Ticket history
+                    await _ticketHistoryService.AddHistoryAsync(ticketComment.TicketId, nameof(TicketComment), ticketComment.UserId);
+
                 }
                 catch (Exception)
                 {
