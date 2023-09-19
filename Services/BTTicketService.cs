@@ -326,7 +326,7 @@ namespace TheBugTracker.Services
             }
         }
 
-        public Task<Ticket> GetTicketAsNoTrackingAsync(int ticketId)
+        public async Task<Ticket> GetTicketAsNoTrackingAsync(int ticketId)
         {
             try
             {
@@ -342,7 +342,6 @@ namespace TheBugTracker.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

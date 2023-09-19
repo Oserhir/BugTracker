@@ -310,6 +310,7 @@ namespace TheBugTracker.Controllers
             {
 
                 BTUser btUser = await _userManager.GetUserAsync(User);
+                Ticket oldTicket = await _ticketService.GetTicketAsNoTrackingAsync(ticket.Id);
 
                 try
                 {
@@ -331,6 +332,9 @@ namespace TheBugTracker.Controllers
                 }
 
                 // TODO: Add Ticket History
+                Ticket newTicket = await _ticketService.GetTicketAsNoTrackingAsync(ticket.Id);
+                await _ticketHistoryService.AddHistoryAsync(oldTicket, newTicket, btUser.Id);
+
                 return RedirectToAction(nameof(Index));
             }
 
