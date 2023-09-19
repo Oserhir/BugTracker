@@ -466,7 +466,8 @@ namespace TheBugTracker.Controllers
                     await _ticketService.AddTicketAttachmentAsync(ticketAttachment);
 
                     // TODO : Ticket history
-                   
+                    await _ticketHistoryService.AddHistoryAsync(ticketAttachment.TicketId, nameof(TicketAttachment), ticketAttachment.UserId);
+
                 }
                 catch (Exception)
                 {
