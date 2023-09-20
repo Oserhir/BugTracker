@@ -23,7 +23,7 @@ namespace TheBugTracker.Controllers
     public class TicketsController : Controller
     {
         #region Properties
-        private readonly ApplicationDbContext _context;
+        //private readonly ApplicationDbContext _context;
         private readonly UserManager<BTUser> _userManager;
         private readonly IBTProjectService _projectService;
         private readonly IBTLookupService _lookupService;
@@ -36,7 +36,7 @@ namespace TheBugTracker.Controllers
         public TicketsController(ApplicationDbContext context, UserManager<BTUser> userManager,
             IBTLookupService lookupService, IBTTicketService ticketService, IBTProjectService projectService, IBTFileService fileService, IBTTicketHistoryService ticketHistoryService)
         {
-            _context = context;
+           // _context = context;
             _userManager = userManager;
             _lookupService = lookupService;
             _ticketService = ticketService;
@@ -48,11 +48,11 @@ namespace TheBugTracker.Controllers
 
         #region  // GET: Tickets
         // GET: Tickets
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Tickets.Include(t => t.DeveloperUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
-            return View(await applicationDbContext.ToListAsync());
-        }
+        //public async Task<IActionResult> Index()
+        //{
+        //    var applicationDbContext = _context.Tickets.Include(t => t.DeveloperUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
+        //    return View(await applicationDbContext.ToListAsync());
+        //}
         #endregion
 
         #region //GET: MyTickets
@@ -154,7 +154,7 @@ namespace TheBugTracker.Controllers
 
         #region //POST: AssignDeveloper
         //POST: AssignDeveloper
-        
+        [Authorize(Roles = "Admin, ProjectManager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AssignDeveloper(AssignDeveloperViewModel model)
@@ -192,7 +192,7 @@ namespace TheBugTracker.Controllers
         // GET: Tickets/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Tickets == null)
+            if (id == null )
             {
                 return NotFound();
             }
@@ -270,7 +270,7 @@ namespace TheBugTracker.Controllers
                 }
 
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AllTickets));
             }
 
             // If model state not valid
@@ -294,7 +294,7 @@ namespace TheBugTracker.Controllers
         // GET: Tickets/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Tickets == null)
+            if (id == null )
             {
                 return NotFound();
             }
@@ -357,7 +357,7 @@ namespace TheBugTracker.Controllers
                 Ticket newTicket = await _ticketService.GetTicketAsNoTrackingAsync(ticket.Id);
                 await _ticketHistoryService.AddHistoryAsync(oldTicket, newTicket, btUser.Id);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AllTickets));
             }
 
             ViewData["TicketPriorityId"] = new SelectList(await _lookupService.GetTicketPrioritiesAsync(), "Id", "Name", ticket.TicketPriorityId);
@@ -370,10 +370,11 @@ namespace TheBugTracker.Controllers
         #endregion
 
         #region // GET: Tickets/Archive/5
+        [Authorize(Roles = "Admin, ProjectManager")]
         // GET: Tickets/Archive/5
         public async Task<IActionResult> Archive(int? id)
         {
-            if (id == null || _context.Tickets == null)
+            if (id == null  )
             {
                 return NotFound();
             }
@@ -390,14 +391,11 @@ namespace TheBugTracker.Controllers
         #endregion
 
         #region // POST: Tickets/Archive/5
+        [Authorize(Roles = "Admin, ProjectManager")]
         [HttpPost, ActionName("Archive")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ArchiveConfirmed(int id)
         {
-            if (_context.Tickets == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Tickets'  is null.");
-            }
 
             Ticket ticket = await _ticketService.GetTicketByIdAsync(id);
 
@@ -405,7 +403,7 @@ namespace TheBugTracker.Controllers
 
             await _ticketService.UpdateTicketAsync(ticket);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AllTickets));
         }
         #endregion
 
@@ -501,10 +499,11 @@ namespace TheBugTracker.Controllers
         #endregion
 
         #region // GET: Tickets/Restore/5
+        [Authorize(Roles = "Admin, ProjectManager")]
         // GET: Tickets/Restore/5
         public async Task<IActionResult> Restore(int? id)
         {
-            if (id == null || _context.Tickets == null)
+            if (id == null  )
             {
                 return NotFound();
             }
@@ -517,18 +516,15 @@ namespace TheBugTracker.Controllers
             }
 
             return View(ticket);
-        } 
+        }
         #endregion
 
         #region // POST: Tickets/Restore/5
+        [Authorize(Roles = "Admin, ProjectManager")]
         [HttpPost, ActionName("Restore")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RestoreConfirmed(int id)
         {
-            if (_context.Tickets == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Tickets'  is null.");
-            }
 
             Ticket ticket = await _ticketService.GetTicketByIdAsync(id);
 
@@ -536,7 +532,7 @@ namespace TheBugTracker.Controllers
 
             await _ticketService.UpdateTicketAsync(ticket);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AllTickets));
         } 
         #endregion
 
