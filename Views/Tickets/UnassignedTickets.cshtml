@@ -8,6 +8,83 @@
 
 <h3 class="mt-2 mb-4">Unassigned Tickets</h3>
 
+	<div class="row">
+								<!-- Column starts -->
+								<div class="col-xl-12">
+									<div class="card dz-card" id="bootstrap-table1">
+										<div class="card-header flex-wrap border-0">
+											<div>
+												<h4 class="card-title">Unassigned Tickets</h4>
+												
+											</div>
+										
+										</div>
+										<!--tab-content-->
+										<div class="tab-content" id="myTabContent">
+											<div class="tab-pane fade show active" id="Preview" role="tabpanel" aria-labelledby="home-tab">
+												<div class="card-body pt-0">
+													<div class="table-responsive">
+														<table class="table table-responsive-md">
+															<thead>
+																<tr>
+																	<th style="width:80px;"><strong>Title</strong></th>
+																	<th><strong>Developer</strong></th>
+																	<th><strong>Status</strong></th>
+																	<th><strong>Priority</strong></th>
+																	<th><strong>Date</strong></th>
+																	<th><strong>Action</strong></th>
+																	<th></th>
+																</tr>
+															</thead>
+															<tbody>
+
+                                    @foreach (var ticket in Model.OrderByDescending(d => d.Created))
+                                    {
+
+																<tr>
+																	<td><strong> <a asp-action="Details" asp-controller="Tickets" asp-route-id="@ticket.Id" style="text-decoration: none">@ticket.Title</a>  </strong></td>
+																	<td>
+
+                                                                            @if (ticket.DeveloperUserId != null)
+                                                                            {
+                                                                                @ticket.DeveloperUser?.FullName
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
+                                                                                {
+                                                                                        <a class="btn btn-sm btn-info text-white" asp-action="AssignDeveloper" asp-controller="Tickets" asp-route-id="@ticket.Id">Assign Dev</a>
+                                                                                }
+
+                                                                            }
+                                                                    </td>
+
+                                                                    @if (ticket.TicketStatus.Name == "New")
+                                                                            {
+                                                                                <td> <span class="badge light badge-success">@ticket.TicketStatus.Name</span> </td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                               <td> <span class="badge light badge-primary">@ticket.TicketStatus.Name</span> </td>
+                                                                    }
+
+                                                                   <td> <span class="badge light badge-warning">@ticket.TicketPriority.Name</span> </td>
+
+
+																	<td> @ticket.Created.ToString("dd-MMM-yyyy") </td>
+                                                                            <td>  <a asp-action="Details" asp-controller="Tickets"asp-route-id="@ticket.Id" class="btn btn-success shadow btn-xs sharp me-1"><i class="fa fa-eye"></i></a> </td>
+																      </tr>
+									} 
+															</tbody>
+														</table>
+													</div>
+												</div>
+												<!-- /Recent Payments Queue -->	
+											</div>
+
+
+											<!--  
+
 <p>
     <a class="btn btn-sm btn-primary" asp-action="Create">Create New +</a>
 </p>
@@ -74,3 +151,4 @@
     </div>
 </div>
 
+-->
