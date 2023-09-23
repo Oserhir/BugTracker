@@ -68,7 +68,21 @@
                                                                                <td> <span class="badge light badge-primary">@ticket.TicketStatus.Name</span> </td>
                                                                     }
 
-                                                                   <td> <span class="badge light badge-warning">@ticket.TicketPriority.Name</span> </td>
+																	@if (ticket.TicketPriority.Name == "Urgent")
+																	{
+																				<td> <span class="badge light badge-danger">@ticket.TicketPriority.Name</span> </td>
+																	}
+																	else if (ticket.TicketPriority.Name == "Medium")
+																	{
+																		 <td> <span class="badge light badge-warning">@ticket.TicketPriority.Name</span> </td>
+																	}
+																	else if (ticket.TicketPriority.Name == "Low")
+																	{
+																		<td> <span class="badge light badge-info">@ticket.TicketPriority.Name</span> </td>
+																	}else
+																	{
+																		 <td> <span class="badge light badge-primary">@ticket.TicketPriority.Name</span> </td>
+																	}
 
 
 																	<td> @ticket.Created.ToString("dd-MMM-yyyy") </td>
@@ -79,76 +93,8 @@
 														</table>
 													</div>
 												</div>
-												<!-- /Recent Payments Queue -->	
+									
 											</div>
 
 
-											<!--  
-
-<p>
-    <a class="btn btn-sm btn-primary" asp-action="Create">Create New +</a>
-</p>
-
-<div class="col mb-4">
-    <div class="card shadow">
-        <div class="card-header">
-            <i class="fas fa-table me-1 text-secondary"></i>
-            <strong>Unassigned Tickets</strong>
-        </div>
-        <div class="card-body">
-            <div class="">
-                <table id="datatablesUnassignedTickets" class="table table-striped dt-responsive w-100">
-                        <thead>
-                            <tr>
-                                @* Table header *@
-                                <th>Title</th>
-                                <th>Developer</th>
-                                <th>Status</th>
-                                <th>Priority</th>
-                                <th>Date</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @* Table body *@
-                            @foreach (var ticket in Model.OrderByDescending(d => d.Created))
-                            {
-                                <tr>
-                                    <td><a asp-action="Details" asp-controller="Tickets" asp-route-id="@ticket.Id" style="text-decoration: none">@ticket.Title</a> </td>
-                                    <td>
-                                        @if (ticket.DeveloperUserId != null)
-                                        {
-                                            @ticket.DeveloperUser?.FullName
-                                        }
-                                        else
-                                        {
-                                            if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
-                                            {
-                                                <a class="btn btn-sm btn-info text-white" asp-action="AssignDeveloper" asp-controller="Tickets" asp-route-id="@ticket.Id">Assign Dev</a>
-                                            }
-
-                                        }
-                                    </td>
-                                    @if (ticket.TicketStatus.Name == "New")
-                                    {
-                                        <td><span class="badge-success">@ticket.TicketStatus.Name </span></td>
-                                    }
-                                    else
-                                    {
-                                        <td><span class="badge-primary">@ticket.TicketStatus.Name </span></td>
-                                    }
-                                    <td><span class="badge-warning">@ticket.TicketPriority.Name </span></td>
-                                    <td>@ticket.Created.ToString("dd-MMM-yyyy")</td>
-                                    <td>
-                                            <a asp-action="Details" asp-controller="Tickets" asp-route-id="@ticket.Id"> Details </a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
--->
+		
