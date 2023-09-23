@@ -7,8 +7,99 @@
 <h1>Restore</h1>
 
 <h3>Are you sure you want to Restore this ticket?</h3>
+
+
+                    <div style = "margin-top : 20px" class="col-xl-12">
+                        <div class="card dz-card" id="bootstrap-table5">
+                            <div class="card-header flex-wrap d-flex justify-content-between  border-0">
+                                <div>
+                                    <h4 class="card-title">Ticket</h4>
+                                </div>
+                            </div>
+                               <!-- tab-content -->	
+                            <div class="tab-content" id="myTabContent-4">
+                                <div class="tab-pane fade show active" id="leftPosition" role="tabpanel" aria-labelledby="home-tab-4">
+                                    <div class="card-body pt-0">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-responsive-sm">
+                                               
+                                                <tbody>
+                                                    <tr>
+                                                        <th> @Html.DisplayNameFor(model => model.Title) </th>
+                                                        <td>  @Html.DisplayFor(model => model.Title) </td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <th>@Html.DisplayNameFor(model => model.Description)</th>
+                                                        <td> @Html.DisplayFor(model => model.Description) </td>
+                                                    </tr>
+
+                                                     <tr>
+                                                        <th> @Html.DisplayNameFor(model => model.Created) </th>
+                                                        <td>  @Html.DisplayFor(model => model.Created) </td>
+                                                    </tr>
+
+                                                     <tr>
+                                                        <th>  @Html.DisplayNameFor(model => model.Updated) </th>
+                                                        <td>  @Html.DisplayFor(model => model.Updated)  </td>
+                                                    </tr>
+
+
+                                                     <tr>
+                                                        <th>  @Html.DisplayNameFor(model => model.Project) </th>
+                                                        <td>   @Html.DisplayFor(model => model.Project.Name)  </td>
+                                                    </tr>
+
+                                                      <tr>
+                                                        <th> @Html.DisplayNameFor(model => model.TicketType) </th>
+                                                        <td>   @Html.DisplayFor(model => model.TicketType.Name) </td>
+                                                    </tr>
+
+                                                     <tr>
+                                                        <th> @Html.DisplayNameFor(model => model.TicketPriority) </th>
+                                                        <td>   @Html.DisplayFor(model => model.TicketPriority.Name) </td>
+                                                    </tr>
+
+                                                     <tr>
+                                                        <th> @Html.DisplayNameFor(model => model.TicketStatus) </th>
+                                                        <td>   @Html.DisplayFor(model => model.TicketStatus.Name) </td>
+                                                    </tr>
+
+                                                     <tr>
+                                                        <th>  @Html.DisplayNameFor(model => model.OwnerUser) </th>
+                                                        <td>   @Html.DisplayFor(model => model.OwnerUser.FullName) </td>
+                                                    </tr>
+
+                                                     <tr>
+                                                        <th>   @Html.DisplayNameFor(model => model.DeveloperUser) </th>
+                                                        <td>      @Html.DisplayFor(model => model.DeveloperUser.FullName) </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style = "margin: 20px" > 
+                                        <form asp-action="Restore">
+                                            <input type="hidden" asp-for="Id" />
+                                            <input type="submit" value="Restore" class="btn btn-success" /> |
+                                            <a asp-action="Index">Back to List</a>
+                                         </form>
+                               </div>
+
+                            </div>
+
+
+
+
+ <!--  
 <div>
     <h4>Ticket</h4>
+
+   
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -78,10 +169,14 @@
             @Html.DisplayFor(model => model.DeveloperUser.FullName)
         </dd>
     </dl>
+
+
     
     <form asp-action="Restore">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Restore" class="btn btn-success" /> |
         <a asp-action="Index">Back to List</a>
     </form>
+
+        -->
 </div>

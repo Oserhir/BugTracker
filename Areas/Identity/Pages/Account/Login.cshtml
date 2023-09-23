@@ -1,11 +1,119 @@
 ﻿@page
 @model LoginModel
 
+
+        <!-- Content -->
+        <div class="browse-job login-style3">
+            <!-- Coming Soon -->
+            <div class="bg-img-fix overflow-hidden" style="background:#fff url(https://rsgaccountants.com.au/wp-content/uploads/2019/07/accountant-accounting-businessman.jpg); background-size: cover; height: 100vh;">
+                <div class="row gx-0">
+                    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12 vh-100  " style="background-color:#181c22">
+                        <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 653px;" tabindex="0">
+                            <div id="mCSB_1_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr"  >
+                                <div class="login-form style-2" style="padding:20px;" >
+
+                                    <!-- 
+                                    <div class="card-body">
+                                        <div class="logo-header">
+                                            <a href="index.html" class="logo"><img src="~/YashAdmin/images/logo/logo-full.png" alt="" class="width-230 light-logo"></a>
+                                            <a href="index.html" class="logo"><img src="~/YashAdmin/images/logo/logofull-white.png" alt="" class="width-230 dark-logo"></a>
+                                        </div>
+                                    -->
+
+                                          <form id="account" method="post" class=" dz-form pb-3">
+                                                    <h3 class="form-title m-t0">Login to your account</h3>
+                                                    <div class="dz-separator-outer m-b5">
+                                                        <div class="dz-separator bg-primary style-liner"></div>
+                                                    </div>
+                                                    <p>Enter your e-mail address and your password. </p>
+                                                    <div class="form-group mb-3">
+                                                        <input asp-for="Input.Email"  type="email" class="form-control" value="" placeholder="Email" >
+                                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group mb-3">
+                                                        <input asp-for="Input.Password"  type="password" class="form-control" value="" placeholder="Password">
+                                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group text-left mb-5 forget-main">
+                                                        <button style="background-color:#fd8d3d; color:white; border : none"  type="submit" class="btn btn-primary">Sign Me In</button>
+
+
+                                                        <span class="form-check d-inline-block">
+                                                            <input type="checkbox" class="form-check-input" id="check1" name="example1">
+                                                            <label class="form-check-label" for="check1">Remember me</label>
+                                                        </span>
+                                                        <button class="nav-link m-auto btn tp-btn-light btn-primary forget-tab " id="nav-forget-tab" data-bs-toggle="tab" data-bs-target="#nav-forget" type="button" role="tab" aria-controls="nav-forget" aria-selected="false">Forget Password ?</button> 	
+                                                    </div>
+                                                     
+                                                </form>
+                                                <div class="text-center bottom"> 
+                                                    <button style="background-color:#fd8d3d; color:white; border : none" class="btn btn-primary button-md btn-block" id="nav-sign-tab" data-bs-toggle="tab" data-bs-target="#nav-sign" type="button" role="tab" aria-controls="nav-sign" aria-selected="false">Create an account</button> 
+
+                                                </div>
+                                          </div>
+                                          <div class="tab-pane fade" id="nav-forget" role="tabpanel" aria-labelledby="nav-forget-tab">
+                                            <form class="dz-form">
+                                                <h3 class="form-title m-t0">Forget Password ?</h3>
+                                                <div class="dz-separator-outer m-b5">
+                                                    <div class="dz-separator bg-primary style-liner"></div>
+                                                </div>
+                                                <p>Enter your e-mail address below to reset your password. </p>
+                                                <div class="form-group mb-4">
+                                                    <input name="dzName" required="" class="form-control" placeholder="Email Address" type="text">
+                                                </div>
+                                                <div class="form-group clearfix text-left"> 
+                                                    <button class=" active btn btn-primary" id="nav-personal-tab" data-bs-toggle="tab" data-bs-target="#nav-personal" type="button" role="tab" aria-controls="nav-personal" aria-selected="true">Back</button>
+                                                    <button class="btn btn-primary float-end">Submit</button>
+                                                </div>
+                                            </form>
+                                             
+                                            
+
+                                                <div class="text-center bottom"> 
+                                                    <form method="post">
+                                                         <button  type="submit" asp-page="/Account/Register" asp-area="Identity"   style="background-color:#fd8d3d; color:white; border : none" class="btn btn-primary button-md btn-block" id="nav-sign-tab" data-bs-toggle="tab" data-bs-target="#nav-sign" type="button" role="tab" aria-controls="nav-sign" aria-selected="false">Create an account</button> 
+                                                    </form>
+                                                </div>
+                                          </div>
+                                          
+                                        </div>
+
+                                                </div>
+                                          </div>
+
+
+                                        </div>
+
+                                        </div>
+                                    </nav>
+
+
+                                </div>
+                            </div>
+                            <div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: block;">
+                                <div class="mCSB_draggerContainer">
+                                <div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 0px; display: block; height: 652px; max-height: 643px; top: 0px;">
+                                <div class="mCSB_dragger_bar" style="line-height: 0px;"></div><div class="mCSB_draggerRail"></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Full Blog Page Contant -->
+        </div>
+        <!-- Content END-->
+
+
+<!-- 
 @{
     ViewData["Title"] = "Log in";
 }
 
 <h1>@ViewData["Title"]</h1>
+
+
+
+
 <div class="row">
     <div class="col-md-4">
         <section>
@@ -77,6 +185,8 @@
         </section>
     </div>
 </div>
+ -->
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
