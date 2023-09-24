@@ -54,6 +54,14 @@
                 <div class=" collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ms-auto ">
 
+                        <!--  
+                            <li class="nav-item">
+                                       <a class="nav-link mx-2 active" aria-current="page" asp-controller="Companies" asp-action="Details" >Company</a>
+                            </li>
+                        -->
+
+                            
+
                         <li class="nav-item dropdown">
 
                             <a class="nav-link mx-2 dropdown-toggle" 
@@ -61,26 +69,87 @@
                             role="button" 
                             data-bs-toggle="dropdown" 
                             aria-expanded="false">
-                                Tickets
+                                    <i class="fa fa-ticket" aria-hidden="true"></i>
+                                    Tickets
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" asp-controller="Tickets" asp-action="Create" >Add Ticket +</a></li>
-                                <li><a class="dropdown-item" asp-controller="Tickets" asp-action="AllTickets" >All Tickets</a></li>
+                                <li  style = "margin-left : 10px"      >
+
+                                      <a  asp-controller="Tickets" asp-action="Create" class="d-flex align-items-center text-dark text-decoration-none "  aria-expanded="false">
+                                                <i class="fa fa-plus"></i>
+                                                <span  class="nav-link text-dark" >Add Ticket</span>
+                                      </a>
+                                        <!-- 
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    <a class="dropdown-item" asp-controller="Tickets" asp-action="Create" >Add Ticket</a>
+                                            -->
+                                </li>
+
+
+
+                                        <li style = "margin-left : 10px"    >
+                                                 <a  asp-controller="Tickets" asp-action="AllTickets" 
+                                                                class="d-flex align-items-center text-dark text-decoration-none "  aria-expanded="false">
+                                                        <i class="fa fa-th-list" aria-hidden="true"></i>
+                                                        <span  class="nav-link text-dark" >All Tickets</span>
+                                                </a>
+                                            
+                                               <!--  <a class="dropdown-item" asp-controller="Tickets" asp-action="AllTickets" >All Tickets</a> -->
+                                            
+                                        </li>
+
+
+
                                 @if (!User.IsInRole(nameof(Roles.Admin)))
                                  {
-                                    <li><a class="dropdown-item" asp-controller="Tickets" asp-action="MyTickets" >My Tickets</a></li>
+                                     <li  style = "margin-left : 10px"  >
+                                        <a   asp-controller="Tickets" asp-action="MyTickets" 
+                                                  class="d-flex align-items-center text-dark text-decoration-none "  aria-expanded="false">
+                                                  <i class="fa fa-bars" aria-hidden="true"></i>
+                                                  <span  class="nav-link text-dark" >My Tickets</span>
+                                         </a>
+
+                                          <!-- <a class="dropdown-item" asp-controller="Tickets" asp-action="MyTickets" >My Tickets  </a> -->
+                                     </li>
                                  }
                                    
-                                        <li><a class="dropdown-item" asp-controller="Tickets" asp-action="ArchivedTickets" >Ticket Archive</a></li>
+                                      <li  style = "margin-left : 10px" >
+                                   <a   asp-controller="Tickets" asp-action="ArchivedTickets"
+                                                      class="d-flex align-items-center text-dark text-decoration-none "  
+                                                      aria-expanded="false">
+                                           <i class="fa fa-archive" aria-hidden="true"></i>
+                                           <span  class="nav-link text-dark" >Ticket Archive</span>
+                                   </a>
+                                       </li>
+
+                                   <!--  <li><a class="dropdown-item" asp-controller="Tickets" asp-action="ArchivedTickets" >Ticket Archive</a></li>
+                                           -->
                                     @if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
                                         {
-                                            <li><a class="dropdown-item" asp-controller="Tickets" asp-action="UnassignedTickets" >Assign Tickets</a></li>
+                                            <li  style = "margin-left : 10px" >
+                                           <a   asp-controller="Tickets" asp-action="UnassignedTickets"
+                                                              class="d-flex align-items-center text-dark text-decoration-none "  
+                                                              aria-expanded="false">
+                                                          <i class="fa fa-leaf" aria-hidden="true"></i>
+                                                           <span  class="nav-link text-dark" >Assign Tickets</span>
+                                           </a>
+                                               </li>
+
+                                     <!--   <li><a class="dropdown-item" asp-controller="Tickets" asp-action="UnassignedTickets" >Assign Tickets</a></li> -->
                                         }
                             </ul>
                         </li>
 
                         <li class="nav-item">
+
+                                   <a asp-controller="UserRoles" asp-action="ManageUserRoles" class="d-flex align-items-center text-white text-decoration-none "  aria-expanded="false">
+                                                   <i class="fa fa-cog" aria-hidden="true"></i>
+                                                   <span  class="nav-link text-white" >Manage User Roles</span>
+                                    </a>
+                           <!-- 
+                            <i class="fa fa-cog" aria-hidden="true"></i>
                             <a class="nav-link mx-2 active" aria-current="page" asp-controller="UserRoles" asp-action="ManageUserRoles" >Manage User Roles</a>
+                                -->
                         </li>
 
                     </ul>
