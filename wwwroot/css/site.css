@@ -20,3 +20,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+.custom-bg-yellow {
+    background-color: #fd8d3d !important; /* Use !important to ensure the style is applied */
+}

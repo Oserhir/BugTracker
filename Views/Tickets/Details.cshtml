@@ -15,68 +15,71 @@
     BTUser projectManager = await ProjectService.GetProjectManagerAsync(Model.ProjectId);
 }
 
+<div class="d-flex align-items-center">
+    <a class="" asp-action="AllTickets" asp-controller="Tickets" style="color: rgb(23, 123, 227); margin-right : 15px" >  <i class="fa fa-arrow-left fa-lg" aria-hidden="true"></i> </a>
+    <h4 class="mb-0">Ticket Details</h4>
+</div>
 
-<h3 class="mt-2">Ticket Details</h3>
+<div class="d-flex align-items-center" style="margin-bottom : 20px">
+    <a class="" asp-action="Dashboard" asp-controller="Home" style="color: rgb(23, 123, 227); margin-right : 15px" >  <i class="fa fa-home fa-lg" aria-hidden="true"></i> </a>
+    <p class="mb-0" style="margin-right : 5px">/ Tickets</p>
+    <p class="mb-0">/ Details</p>
+</div>
+
+
+
 <div class="mb-4">
-  
 
 <div class="row mt-2">
     <div class="col-12 col-md-8">
-        <!-- Details -->
-        <div class="row">
-            <div class="col">
-                <div class="card col shadow">
-                    <div class="card-header">
-                      
-                        <strong>@Model.Title</strong                  <!-- Title -->
-                        <i class="fas fa-info-circle text-secondary"></i>
-                    </div>
-                    <div class="card-body px-2" style="overflow-y:auto;max-height:350px;">
-                        <p>@Model.Description</p>                     <!-- Description -->
-                        <div class="progress-container progress-info m-b-25">
-                            @*Project Name and information*@
-                            <strong class="progress-badge" style="font-size:small">Project: </strong><a style="text-decoration:none" asp-controller="Projects" asp-action="Details" asp-route-id="@Model.ProjectId">@Model.Project.Name</a>  <!-- Project -->
-                            <br />
-                            <strong class="progress-badge" style="font-size:small">Developer: </strong>
-                            @if (Model.DeveloperUserId != null)
-                            {
-                                <span>@Model.DeveloperUser?.FullName</span>
-                            }
-                            else
-                            {
-                                if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
+    <!--Ticket Detail - Short -->
+
+    <div style="margin-top: 20px; " class="col-xl-4 col-lg-12 col-sm-12">
+                        <div class="card" style = "padding-bottom: 50px">
+                            <div class="card-header border-0 pb-0">
+                                <h2 class="card-title">@Model.Title</h2>
+                            </div>
+                            <div class="card-body pb-0">
+                                <p>  @Model.Description </p>
+                                 @*Project Name and information*@
+                               <strong class="" ">Project: </strong><a style="text-decoration:none" asp-controller="Projects" asp-action="Details" asp-route-id="@Model.ProjectId">@Model.Project.Name</a>  <!-- Project -->
+                                <br />
+                                 <strong class="" ">Developer: </strong>
+                                @if (Model.DeveloperUserId != null)
                                 {
-                                    <a class="badge bg-info text-white" style="text-decoration:none" asp-action="AssignDeveloper" asp-controller="Tickets" asp-route-id="@Model.Id">Assign Developer</a>
+                                     <span>@Model.DeveloperUser?.FullName</span>
                                 }
+                                else
+                                {
+                                    if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
+                                    {
+                                           <a class="badge bg-info text-white" style="text-decoration:none" asp-action="AssignDeveloper" asp-controller="Tickets" asp-route-id="@Model.Id">Assign Developer</a>
+                                    }
 
-                            }
+                                }
                             <br />
 
-                            <div class="progress mt-2">
-                                @*Progress bar logic*@
-                                @{
-                                    var start = Model.Project.StartDate.DateTime;
-                                    var end = Model.Project.EndDate.DateTime;
-                                    var today = DateTime.Now;
-                                    var percent = today >= end ? 100 : today < start ? 0 : Math.Round((today.Subtract(start)) / (end.Subtract(start)) * 100);
-                                }
-                                @*Variable from razor logic*@
+                                  <div class="progress mt-2">
+                    @*Progress bar logic*@
+                    @{
+                        var start = Model.Project.StartDate.DateTime;
+                        var end = Model.Project.EndDate.DateTime;
+                        var today = DateTime.Now;
+                        var percent = today >= end ? 100 : today < start ? 0 : Math.Round((today.Subtract(start)) / (end.Subtract(start)) * 100);
+                    }
+                    @*Variable from razor logic*@
                                 <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: @percent%;">
-                                    @*Variable from razor logic*@
+                        @*Variable from razor logic*@
                                     <span class="progress-value">@percent%</span>
                                 </div>
 
-                               
-
                             </div>
-
-                           
+                                
+                            </div>
+                            
                         </div>
-                      
                     </div>
-                </div>
-            </div>
-        </div>
+
 
         <!-- Ticket Details  -->
 
@@ -333,55 +336,3 @@
     <div> </div>
 
 
-<!--
-
-    <div class="col-12 col-md-4 mb-4">
-        <div class="col">
-            <div class="card shadow">
-                <div class="card-header">
-                    <i class="fas fa-history text-secondary"></i>
-                    <strong>Ticket Activity</strong>
-                </div>
-                <div class="card-body ticket-activity px-2">
-                        @if (Model.History.Count == 0)
-                        {
-                            <p class="text-secondary">&nbsp;No Activity</p>
-                        }
-                        @*Loop to show the history entries for the Ticket*@
-                        @foreach (TicketHistory tH in Model.History.Reverse())
-                        {
-                            <div class="">
-                                <span class="date"><strong>@tH.Created.ToString("dd MMM yyyy")</strong></span>
-                                <br>
-                                <span>@tH.Description</span>
-                                <br>
-                                <span>By: <a href="" style="text-decoration: none">@tH.User?.FullName</a></span>
-                                <p></p>
-                                <div class="">
-                                    @if (tH.Description.Contains("New Ticket Created"))
-                                    {
-                                            <p>&nbsp;&nbsp;A ticket was added.</p>
-                                    }
-                                    else if (tH.Property.Equals("TicketComment") || tH.Property.Equals("TicketAttachment"))
-                                    {
-                                            <p>&nbsp;&nbsp;A <b>@tH.Property</b> was added.</p>
-                                    }
-                                    else
-                                    {
-                                            <p>&nbsp;&nbsp;The ticket <b>@tH.Property</b> was edited</p>
-                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;@($"Previous {tH.Property}:  ") <span class="text-danger">@tH.OldValue</span></p>
-                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;@($"Current {tH.Property}:   ") <span class="text-success">@tH.NewValue</span></p>
-                                    }
-
-                                </div>
-                            </div>
-                            <hr />
-                        }
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
- -->

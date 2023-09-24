@@ -41861,6 +41861,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\header\\css.css",
+      "PackagePath": "staticwebassets\\header\\css.css"
+    },
+    {
       "Id": "C:\\Users\\YUSSEF\\source\\repos\\TheBugTracker\\wwwroot\\img\\contenttype\\3ds.png",
       "PackagePath": "staticwebassets\\img\\contenttype\\3ds.png"
     },

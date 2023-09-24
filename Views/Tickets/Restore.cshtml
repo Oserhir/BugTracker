@@ -4,7 +4,18 @@
     ViewData["Title"] = "Restore";
 }
 
-<h1>Restore</h1>
+
+<div class="d-flex align-items-center">
+    <a class="" asp-action="AllTickets" asp-controller="Tickets" style="color: rgb(23, 123, 227); margin-right : 15px" >  <i class="fa fa-arrow-left fa-lg" aria-hidden="true"></i> </a>
+    <h4 class="mb-0">Restore</h4>
+</div>
+
+<div class="d-flex align-items-center" style="margin-bottom : 20px">
+    <a class="" asp-action="Dashboard" asp-controller="Home" style="color: rgb(23, 123, 227); margin-right : 15px" >  <i class="fa fa-home fa-lg" aria-hidden="true"></i> </a>
+    <p class="mb-0" style="margin-right : 5px">/ Tickets</p>
+    <p class="mb-0">/ Restore</p>
+</div>
+
 
 <h3>Are you sure you want to Restore this ticket?</h3>
 
@@ -86,97 +97,11 @@
                                         <form asp-action="Restore">
                                             <input type="hidden" asp-for="Id" />
                                             <input type="submit" value="Restore" class="btn btn-success" /> |
-                                            <a asp-action="Index">Back to List</a>
+                                             
                                          </form>
                                </div>
 
                             </div>
 
 
-
-
- <!--  
-<div>
-    <h4>Ticket</h4>
-
-   
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Created)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Updated)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Updated)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Archived)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Archived)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Project)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Project.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TicketType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TicketType.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TicketPriority)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TicketPriority.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TicketStatus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TicketStatus.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OwnerUser)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OwnerUser.FullName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DeveloperUser)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DeveloperUser.FullName)
-        </dd>
-    </dl>
-
-
-    
-    <form asp-action="Restore">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Restore" class="btn btn-success" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
-
-        -->
 </div>

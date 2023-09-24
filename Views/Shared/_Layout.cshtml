@@ -1,4 +1,8 @@
 ﻿@using TheBugTracker.Models.Enums
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<BTUser> SignInManager
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +15,7 @@
     <link rel="stylesheet" href="~/TheBugTracker.styles.css" asp-append-version="true" />
 
     <!--  Login   **************************************  -->
-    
+
     <!-- FAVICONS ICON -->
     <link rel="shortcut icon" type="image/png" href="~/YashAdmin/images/favicon.png">
     <link href="~/YashAdmin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
@@ -30,75 +34,91 @@
     <link href="~/YashAdmin/css/style.css" rel="stylesheet">
 
 
-
 </head>
+
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+                <nav class="navbar navbar-expand-lg navbar-dark custom-bg-yellow  p-3" style = "margin-bottom: 20px;" >
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TheBugTracker</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                
+                <a class="navbar-brand" asp-controller="Home" asp-action="Dashboard"  >Bugs Tracker</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" 
+                aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+                <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto ">
+
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link mx-2 dropdown-toggle" 
+                            id="navbarDropdownMenuLink" 
+                            role="button" 
+                            data-bs-toggle="dropdown" 
+                            aria-expanded="false">
+                                Tickets
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" asp-controller="Tickets" asp-action="Create" >Add Ticket +</a></li>
+                                <li><a class="dropdown-item" asp-controller="Tickets" asp-action="AllTickets" >All Tickets</a></li>
+                                @if (!User.IsInRole(nameof(Roles.Admin)))
+                                 {
+                                    <li><a class="dropdown-item" asp-controller="Tickets" asp-action="MyTickets" >My Tickets</a></li>
+                                 }
+                                   
+                                        <li><a class="dropdown-item" asp-controller="Tickets" asp-action="ArchivedTickets" >Ticket Archive</a></li>
+                                    @if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
+                                        {
+                                            <li><a class="dropdown-item" asp-controller="Tickets" asp-action="UnassignedTickets" >Assign Tickets</a></li>
+                                        }
+                            </ul>
+                        </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Companies" asp-action="Index">Company</a>
+                            <a class="nav-link mx-2 active" aria-current="page" asp-controller="UserRoles" asp-action="ManageUserRoles" >Manage User Roles</a>
                         </li>
 
-
-                        @if (!User.IsInRole(nameof(Roles.Admin)))
-                        {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Tickets" asp-action="MyTickets">My Tickets</a>
-                                </li>
-                        }
-
-                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Tickets" asp-action="AllTickets">All Tickets</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Tickets" asp-action="ArchivedTickets">Archived Tickets</a>
-                        </li>
-
-                        @if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
-                        {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Tickets" asp-action="UnassignedTickets">Unassigned Tickets</a>
-                                </li>
-                        }
-
-
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Notifications" asp-action="Index">Notifications</a>
-                        </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="UserRoles" asp-action="ManageUserRoles">Manage User Roles</a>
-                        </li>
                     </ul>
-                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav ms-auto d-none d-lg-inline-flex">
+                        <partial name="_LoginPartial" />
+                    </ul>
                 </div>
             </div>
         </nav>
-    </header>
+    }
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+     
+     @if (SignInManager.IsSignedIn(User))
+    {
+              <div class="container">
+                <main role="main" class="pb-3">
+                @RenderBody()
+                </main>
+        </div>
+
+    }else
+    {
+            <div class="">
+                <main role="main" class="pb-3">
+                @RenderBody()
+                </main>
+           </div>
+    }
+
+       
+
 
     <footer class="border-top footer text-muted">
-       
+
     </footer>
+
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -168,7 +188,7 @@
         });	
     </script>
 
-    
+
 
     <!--END-->
 
