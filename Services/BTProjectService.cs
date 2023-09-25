@@ -12,19 +12,19 @@ namespace TheBugTracker.Services
         
         private readonly ApplicationDbContext _context;
         private readonly IBTRolesService _rolesService; // TODO - Question - why instantiate an Interface? 
-        
 
-        
+
+        #region // Constructor
         // Constructor
         public BTProjectService(ApplicationDbContext context, IBTRolesService rolesService)
         {
             _context = context;
             _rolesService = rolesService;
-        }
-        
+        } 
+        #endregion
 
         #region Add New Project
-        // CRUD - Create
+        
         public async Task AddNewProjectAsync(Project project)
         {
             _context.Add(project);
@@ -551,6 +551,7 @@ namespace TheBugTracker.Services
             await _context.SaveChangesAsync();
         }
         #endregion
+
 
     }
 }

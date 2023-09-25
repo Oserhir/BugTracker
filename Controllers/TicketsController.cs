@@ -220,7 +220,6 @@ namespace TheBugTracker.Controllers
 
             if (User.IsInRole(nameof(Roles.Admin)))
             {
-
                 ViewData["ProjectId"] = new SelectList(await _projectService.GetAllProjectsByCompanyAsync(companyId), "Id", "Name");
             }
             else
