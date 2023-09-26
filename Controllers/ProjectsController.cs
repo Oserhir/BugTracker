@@ -27,20 +27,22 @@ namespace TheBugTracker.Controllers
         private readonly IBTRolesService _rolesService;
         private readonly IBTProjectService _projectService;
         private readonly IBTFileService _fileService;
+		private readonly IBTCompanyInfoService _companyInfoService;
 
-        public ProjectsController(ApplicationDbContext context, UserManager<BTUser> userManager, IBTLookupService lookupService, IBTRolesService rolesService, IBTProjectService projectService, IBTFileService fileService)
-        {
-            _context = context;
-            _userManager = userManager;
-            _lookupService = lookupService;
-            _rolesService = rolesService;
-            _projectService = projectService;
-            _fileService = fileService;
-        }
+		public ProjectsController(ApplicationDbContext context, UserManager<BTUser> userManager, IBTLookupService lookupService, IBTRolesService rolesService, IBTProjectService projectService, IBTFileService fileService, IBTCompanyInfoService companyInfoService)
+		{
+			_context = context;
+			_userManager = userManager;
+			_lookupService = lookupService;
+			_rolesService = rolesService;
+			_projectService = projectService;
+			_fileService = fileService;
+			_companyInfoService = companyInfoService;
+		}
 
-        #region // GET: Projects
-        // GET: Projects
-        public async Task<IActionResult> Index()
+		#region // GET: Projects
+		// GET: Projects
+		public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Projects.Include(p => p.Company).Include(p => p.ProjectPriority);
             return View(await applicationDbContext.ToListAsync());
@@ -196,7 +198,7 @@ namespace TheBugTracker.Controllers
                         await _projectService.AddProjectManagerAsync(model.PmId, model.Project.Id);
                     }
                    
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(AllProject));
 
                 }
                 catch (DbUpdateConcurrencyException)
@@ -253,7 +255,7 @@ namespace TheBugTracker.Controllers
            
             await _projectService.ArchiveProjectAsync(project);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AllProject));
         }
         #endregion
 
@@ -291,7 +293,7 @@ namespace TheBugTracker.Controllers
 
             await _projectService.RestoreProjectAsync(project);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AllProject));
         }
         #endregion
 
@@ -307,10 +309,30 @@ namespace TheBugTracker.Controllers
 
             return View(projets);
         }
-        #endregion
+		#endregion
 
-        #region ProjectExists
-        private async Task<bool> ProjectExists(int id)
+		#region //GET: AllProject
+		//GET: MyProject
+		public async Task<IActionResult> AllProject()
+		{
+            int companyId = User.Identity.GetCompanyId().Value;
+			List<Project> projets = new();
+
+			if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
+			{
+                projets = await _companyInfoService.GetAllProjectsAsync(companyId);
+			}
+            else
+            {
+				projets = await _projectService.GetAllProjectsByCompanyAsync(companyId);
+			}
+
+			return View(projets);
+		}
+		#endregion
+
+		#region ProjectExists
+		private async Task<bool> ProjectExists(int id)
         {
             int companyId = User.Identity.GetCompanyId().Value;
 
