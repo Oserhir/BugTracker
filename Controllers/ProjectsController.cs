@@ -217,19 +217,19 @@ namespace TheBugTracker.Controllers
 
         #endregion
 
-        #region // GET: Projects/Delete/5
-        // GET: Projects/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        #region // GET: Projects/Archive/5
+        // GET: Projects/Archive/5
+        public async Task<IActionResult> Archive(int? id)
         {
-            if (id == null || _context.Projects == null)
+            if (id == null  )
             {
                 return NotFound();
             }
 
-            var project = await _context.Projects
-                .Include(p => p.Company)
-                .Include(p => p.ProjectPriority)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            int companyId = User.Identity.GetCompanyId().Value;
+
+            Project project = await  _projectService.GetProjectByIdAsync( id.Value , companyId );
+
             if (project == null)
             {
                 return NotFound();
@@ -239,11 +239,11 @@ namespace TheBugTracker.Controllers
         }
         #endregion
 
-        #region // POST: Projects/Delete/5
-        // POST: Projects/Delete/5
-        [HttpPost, ActionName("Delete")]
+        #region // POST: Projects/Archive/5
+        // POST: Projects/Archive/5
+        [HttpPost, ActionName("Archive")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> ArchiveConfirmed(int id)
         {
             if (_context.Projects == null)
             {
