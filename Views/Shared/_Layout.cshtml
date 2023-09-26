@@ -85,40 +85,36 @@
                                         <a class="dropdown-item" asp-controller="Tickets" asp-action="Create" >Add Ticket</a>
                                                 -->
                                     </li>
-                                           <li style = "margin-left : 10px"    >
-                                                     <a  asp-controller="Projects" asp-action="Index" 
-                                                                    class="d-flex align-items-center text-dark text-decoration-none "  aria-expanded="false">
-                                                            <i class="fa fa-th-list" aria-hidden="true"></i>
-                                                                <span  class="nav-link text-dark" >All Projects</span>
-                                                    </a>
-
+                               <li style = "margin-left : 10px"    >
+                                          <a  asp-controller="Projects" asp-action="Index" 
+                                                  class="d-flex align-items-center text-dark text-decoration-none "  aria-expanded="false">
+                                                  <i class="fa fa-th-list" aria-hidden="true"></i>
+                                                  <span  class="nav-link text-dark" >All Projects</span>
+                                          </a>
                                                    <!--  <a class="dropdown-item" asp-controller="Tickets" asp-action="AllTickets" >All Tickets</a> -->
 
-                                            </li>
-
-
+                               </li>
 
                                 @if (!User.IsInRole(nameof(Roles.Admin)))
                                 {
-                                             <li  style = "margin-left : 10px"  >
-                                                <a   asp-controller="Tickets" asp-action="MyTickets" 
-                                                          class="d-flex align-items-center text-dark text-decoration-none "  aria-expanded="false">
-                                                          <i class="fa fa-bars" aria-hidden="true"></i>
-                                                                  <span  class="nav-link text-dark" >My Project</span>
-                                                 </a>
-
-                                                  <!-- <a class="dropdown-item" asp-controller="Tickets" asp-action="MyTickets" >My Tickets  </a> -->
-                                             </li>
+                                    <li style = "margin-left : 10px"    >
+                                        <a  asp-controller="Projects" asp-action="MyProject" 
+                                             class="d-flex align-items-center text-dark text-decoration-none "  aria-expanded="false">
+                                             <i class="fa fa-bars" aria-hidden="true"></i>
+                                             <span  class="nav-link text-dark" >My Projects</span>
+                                        </a>
+                                    </li>
                                 }
 
-                                          <li  style = "margin-left : 10px" >
+
+                                <li  style = "margin-left : 10px" >
                                        <a   asp-controller="Tickets" asp-action="ArchivedTickets"
                                                           class="d-flex align-items-center text-dark text-decoration-none "  
                                                           aria-expanded="false">
-                                               <i class="fa fa-archive" aria-hidden="true"></i>
-                                                   <span  class="nav-link text-dark" >Project Archive</span>
+                                                          <i class="fa fa-archive" aria-hidden="true"></i>
+                                                          <span  class="nav-link text-dark" >Project Archive</span>
                                        </a>
-                                           </li>
+                               </li>
 
                                        <!--  <li><a class="dropdown-item" asp-controller="Tickets" asp-action="ArchivedTickets" >Ticket Archive</a></li>
                                                -->

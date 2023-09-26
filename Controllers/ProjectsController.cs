@@ -295,7 +295,19 @@ namespace TheBugTracker.Controllers
         }
         #endregion
 
+        #region //GET: MyProject
+        //GET: MyProject
+        public async Task<IActionResult> MyProject()
+        {
+            BTUser bTUser = new();
+            List<Project> projets = new();
 
+            bTUser = await _userManager.GetUserAsync(User);
+            projets = await _projectService.GetUserProjectsAsync(bTUser.Id);
+
+            return View(projets);
+        }
+        #endregion
 
         #region ProjectExists
         private async Task<bool> ProjectExists(int id)
