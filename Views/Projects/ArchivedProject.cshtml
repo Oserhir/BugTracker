@@ -1,0 +1,84 @@
+﻿﻿@using TheBugTracker.Models.Enums
+@model IEnumerable<TheBugTracker.Models.Project>
+
+@{
+	ViewData["Title"] = "Archived Project";
+}
+
+<div class="d-flex align-items-center">
+	<a class="" asp-action="AllProjects" asp-controller="Projects" style="color: rgb(23, 123, 227); margin-right : 15px" >  
+        <i class="fa fa-arrow-left fa-lg" aria-hidden="true"></i> </a>
+	<h4 class="mb-0">Archived Project</h4>
+</div>
+
+<div class="d-flex align-items-center" style="margin-bottom : 20px">
+    <a class="" asp-action="Dashboard" asp-controller="Home" style="color: rgb(23, 123, 227); margin-right : 15px" >  <i class="fa fa-home fa-lg" aria-hidden="true"></i> </a>
+    <p class="mb-0" style="margin-right : 5px">/ Projects</p>
+	<p class="mb-0">/ ArchiveProject</p>
+</div>
+
+
+<div class="element-area">
+	 <div class="demo-view">
+		 <div class="container-fluid pt-0 ps-0 pe-lg-4 pe-0">
+				<div class="row">
+						<div class="col-xl-12">
+							 <div class="card dz-card" id="accordion-one">
+									       <div class="card-header flex-wrap">
+											<div>
+												<h4 class="card-title">My Projects</h4>
+											</div>
+											
+										</div>
+										<!--tab-content-->
+										<div class="tab-content" id="myTabContent">
+											<div class="tab-pane fade show active" id="Preview" role="tabpanel" aria-labelledby="home-tab">
+											 <div class="card-body pt-0">
+												<div class="table-responsive">
+													<table id="example" class="display table" style="min-width: 845px">
+														<thead>
+															<tr>
+																<th>Name</th>
+																<th>Description</th>
+																<th>Start Date</th>
+																<th>End Date</th>
+																<th>Priority</th>
+																<th>Action</th>
+															</tr>
+														</thead>
+														<tbody>
+
+														@foreach( var item in Model  ) {
+															<tr>
+																	<td>@item.Name</td>
+																<td>@item.Description</td>
+																<td>@item.StartDate</td>
+																<td>@item.EndDate</td>
+																<td>@item.ProjectPriority</td>
+																<td>
+																	<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success shadow btn-xs sharp me-1"><i class="fa fa-eye"></i></a>
+																     
+																		<a asp-action="Restore" asp-route-id="@item.Id" class="btn btn-info shadow btn-xs sharp"><i class="fa fa-refresh"></i></a>
+																
+																</td>
+															</tr>
+														}
+														</tbody>
+													
+													</table>
+												</div>
+											</div>
+												<!-- /Default accordion -->	
+											</div>
+											<div class="tab-pane fade " id="html" role="tabpanel" aria-labelledby="home-tab">
+												<div class="card-body pt-0 p-0 code-area">
+ 
+</div>
+<!-- /Default accordion -->	
+											</div>	
+										</div>
+										<!--/tab-content-->
+									</div>
+								</div>
+							</div>
+						<!-- Column ends -->

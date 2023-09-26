@@ -248,12 +248,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Projects/AllProject.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdHNcQWxsUHJvamVjdC5jc2h0bWw=
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Projects/AllProjects.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdHNcQWxsUHJvamVjdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Projects/Archive.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdHNcQXJjaGl2ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Projects/ArchivedProject.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdHNcQXJjaGl2ZWRQcm9qZWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/YUSSEF/source/repos/TheBugTracker/Views/Projects/Create.cshtml]

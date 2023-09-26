@@ -198,7 +198,7 @@ namespace TheBugTracker.Controllers
                         await _projectService.AddProjectManagerAsync(model.PmId, model.Project.Id);
                     }
                    
-                    return RedirectToAction(nameof(AllProject));
+                    return RedirectToAction(nameof(AllProjects));
 
                 }
                 catch (DbUpdateConcurrencyException)
@@ -255,7 +255,7 @@ namespace TheBugTracker.Controllers
            
             await _projectService.ArchiveProjectAsync(project);
 
-            return RedirectToAction(nameof(AllProject));
+            return RedirectToAction(nameof(AllProjects));
         }
         #endregion
 
@@ -293,7 +293,7 @@ namespace TheBugTracker.Controllers
 
             await _projectService.RestoreProjectAsync(project);
 
-            return RedirectToAction(nameof(AllProject));
+            return RedirectToAction(nameof(AllProjects));
         }
         #endregion
 
@@ -313,7 +313,7 @@ namespace TheBugTracker.Controllers
 
 		#region //GET: AllProject
 		//GET: MyProject
-		public async Task<IActionResult> AllProject()
+		public async Task<IActionResult> AllProjects()
 		{
             int companyId = User.Identity.GetCompanyId().Value;
 			List<Project> projets = new();
@@ -326,6 +326,20 @@ namespace TheBugTracker.Controllers
             {
 				projets = await _projectService.GetAllProjectsByCompanyAsync(companyId);
 			}
+
+			return View(projets);
+		}
+		#endregion
+
+		#region //GET: ArchivedProject
+		//GET: ArchivedProject
+		public async Task<IActionResult> ArchivedProject()
+		{
+			int companyId = User.Identity.GetCompanyId().Value;
+
+			List<Project> projets = new();
+
+			projets = await _projectService.GetArchivedProjectsByCompany(companyId);
 
 			return View(projets);
 		}
