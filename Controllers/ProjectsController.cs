@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -245,20 +247,55 @@ namespace TheBugTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ArchiveConfirmed(int id)
         {
-            if (_context.Projects == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Projects'  is null.");
-            }
-            var project = await _context.Projects.FindAsync(id);
-            if (project != null)
-            {
-                _context.Projects.Remove(project);
-            }
+            int companyId = User.Identity.GetCompanyId().Value;
 
-            await _context.SaveChangesAsync();
+            Project project = await _projectService.GetProjectByIdAsync(id, companyId);
+           
+            await _projectService.ArchiveProjectAsync(project);
+
             return RedirectToAction(nameof(Index));
         }
         #endregion
+
+        #region // GET: Projects/Restore/5
+        // GET: Projects/Restore/5
+        [Authorize(Roles = "Admin, ProjectManager")]
+        public async Task<IActionResult> Restore(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            int companyId = User.Identity.GetCompanyId().Value;
+            var project = await _projectService.GetProjectByIdAsync(id.Value, companyId);
+
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            return View(project);
+        }
+        #endregion
+
+        #region // POST: Projects/Restore/5
+        // POST: Projects/Restore/5
+        [Authorize(Roles = "Admin, ProjectManager")]
+        [HttpPost, ActionName("Restore")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RestoreConfirmed(int id)
+        {
+            int companyId = User.Identity.GetCompanyId().Value;
+            var project = await _projectService.GetProjectByIdAsync(id, companyId);
+
+            await _projectService.RestoreProjectAsync(project);
+
+            return RedirectToAction(nameof(Index));
+        }
+        #endregion
+
+
 
         #region ProjectExists
         private async Task<bool> ProjectExists(int id)
