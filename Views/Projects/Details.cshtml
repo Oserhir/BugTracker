@@ -1,78 +1,357 @@
 ﻿@model TheBugTracker.Models.Project
+@using TheBugTracker.Models.Enums
+@using TheBugTracker.Services.Interfaces
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<BTUser> UserManager
+@inject IBTProjectService ProjectService
+@inject IBTTicketHistoryService TicketHistoryService
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Project Details";
+
+    BTUser btUser = await UserManager.GetUserAsync(User);
+    BTUser projectManager = await ProjectService.GetProjectManagerAsync(Model.Id);
+    bool isPM = (await ProjectService.GetProjectManagerAsync(Model.Id))?.Id == btUser.Id;
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>Project</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Archived)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Archived)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageFileName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImageFileName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageFileData)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImageFileData)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageContentType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImageContentType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Company)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Company.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProjectPriority)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProjectPriority.Id)
-        </dd>
-    </dl>
+<div class="d-flex align-items-center">
+    <a class="" asp-action="AllProjects" asp-controller="Projects" style="color: rgb(23, 123, 227); margin-right : 15px" >  <i class="fa fa-arrow-left fa-lg" aria-hidden="true"></i> </a>
+    <h4 class="mb-0">Project</h4>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="d-flex align-items-center" style="margin-bottom : 20px">
+    <a class="" asp-action="Dashboard" asp-controller="Home" style="color: rgb(23, 123, 227); margin-right : 15px" >  <i class="fa fa-home fa-lg" aria-hidden="true"></i> </a>
+    <p class="mb-0" style="margin-right : 5px">/ Project</p>
+    <p class="mb-0">/ Details</p>
 </div>
+ 
+
+<div class="row">
+    <div class="col-12 col-md-8">
+        <div class="row">
+            <div class="col">
+                 <!-- Start - Project Info -->
+                    <div class="card">
+                          <div class="card-body" >
+                            <h5 class="card-title">@Model.Name</h5>
+                            <p class="card-text">@Model.Description</p> 
+
+                            <div class="progress-container progress-warning m-b-25">
+                                             <span class="progress-badge" style="">Project Status</span>
+                                            <div class="progress"  style="margin-top: 10px;">
+                            @{
+                                var start = Model.StartDate.DateTime;
+                                var end = Model.EndDate.DateTime;
+                                var today = DateTime.Now;
+                                var percent = today >= end ? 100 : today < start ? 0 : Math.Round((today.Subtract(start)) / (end.Subtract(start)) * 100);
+                            }
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @percent%;">
+                                </div>
+                            </div>
+                     </div>
+                 </div>
+
+               </div>
+                <!-- End - Project Info -->
+          </div>
+    </div>
+
+    <!--         -->
+
+                 <div class="col-12 col-md-8">
+                        <div class="card">
+                            <div class="card-header border-0 pb-0">
+                                <h2 class="card-title">Project Details</h2>
+                            </div>
+                            <div class="card-body pb-0">
+                               
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex px-0 justify-content-between">
+                                        <strong>Start Date</strong>
+                                        <span class="mb-0">@Model.StartDate.ToString("dd MMM, yyyy")</span>
+                                    </li>
+                                    <li class="list-group-item d-flex px-0 justify-content-between">
+                                        <strong>Deadline</strong>
+                                        <span class="mb-0">@Model.EndDate.ToString("dd MMM, yyyy")</span>
+                                    </li>
+                                    <li class="list-group-item d-flex px-0 justify-content-between">
+                                        <strong>Priority</strong>
+                                        <span class="mb-0">@Model.ProjectPriority?.Name</span>
+                                    </li>
+                                    <li class="list-group-item d-flex px-0 justify-content-between">
+                                        <strong>Status</strong>
+
+                                        @if (today < end && today >= start)
+                                        {
+                                              <span class="mb-0">Active</span>
+                                        }
+                                        else
+                                        {
+                                              <span class="mb-0">Inactive</span>
+                                        }
+                                        
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+ 
+    <!-- PM & team-->
+       <div class="row">
+           <!-- Project Manager -->
+                 <div class="col-12 col-md-8">
+
+                @if (projectManager == null )
+                {
+                            <div class="col-12 col-md-8">
+                                <div class="card overflow-hidden">
+                                        <div class="card-header border-0 pb-0">
+                                            <h2 class="card-title">Project Manager</h2>
+                                        </div>
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <div class="profile-photo">
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg" width="100" class="img-fluid rounded-circle" alt="">
+                                            </div>
+                                            <h3 class="mt-4 mb-1">Not Assigned</h3>
+                                        </div>
+                                    </div>
+
+                                </div>
+                         </div>
+
+                }
+                else
+                {
+                  <div class="col-12 col-md-8">
+
+                                    <div class="card overflow-hidden">
+
+                                            <div class="card-header border-0 pb-0">
+                                                        <h2 class="card-title">Project Manager</h2>
+                                            </div>
+
+
+                                        <div class="card-body">
+
+
+
+                                            <div class="text-center">
+                                                <div class="profile-photo">
+                                                        <img src="https://cdn.pixabay.com/photo/2016/11/08/15/21/user-1808597_1280.png" width="100" class="img-fluid rounded-circle" alt="">
+                                                </div>
+                                                        <h3 class="mt-4 mb-1">@projectManager.FullName</h3>
+                                                            <p class="">@projectManager.Email</p>
+                                                                <p class="">Project Manager</p>
+                                               
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                     </div>
+                }
+
+                     
+               </div>
+       </div>
+            <!-- Project Team -->
+       <div class="col-12 col-md-6 mt-4">
+                
+       </div>
+
+    <!-- Project Activity-->
+         <div class="col-xl-8  col-lg-12">
+                        <div class="card">
+                            <div class="card-header border-0 pb-0">
+                                <h4 class="card-title">Project Activity</h4>
+                            </div>
+                            <div class="card-body p-0">
+                                <div id="DZ_W_TimeLine11" class="widget-timeline dz-scroll style-1 height370 my-4 px-4">
+                                    <ul class="timeline">
+
+                                    @foreach (TicketHistory tH in await TicketHistoryService.GetProjectTicketsHistoriesAsync(Model.Id, btUser.CompanyId))
+                                   {
+                                        <li>
+                                            <div class="timeline-badge warning"></div>
+                                            <a class="timeline-panel" href="#">
+                                                <span>@tH.Created.ToString("dd MMM yyyy")</span>
+                                                <h6 class="mb-0"> @tH.Description </h6>
+                                                <h6 class="mb-0">By <strong class="text-primary"> @tH.User?.FullName </strong>.</h6>
+
+                                                    <p></p>
+                                                <div class="">
+                                                    <p>&nbsp;&nbsp;The ticket <b>@tH.Property</b> was edited</p>
+                                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;@($"Previous {tH.Property}:  ") <span class="text-danger">@tH.OldValue</span></p>
+                                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;@($"Current {tH.Property}:   ") <span class="text-success">@tH.NewValue</span></p>
+                                                </div>
+                                                <hr>
+                                            </a>
+                                        </li>
+                                   }
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+ 
+
+<!-- Tickets Table -->
+
+ <!-- row -->
+
+							<div class="row">
+								<!-- Column starts -->
+								<div class="col-xl-12">
+									<div class="card dz-card" id="accordion-one">
+										<div class="card-header flex-wrap">
+											<div>
+												<h4 class="card-title">Tickets</h4>
+												
+											</div>
+											
+										</div>
+										<!--tab-content-->
+										<div class="tab-content" id="myTabContent">
+											<div class="tab-pane fade show active" id="Preview" role="tabpanel" aria-labelledby="home-tab">
+											 <div class="card-body pt-0">
+												<div class="table-responsive">
+													<table id="example" class="display table" style="min-width: 845px">
+														<thead>
+															<tr>
+																<th>Title</th>
+																<th>Developer</th>
+																<th>Status</th>
+                                                                <th>Priority</th>
+																<th>Date</th>
+																<th>Action</th>
+															</tr>
+														</thead>
+														<tbody>
+                                            @foreach (var ticket in Model.Tickets.OrderByDescending(d => d.Created))
+                                            {
+                                                   <tr>
+                                                            <td>@ticket.Title</td>
+															<td>
+                                                                    @if (ticket.DeveloperUserId != null)
+                                                                    {
+                                                                        @ticket.DeveloperUser?.FullName
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
+                                                                        {
+                                                                        <a class="btn btn-sm btn-info text-white" asp-action="AssignDeveloper" asp-controller="Tickets" asp-route-id="@ticket.Id">Assign Dev</a>
+                                                                        }
+                                                                      }
+                                                            </td>
+															<td>
+                                                                    @if (ticket.TicketStatus.Name == "New")
+                                                                    {
+                                                                                 <span class="badge badge-success">@ticket.TicketStatus.Name</span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                         <span class="badge badge-primary">@ticket.TicketStatus.Name </span>
+                                                                    }
+
+                                                            </td>
+															<td>@ticket.TicketPriority.Name </td>
+                                                                <td>@ticket.Created.ToString("dd-MMM-yyyy")</td>
+															<td>
+
+                                                                   <a asp-action="Details" asp-controller="Tickets" asp-route-id="@ticket.Id" class="btn btn-success shadow btn-xs sharp me-1"><i class="fa fa-eye"></i></a>
+                                                        @if (ticket.DeveloperUserId == btUser.Id || ticket.OwnerUserId == btUser.Id || (projectManager?.Id == btUser.Id) || User.IsInRole(nameof(Roles.Admin)))
+                                                        {
+                                                            
+                                                                             <a asp-action="Edit" asp-controller="Tickets" asp-route-id="@ticket.Id"  class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+                                                        }
+
+                                                        @if (User.IsInRole("Admin") || (projectManager?.Id == btUser.Id))
+                                                        {
+                                                               <a asp-action="Archive" asp-controller="Tickets" asp-route-id="@ticket.Id" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-archive"></i></a>
+                                                    
+                                                        }
+
+                                                            </td>
+												   </tr>
+                                            }
+														</tbody>
+														
+													</table>
+												</div>
+											</div>
+												<!-- /Default accordion -->	
+											</div>
+											<div class="tab-pane fade " id="html" role="tabpanel" aria-labelledby="home-tab">
+												<div class="card-body pt-0 p-0 code-area">
+<!-- Default accordion -->
+
+	            </div>
+<!-- /Default accordion -->	
+											</div>	
+										</div>
+										<!--/tab-content-->
+                        </div>
+</div>
+<!--...............................................................-->
+
+            @* Logic for avatars *@
+            @{
+                List<BTUser> projectTeam = await ProjectService.GetAllProjectMembersExceptPMAsync(Model.Id);
+            }
+
+ <div class="col-xl-6 col-lg-12">
+                        <div class="card overflow-hidden">
+                            <div class="card-header border-0 pb-0">
+                                <h4 class="card-title">Project Team</h4>
+                            </div>
+                            <div class="card-body pb-0">
+                                <div class="widget-media">
+                                    <ul class="timeline">
+
+                                @foreach ( BTUser member in projectTeam.Distinct() )
+                                {  
+                                        <li>
+                                            <div class="timeline-panel">
+                                                <div class="media me-2">
+
+                                                @if (member.AvatarFileData != null)
+                                                {
+                                                    <img alt="/" width="50" src="data:image/*;base64,@(Convert.ToBase64String(member.AvatarFileData))" >
+                                                }else
+                                                {
+                                                    <img alt="image" width="50" src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png">
+                                                }
+
+                                                   
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="mb-1">@member.FullName</h5>
+
+                                                      @{
+                                                            List<string> memberRoles = (await UserManager.GetRolesAsync(member)).ToList();
+                                                            string listRoles = "";
+                                                        }
+
+                                                        @foreach (string role in memberRoles)
+                                                        {
+                                                            listRoles += "[ " + role + "]" + " ";
+                                                        }
+
+                                                        <small class="d-block">[@listRoles]</small>
+                                                   
+                                                </div>
+                                            </div>
+                                        </li>
+                                }
+                                        
+                                    </ul>	
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>

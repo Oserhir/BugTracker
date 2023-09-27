@@ -48,9 +48,7 @@
 													<table id="example" class="display table" style="min-width: 845px">
 														<thead>
 															<tr>
-																<th>Name</th>
-																<th>Description</th>
-																<th>Start Date</th>
+																<th>Project</th>
 																<th>End Date</th>
 																<th>Priority</th>
 																<th>Action</th>
@@ -60,9 +58,11 @@
 
 														@foreach( var item in Model  ) {
 															<tr>
-																	<td>@item.Name</td>
-																	<td>  @Html.DisplayFor(modelItem => item.Description) </td>
-																    <td> @Html.DisplayFor(modelItem => item.StartDate) </td>
+																	<td>
+																		<h6> @item.Name  </h6> 
+																		<span> Created @Html.DisplayFor(modelItem => item.StartDate) </span> 
+																	</td> 
+
 																	<td>  @Html.DisplayFor(modelItem => item.EndDate) </td>
 																	<td> @Html.DisplayFor(modelItem => item.ProjectPriority.Name) </td>
 																    <td>

@@ -16,10 +16,11 @@ namespace TheBugTracker.Services
         }
 
 
+        #region Add History 
         public async Task AddHistoryAsync(Ticket oldTicket, Ticket newTicket, string userId)
         {
-           // NEW TICKET HAS BEEN ADDED
-           if( oldTicket == null && newTicket!= null)
+            // NEW TICKET HAS BEEN ADDED
+            if (oldTicket == null && newTicket != null)
             {
                 TicketHistory ticketHistory = new()
                 {
@@ -41,11 +42,12 @@ namespace TheBugTracker.Services
                 {
                     throw;
                 }
-            }else
+            }
+            else
             {
                 // Check Ticket Title
-                
-                if(oldTicket.Title != newTicket.Title)
+
+                if (oldTicket.Title != newTicket.Title)
                 {
                     TicketHistory ticketHistory = new()
                     {
@@ -169,9 +171,10 @@ namespace TheBugTracker.Services
 
             }
 
-        }
+        } 
+        #endregion
 
-        #region AddHistoryAsync (2)
+        #region Add History (2)
         public async Task AddHistoryAsync(int ticketId, string model, string userId)
         {
             try
@@ -200,9 +203,10 @@ namespace TheBugTracker.Services
             {
                 throw;
             }
-        } 
+        }
         #endregion
 
+        #region Get Company Tickets Histories 
         public async Task<List<TicketHistory>> GetCompanyTicketsHistoriesAsync(int companyId)
         {
             try
@@ -226,17 +230,19 @@ namespace TheBugTracker.Services
                 throw;
             }
         }
+        #endregion
 
+        #region Get Project Tickets Histories 
         public async Task<List<TicketHistory>> GetProjectTicketsHistoriesAsync(int projectId, int companyId)
         {
 
             try
             {
-                Project project = await _context.Projects.Where( p => p.CompanyId == companyId)
+                Project project = await _context.Projects.Where(p => p.CompanyId == companyId)
                                                  .Include(p => p.Tickets)
                                                     .ThenInclude(t => t.History)
                                                     .ThenInclude(h => h.User)
-                                                 .FirstOrDefaultAsync( p => p.Id == projectId);
+                                                 .FirstOrDefaultAsync(p => p.Id == projectId);
 
                 List<TicketHistory> ticketHistory = project.Tickets.SelectMany(t => t.History).ToList();
 
@@ -251,6 +257,7 @@ namespace TheBugTracker.Services
 
 
 
-        }
+        } 
+        #endregion
     }
 }
