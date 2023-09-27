@@ -120,19 +120,25 @@
 
                                        <!--  <li><a class="dropdown-item" asp-controller="Tickets" asp-action="ArchivedTickets" >Ticket Archive</a></li>
                                                -->
-                                @if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
+                                @if (User.IsInRole(nameof(Roles.Admin))  )
                                 {
                                                     <li  style = "margin-left : 10px" >
-                                                   <a   asp-controller="Tickets" asp-action="UnassignedTickets"
-                                                                      class="d-flex align-items-center text-dark text-decoration-none "  
-                                                                      aria-expanded="false">
-                                                                  <i class="fa fa-leaf" aria-hidden="true"></i>
-                                                                           <span  class="nav-link text-dark" >Assign Project</span>
-                                                   </a>
-                                                       </li>
+                                                   
+                                                           <a   asp-controller="Projects" asp-action="UnassignedProjects"
+                                                                              class="d-flex align-items-center text-dark text-decoration-none "  
+                                                                              aria-expanded="false">
+                                                           <i class="fa fa-leaf" aria-hidden="true"></i>
+                                                           <span  class="nav-link text-dark" >Assign Project</span>
+                                                           </a>
+
+                                                    </li>
 
                                              <!--   <li><a class="dropdown-item" asp-controller="Tickets" asp-action="UnassignedTickets" >Assign Tickets</a></li> -->
                                 }
+
+
+                                      
+
                                 </ul>
                             </li>
 

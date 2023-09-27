@@ -343,7 +343,36 @@ namespace TheBugTracker.Controllers
 
 			return View(projets);
 		}
+        #endregion
+
+        #region //GET: AllProject
+        //GET: MyProject
+        public async Task<IActionResult> UnassignedProjects()
+        {
+            int companyId = User.Identity.GetCompanyId().Value;
+            List<Project> projets = new();
+
+            projets = await _projectService.GetUnassignedProjectsAsync(companyId);
+
+            return View(projets);
+        }
 		#endregion
+
+		
+		[Authorize(Roles = "Admin")]
+		[HttpGet]
+		// GET: Projects/AssignPM
+		public async Task<IActionResult> AssignPM(int projectId)
+		{
+			int companyId = User.Identity.GetCompanyId().Value;
+			AssignPMViewModel model = new();
+
+			model.Project = await _projectService.GetProjectByIdAsync(projectId, companyId);
+			model.PMList = new SelectList(await _rolesService.GetUsersInRoleAsync(nameof(Roles.ProjectManager), companyId), "Id", "FullName");
+
+			return View(model);
+		}
+
 
 		#region ProjectExists
 		private async Task<bool> ProjectExists(int id)
