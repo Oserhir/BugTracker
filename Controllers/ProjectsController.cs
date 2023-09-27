@@ -358,24 +358,53 @@ namespace TheBugTracker.Controllers
         }
 		#endregion
 
-		
+		#region AssignPM
 		[Authorize(Roles = "Admin")]
-		[HttpGet]
-		// GET: Projects/AssignPM
-		public async Task<IActionResult> AssignPM(int projectId)
-		{
-			int companyId = User.Identity.GetCompanyId().Value;
-			AssignPMViewModel model = new();
+        [HttpGet]
+        // GET: Projects/AssignPM
+        public async Task<IActionResult> AssignPM(int projectId)
+        {
+            int companyId = User.Identity.GetCompanyId().Value;
 
-			model.Project = await _projectService.GetProjectByIdAsync(projectId, companyId);
-			model.PMList = new SelectList(await _rolesService.GetUsersInRoleAsync(nameof(Roles.ProjectManager), companyId), "Id", "FullName");
+            AssignPMViewModel model = new();
 
-			return View(model);
-		}
+            model.Project = await _projectService.GetProjectByIdAsync(projectId, companyId);
+            model.PMList = new SelectList(await _rolesService.GetUsersInRoleAsync(nameof(Roles.ProjectManager), companyId), "Id", "FullName");
+
+            return View(model);
+        }
+        #endregion
+
+        #region AssignPM
+        // POST: Projects/AssignPM
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AssignPM(AssignPMViewModel model)
+        {
+
+            if (!string.IsNullOrEmpty(model.PMId))
+            {
+                try
+                {
+                    await _projectService.AddProjectManagerAsync(model.PMId, model.Project.Id);
+
+                    return RedirectToAction(nameof(Details), new { id = model.Project.Id });
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+
+            return RedirectToAction(nameof(AssignPM), new { projectId = model.Project.Id });
+        }
+        #endregion
 
 
-		#region ProjectExists
-		private async Task<bool> ProjectExists(int id)
+        #region ProjectExists
+        private async Task<bool> ProjectExists(int id)
         {
             int companyId = User.Identity.GetCompanyId().Value;
 
