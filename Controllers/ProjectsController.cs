@@ -19,6 +19,7 @@ using TheBugTracker.Services.Interfaces;
 
 namespace TheBugTracker.Controllers
 {
+    [Authorize]
     public class ProjectsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -73,6 +74,7 @@ namespace TheBugTracker.Controllers
 
         #region // GET: Projects/Create
         // GET: Projects/Create
+        [Authorize(Roles = "Admin, ProjectManager")]
         public async Task<IActionResult> Create()
         {
             
@@ -91,6 +93,7 @@ namespace TheBugTracker.Controllers
         #endregion
 
         #region // POST: Projects/Create
+        [Authorize(Roles = "Admin, ProjectManager")]
         // POST: Projects/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -143,6 +146,7 @@ namespace TheBugTracker.Controllers
 
         #region // GET: Projects/Edit/5
         // GET: Projects/Edit/5
+        [Authorize(Roles = "Admin, ProjectManager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null )
@@ -173,8 +177,7 @@ namespace TheBugTracker.Controllers
 
         #region // POST: Projects/Edit/5
         // POST: Projects/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, ProjectManager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(AddProjectWithPMViewModel model)
@@ -223,6 +226,7 @@ namespace TheBugTracker.Controllers
 
         #region // GET: Projects/Archive/5
         // GET: Projects/Archive/5
+        [Authorize(Roles = "Admin, ProjectManager")]
         public async Task<IActionResult> Archive(int? id)
         {
             if (id == null  )
@@ -245,6 +249,7 @@ namespace TheBugTracker.Controllers
 
         #region // POST: Projects/Archive/5
         // POST: Projects/Archive/5
+        [Authorize(Roles = "Admin, ProjectManager")]
         [HttpPost, ActionName("Archive")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ArchiveConfirmed(int id)
@@ -347,6 +352,7 @@ namespace TheBugTracker.Controllers
 
         #region //GET: UnassignedProjects
         //GET: MyProject
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UnassignedProjects()
         {
             int companyId = User.Identity.GetCompanyId().Value;
@@ -403,7 +409,7 @@ namespace TheBugTracker.Controllers
         #endregion
 
         #region  // GET: Projects/AssignMembers
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, ProjectManager")]
         [HttpGet]
         // GET: Projects/AssignMembers
         public async Task<IActionResult> AssignMembers(int projectId)
@@ -427,6 +433,7 @@ namespace TheBugTracker.Controllers
         }
         #endregion
 
+        #region // POST: Projects/AssignMembers
         // POST: Projects/AssignMembers
         [Authorize(Roles = "Admin, ProjectManager")]
         [HttpPost]
@@ -457,6 +464,7 @@ namespace TheBugTracker.Controllers
             return RedirectToAction(nameof(AssignMembers), new { projectId = model.Project.Id });
         }
 
+        #endregion
 
         #region ProjectExists
         private async Task<bool> ProjectExists(int id)

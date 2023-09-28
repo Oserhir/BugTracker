@@ -137,6 +137,7 @@ namespace TheBugTracker.Controllers
 
         #region //GET: AssignDeveloper
         //GET: AssignDeveloper
+        [Authorize(Roles = "Admin, ProjectManager")]
         [HttpGet]
 
         public async Task<IActionResult> AssignDeveloper(int id)
