@@ -26,69 +26,83 @@
 </div>
 
 
-   <!-- row -->
-				<div class="element-area">
-					<div class="demo-view">
-						<div class="container-fluid pt-0 ps-0 pe-lg-4 pe-0">
-							<div class="row">
-								<!-- Column starts -->
-								<div class="col-xl-12">
-									<div class="card dz-card" id="accordion-one">
-										<div class="card-header flex-wrap">
-											<div>
-												<h4 class="card-title">All Projects</h4>
-											</div>
-											
-										</div>
-										<!--tab-content-->
-										<div class="tab-content" id="myTabContent">
-											<div class="tab-pane fade show active" id="Preview" role="tabpanel" aria-labelledby="home-tab">
-											 <div class="card-body pt-0">
-												<div class="table-responsive">
-													<table id="example" class="display table" style="min-width: 845px">
-														<thead>
-															<tr>
-																<th>Project</th>
-																<th>End Date</th>
-																<th>Priority</th>
-																<th>Action</th>
-															</tr>
-														</thead>
-														<tbody>
+<div class="row">
+  <!-- Column starts -->
+  <div class="col-xl-12">
+    <div class="card dz-card" id="accordion-one">
+      <div class="card-header flex-wrap">
+        <div>
+          <h4 class="card-title">Unassigned Projects</h4>
+        </div>
+      </div>
+      <!--tab-content-->
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="Preview"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+        >
+          <div class="card-body pt-0">
+            <div class="table-responsive">
+              <table
+                id="example"
+                class="display table"
+                style="min-width: 845px"
+              >
+                <thead>
+                  <tr>
+                    <th>Project</th>
+                    <th>End Date</th>
+                    <th>Priority</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                      <tr>
+                        <td>
+                          <h6>@item.Name</h6>
+                          <span>
+                            Created @Html.DisplayFor(modelItem => item.StartDate)
+                          </span>
+                        </td>
 
-														@foreach( var item in Model  ) {
-															<tr>
-																	<td>
-																		<h6> @item.Name  </h6> 
-																		<span> Created @Html.DisplayFor(modelItem => item.StartDate) </span> 
-																	</td> 
-
-																	<td>  @Html.DisplayFor(modelItem => item.EndDate) </td>
-																	<td> @Html.DisplayFor(modelItem => item.ProjectPriority.Name) </td>
-																    <td>
-																			<a class="badge bg-info text-white" style="text-decoration:none" 
-																 asp-action="AssignPM" asp-controller="Projects" 
-																				  asp-route-projectId="@item.Id">Add PM</a>
-																
-																</td>
-															</tr>
-														}
-														</tbody>
-													
-													</table>
-												</div>
-											</div>
-												<!-- /Default accordion -->	
-											</div>
-											<div class="tab-pane fade " id="html" role="tabpanel" aria-labelledby="home-tab">
-												<div class="card-body pt-0 p-0 code-area">
- 
+                        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                        <td>
+                                                @Html.DisplayFor(modelItem => item.ProjectPriority.Name)
+                        </td>
+                        <td>
+                          <a
+                                class="badge badge-success text-white"
+                            style="text-decoration: none"
+                            asp-action="AssignPM"
+                            asp-controller="Projects"
+                            asp-route-projectId="@item.Id"
+                            >Add Project Manager</a
+                          >
+                        </td>
+                      </tr>
+                                    }
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- /Default accordion -->
+        </div>
+        <div
+          class="tab-pane fade"
+          id="html"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+        >
+          <div class="card-body pt-0 p-0 code-area"></div>
+          <!-- /Default accordion -->
+        </div>
+      </div>
+      <!--/tab-content-->
+    </div>
+  </div>
+  <!-- Column ends -->
 </div>
-<!-- /Default accordion -->	
-											</div>	
-										</div>
-										<!--/tab-content-->
-									</div>
-								</div>
-							</div>
-						<!-- Column ends -->

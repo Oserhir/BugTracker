@@ -17,67 +17,79 @@
     <p class="mb-0">/ MyProject</p>
 </div>
 
+<!-- row -->
 
-   <!-- row -->
-				<div class="element-area">
-					<div class="demo-view">
-						<div class="container-fluid pt-0 ps-0 pe-lg-4 pe-0">
-							<div class="row">
-								<!-- Column starts -->
-								<div class="col-xl-12">
-									<div class="card dz-card" id="accordion-one">
-										<div class="card-header flex-wrap">
-											<div>
-												<h4 class="card-title">My Projects</h4>
-											</div>
-											
-										</div>
-										<!--tab-content-->
-										<div class="tab-content" id="myTabContent">
-											<div class="tab-pane fade show active" id="Preview" role="tabpanel" aria-labelledby="home-tab">
-											 <div class="card-body pt-0">
-												<div class="table-responsive">
-													<table id="example" class="display table" style="min-width: 845px">
-														<thead>
-															<tr>
-																<th>Name</th>
-																<th>Description</th>
-																<th>Start Date</th>
-																<th>End Date</th>
-																<th>Priority</th>
-																<th>Action</th>
-															</tr>
-														</thead>
-														<tbody>
-
-														@foreach( var item in Model  ) {
-															<tr>
-																	<td>@item.Name</td>
-																<td>@item.Description</td>
-																<td>@item.StartDate</td>
-																<td>@item.EndDate</td>
-																<td>@item.ProjectPriority</td>
-																<td>
-																	<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success shadow btn-xs sharp me-1"><i class="fa fa-eye"></i></a>
-																</td>
-															</tr>
-														}
-														</tbody>
-													
-													</table>
-												</div>
-											</div>
-												<!-- /Default accordion -->	
-											</div>
-											<div class="tab-pane fade " id="html" role="tabpanel" aria-labelledby="home-tab">
-												<div class="card-body pt-0 p-0 code-area">
- 
+<div class="row">
+  <!-- Column starts -->
+  <div class="col-xl-12">
+    <div class="card dz-card" id="accordion-one">
+      <div class="card-header flex-wrap">
+        <div>
+          <h4 class="card-title">My Projects</h4>
+        </div>
+      </div>
+      <!--tab-content-->
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="Preview"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+        >
+          <div class="card-body pt-0">
+            <div class="table-responsive">
+              <table
+                id="example"
+                class="display table"
+                style="min-width: 845px"
+              >
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                @*   <th>Description</th> *@ 
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Priority</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                      <tr>
+                        <td>@item.Name</td>
+                  @*    <td>@item.Description</td> *@ 
+                        <td>@item.StartDate</td>
+                        <td>@item.EndDate</td>
+                        <td>@item.ProjectPriority</td>
+                        <td>
+                          <a
+                            asp-action="Details"
+                            asp-route-id="@item.Id"
+                            class="btn btn-success shadow btn-xs sharp me-1"
+                            ><i class="fa fa-eye"></i
+                          ></a>
+                        </td>
+                      </tr>
+                                    }
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- /Default accordion -->
+        </div>
+        <div
+          class="tab-pane fade"
+          id="html"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+        >
+          <div class="card-body pt-0 p-0 code-area"></div>
+          <!-- /Default accordion -->
+        </div>
+      </div>
+      <!--/tab-content-->
+    </div>
+  </div>
 </div>
-<!-- /Default accordion -->	
-											</div>	
-										</div>
-										<!--/tab-content-->
-									</div>
-								</div>
-							</div>
-						<!-- Column ends -->
+<!-- Column ends -->
