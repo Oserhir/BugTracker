@@ -15,93 +15,73 @@
     <p class="mb-0" style="margin-right : 5px">/ Tickets</p>
     <p class="mb-0">/ MyTickets</p>
 </div>
+ 
 
+<!-- Column starts -->
+<div class="col-xl-12">
+  <div class="card dz-card" id="accordion-one">
+    <div class="card-header flex-wrap">
+      <div>
+        <h4 class="card-title">My Tickets</h4>
+      </div>
+      
+    </div>
+ 
+    <div class="tab-content" id="myTabContent">
+       
+        <div class="card-body pt-0">
+          <div class="table-responsive">
+            <table id="example" class="display table" style="min-width: 845px">
+              <thead>
+                <tr>
+                  <th> @Html.DisplayNameFor(model => model.Title) </th>
+                @* <th> @Html.DisplayNameFor(model => model.Created) </th>
+                  <th> @Html.DisplayNameFor(model => model.Project)</th> *@ 
+                  <th>  Type </th>
+                  <th> Priority </th>
+                  <th>Status </th>
+                  <th>Owner </th>
+                  <th>Developer </th>
+                  <th> Actions </th>
+                </tr>
+              </thead>
+              <tbody>
+                  @foreach (var item in Model) {
+                    <tr>
+                              <td> @Html.DisplayFor(modelItem => item.Title) </td>
+                             @* <td>  @Html.DisplayFor(modelItem => item.Created) </td>
+                              <td> @Html.DisplayFor(modelItem => item.Project.Name) </td> *@ 
+                                      <td>  @Html.DisplayFor(modelItem => item.TicketType.Name)  </td> 
+                                      <td>  @Html.DisplayFor(modelItem => item.TicketPriority.Name) </td>
+                                      <td>  @Html.DisplayFor(modelItem => item.TicketStatus.Name) </td>
+                                      <td> @Html.DisplayFor(modelItem => item.OwnerUser.FullName) </td>
+                                  <td>
+                                        @Html.DisplayFor(modelItem => item.DeveloperUser.FullName)
+                                      </td>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Updated)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Archived)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Project)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TicketType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TicketPriority)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TicketStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OwnerUser)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeveloperUser)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Updated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Archived)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Project.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TicketType.Name )
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.TicketPriority.Name)
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.TicketStatus.Name)
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.OwnerUser.FullName)
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.DeveloperUser.FullName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-               
+                              <td>
+                                             <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success shadow btn-xs sharp me-1"><i class="fa fa-eye"></i></a>
+                                             <a asp-action="Edit" asp-route-id="@item.Id"  class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+                                            @if (item.Archived)
+                                            {
+                                                         <a asp-action="Restore" asp-route-id="@item.Id" class="btn btn-info shadow btn-xs sharp"><i class="fa fa-refresh"></i></a>
+                                            }
+                                            else
+                                            {
+                                                         <a asp-action="Archive" asp-route-id="@item.Id" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-archive"></i></a>
+                                            }
 
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                                    </td>
+                    </tr>
+                  }
+              </tbody>
+            </table>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
