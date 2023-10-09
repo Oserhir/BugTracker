@@ -24,151 +24,196 @@
 </div>
 
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<!-- Column starts -->
+<div class="col-xl-12">
+  <div class="card dz-card" id="accordion-one">
+    <div class="card-header flex-wrap">
+      <div>
+        <h4 class="card-title">All Tickets</h4>
+      </div>
+     
+    </div>
+    <!--tab-content-->
+    <div class="tab-content" id="myTabContent">
+      <div
+        class="tab-pane fade show active"
+        id="Preview"
+        role="tabpanel"
+        aria-labelledby="home-tab"
+      >
+        <div class="card-body pt-0">
+          <div class="table-responsive">
+            <table id="example" class="display table" style="min-width: 845px">
+              <thead>
+                <tr>
+                  <th>Owner</th>
+                  <th>Assigned To</th>
+                  <th>Title</th>
+                  <th>Status</th>
+                  <th>Priority</th>
+                  <th>Last Update</th>
+                  <th class="text-end" >Action</th>
+                </tr>
+              </thead>
+              <tbody>
 
 
-<div id="">
+                                @foreach (var item in Model)
+                                {
+
+                                    var status = "";
+
+                                    if (item.TicketStatus.Name == "New")
+                                    {
+                                        status = "badge-success";
+                                    }
+                                    else if (item.TicketStatus.Name == "Development")
+                                    {
+                                        status = "badge-primary";
+                                    }
+                                    else if (item.TicketStatus.Name == "Testing")
+                                    {
+                                        status = "badge-warning";
+                                    }else
+                                    {
+                                        status = "badge-danger";
+                                    }
+
+                                    var priority = "";
+
+                                    if (item.TicketPriority.Name == "High")
+                                    {
+                                        priority = "badge-warning";
+                                    }
+                                    else if (item.TicketPriority.Name == "Low")
+                                    {
+                                        priority = "badge-success";
+                                    }
+                                    else if (item.TicketPriority.Name == "Medium")
+                                    {
+                                        priority = "badge-primary";
+                                    }
+                                    else if (item.TicketPriority.Name == "Urgent")
+                                    {
+                                        priority = "badge-danger";
+                                    }
+                                    else
+                                    {
+                                        priority = "badge-danger";
+                                    }
 
 
-					<!-- -->
-					<div class="col-xl-12">
-						<div class="card">
-							<div class="card-body p-0">
-								<div class="table-responsive active-projects task-table">
-									<div class="tbl-caption">
-										<h4 class="heading mb-0">Ticket List</h4>
-									</div>
-									
-									<table id="empoloyeestbl2" class="table">
-										<thead>
-											<tr>
-												<th>
-												</th>
-											
-												<th>Owner</th>
-												<th>Assigned To</th>
-												<th>Title</th>
-												<th>Status</th>
-												<th>Priority</th>
-												<th>Last Update</th>
-												<th class="text-end" >Action</th>
-											</tr>
-										</thead>
-										<tbody>
 
+                                                <tr>
+                                                    <!-- LOOP -->
 
-                                        @foreach (var item in Model)
-                                        {
-											<tr>
-												<!-- LOOP -->
+                                                                                                              
 
-                                                
-											
-												
-                                                        <td><span>  @Html.DisplayFor(modelItem => item.Id)  </span></td>
+                                                    <td>
+                                                        <div class="products">
+                                                            <div>
+                                                                        <h6> @Html.DisplayFor(modelItem => item.OwnerUser.FullName) </h6>
+                                                            </div>	
+                                                        </div>
+                                                    </td>
 
-												<td>
-													<div class="products">
-														<div>
-                                                                    <h6> @Html.DisplayFor(modelItem => item.OwnerUser.FullName) </h6>
-														</div>	
-													</div>
-												</td>
+                                                    <td>
+                                                        <div class="products">
+                                                            <div>
 
-												<td>
-													<div class="products">
-														<div>
-
-												@if (item.DeveloperUserId == null )
-												{
-													if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
-													{
-														<a class="badge bg-info text-white" style="text-decoration:none" 
-														 asp-action="AssignDeveloper" asp-controller="Tickets" 
-																	  asp-route-id="@item.Id">Assign Dev</a>
-													}
-
-												}else
-												{
-													<a class="" 
-																 asp-action="AssignDeveloper" asp-controller="Tickets" 
-																			  asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.DeveloperUser.FullName) </a>
-												}
-                                                               
-														</div>	
-													</div>
-												</td>
-
-												<td>
-													<div class="products">
-														<div>
-                                                                <h6>@Html.DisplayFor(modelItem => item.Title)</h6>
-														</div>	
-													</div>
-												</td>
-
-
-												<td> <span class="badge badge-primary light border-0 me-1">
-
-                                                        @Html.DisplayFor(modelItem => item.TicketStatus.Name)
-                                                </span></td>
-
-												<td> <span class="badge badge-primary light border-0 me-1">
-                                                        @Html.DisplayFor(modelItem => item.TicketPriority.Name)
-                                                </span> </td>
-
-                                                    <td><span>@Html.DisplayFor(modelItem => item.Updated)</span></td>
-
-                                                <td>
-
-                                                    <div class="d-flex">
-                                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success shadow btn-xs sharp me-1"><i class="fa fa-eye"></i></a>
-                                          
-                                           
-
-
-                                                        @if (User.IsInRole(nameof(Roles.Admin)) || item.DeveloperUserId == btUser.Id || item.OwnerUserId == btUser.Id
-                                                          || await ProjectService.IsAssignedProjectManagerAsync(btUser.Id, item.ProjectId))
+                                                    @if (item.DeveloperUserId == null)
+                                                    {
+                                                        if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
                                                         {
-                                                                      <a asp-action="Edit" asp-route-id="@item.Id"  class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+                                                                    <a class="badge bg-info text-white" style="text-decoration:none" 
+                                                                     asp-action="AssignDeveloper" asp-controller="Tickets" 
+                                                                                  asp-route-id="@item.Id">Assign Dev</a>
                                                         }
 
-                                                        @if (User.IsInRole(nameof(Roles.Admin)) || await ProjectService.IsAssignedProjectManagerAsync(btUser.Id, item.ProjectId))
-                                                        {
-                                                            if (item.Archived)
-                                                            {
-                                                                   <a asp-action="Restore" asp-route-id="@item.Id" class="btn btn-info shadow btn-xs sharp"><i class="fa fa-refresh"></i></a>
+                                                    }
+                                                    else
+                                                    {
+                                                            <a class="" 
+                                                                         asp-action="AssignDeveloper" asp-controller="Tickets" 
+                                                                                      asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.DeveloperUser.FullName) </a>
+                                                    }
 
-                                                            }
-                                                            else
-                                                            {
-                                                                 <a asp-action="Archive" asp-route-id="@item.Id" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-archive"></i></a>
-                                                            }
-                                                        }
+                                                            </div>	
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="products">
+                                                            <div>
+                                                                    <h6>@Html.DisplayFor(modelItem => item.Title)</h6>
+                                                            </div>	
+                                                        </div>
+                                                    </td>
+
+
+                                                            <td> <span class="badge @status light border-0 me-1">
+
+                                                @Html.DisplayFor(modelItem => item.TicketStatus.Name)
+                                                    </span></td>
+
+                                                            <td> <span class="badge @priority light border-0 me-1">
+                                                @Html.DisplayFor(modelItem => item.TicketPriority.Name)
+                                                    </span> </td>
+
+                                                        <td><span>@Html.DisplayFor(modelItem => item.Updated)</span></td>
+
+                                                    <td>
+
+                                                        <div class="d-flex">
+                                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success shadow btn-xs sharp me-1"><i class="fa fa-eye"></i></a>
 
 
 
-                                                   </div>
-                                             </td>
 
-											</tr>
+                                                @if (User.IsInRole(nameof(Roles.Admin)) || item.DeveloperUserId == btUser.Id || item.OwnerUserId == btUser.Id
+                                                 || await ProjectService.IsAssignedProjectManagerAsync(btUser.Id, item.ProjectId))
+                                                {
+                                                                              <a asp-action="Edit" asp-route-id="@item.Id"  class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+                                                }
 
-                                            }
-											
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                                                @if (User.IsInRole(nameof(Roles.Admin)) || await ProjectService.IsAssignedProjectManagerAsync(btUser.Id, item.ProjectId))
+                                                {
+                                                    if (item.Archived)
+                                                    {
+                                                                               <a asp-action="Restore" asp-route-id="@item.Id" class="btn btn-info shadow btn-xs sharp"><i class="fa fa-refresh"></i></a>
 
-		<!--**********************************
-			Content body end
-		***********************************-->
+                                                    }
+                                                    else
+                                                    {
+                                                                             <a asp-action="Archive" asp-route-id="@item.Id" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-archive"></i></a>
+                                                    }
+                                                }
 
- </div>
+
+
+                                                       </div>
+                                                 </td>
+
+                                                </tr>
+
+                                }
+
+             
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="html"
+        role="tabpanel"
+        aria-labelledby="home-tab"
+      >
+        <div class="card-body pt-0 p-0 code-area"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
