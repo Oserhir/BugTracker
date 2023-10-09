@@ -18,89 +18,98 @@
 </div>
 
 
-	<div class="row">
-								<!-- Column starts -->
+							<!-- Column starts -->
 								<div class="col-xl-12">
-									<div class="card dz-card" id="bootstrap-table1">
-										<div class="card-header flex-wrap border-0">
-										
+									<div class="card dz-card" id="accordion-one">
+										<div class="card-header flex-wrap">
+											<div>
+												<h4 class="card-title">Unassigned Tickets</h4>
+												 
+											</div>
+										 
 										</div>
 										<!--tab-content-->
 										<div class="tab-content" id="myTabContent">
 											<div class="tab-pane fade show active" id="Preview" role="tabpanel" aria-labelledby="home-tab">
-												<div class="card-body pt-0">
-													<div class="table-responsive">
-														<table class="table table-responsive-md">
-															<thead>
-																<tr>
-																	<th style="width:80px;"><strong>Title</strong></th>
-																	<th><strong>Developer</strong></th>
-																	<th><strong>Status</strong></th>
-																	<th><strong>Priority</strong></th>
-																	<th><strong>Date</strong></th>
-																	<th><strong>Action</strong></th>
-																	<th></th>
-																</tr>
-															</thead>
-															<tbody>
+											 <div class="card-body pt-0">
+												<div class="table-responsive">
+													<table id="example" class="display table" style="min-width: 845px">
+														<thead>
+															<tr>
+																<th>Title</th>
+																<th>Developer</th>
+																<th>Status</th>
+																<th>Priority</th>
+																<th>Date</th>
+																<th>Action</th>
+															</tr>
+														</thead>
+														<tbody>
+															
+								@foreach (var ticket in Model.OrderByDescending(d => d.Created))
+								{
 
-                                    @foreach (var ticket in Model.OrderByDescending(d => d.Created))
-                                    {
+																	<tr>
+																		<td><strong> <a asp-action="Details" asp-controller="Tickets" asp-route-id="@ticket.Id" style="text-decoration: none">@ticket.Title</a>  </strong></td>
+																		<td>
 
-																<tr>
-																	<td><strong> <a asp-action="Details" asp-controller="Tickets" asp-route-id="@ticket.Id" style="text-decoration: none">@ticket.Title</a>  </strong></td>
-																	<td>
+											@if (ticket.DeveloperUserId != null)
+											{
+												@ticket.DeveloperUser?.FullName
+											}
+											else
+											{
+												if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
+												{
+																									<a class="btn btn-sm btn-info text-white" asp-action="AssignDeveloper" asp-controller="Tickets" asp-route-id="@ticket.Id">Assign Dev</a>
+												}
 
-                                                                            @if (ticket.DeveloperUserId != null)
-                                                                            {
-                                                                                @ticket.DeveloperUser?.FullName
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
-                                                                                {
-                                                                                        <a class="btn btn-sm btn-info text-white" asp-action="AssignDeveloper" asp-controller="Tickets" asp-route-id="@ticket.Id">Assign Dev</a>
-                                                                                }
+											}
+																		</td>
 
-                                                                            }
-                                                                    </td>
+										@if (ticket.TicketStatus.Name == "New")
+										{
+																						<td> <span class="badge light badge-success">@ticket.TicketStatus.Name</span> </td>
+										}
+										else
+										{
+																					   <td> <span class="badge light badge-primary">@ticket.TicketStatus.Name</span> </td>
+										}
 
-                                                                    @if (ticket.TicketStatus.Name == "New")
-                                                                            {
-                                                                                <td> <span class="badge light badge-success">@ticket.TicketStatus.Name</span> </td>
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                               <td> <span class="badge light badge-primary">@ticket.TicketStatus.Name</span> </td>
-                                                                    }
-
-																	@if (ticket.TicketPriority.Name == "Urgent")
-																	{
-																				<td> <span class="badge light badge-danger">@ticket.TicketPriority.Name</span> </td>
-																	}
-																	else if (ticket.TicketPriority.Name == "Medium")
-																	{
-																		 <td> <span class="badge light badge-warning">@ticket.TicketPriority.Name</span> </td>
-																	}
-																	else if (ticket.TicketPriority.Name == "Low")
-																	{
-																		<td> <span class="badge light badge-info">@ticket.TicketPriority.Name</span> </td>
-																	}else
-																	{
-																		 <td> <span class="badge light badge-primary">@ticket.TicketPriority.Name</span> </td>
-																	}
+										@if (ticket.TicketPriority.Name == "Urgent")
+										{
+																						<td> <span class="badge light badge-danger">@ticket.TicketPriority.Name</span> </td>
+										}
+										else if (ticket.TicketPriority.Name == "Medium")
+										{
+																				 <td> <span class="badge light badge-warning">@ticket.TicketPriority.Name</span> </td>
+										}
+										else if (ticket.TicketPriority.Name == "Low")
+										{
+																				<td> <span class="badge light badge-info">@ticket.TicketPriority.Name</span> </td>
+										}
+										else
+										{
+																				 <td> <span class="badge light badge-primary">@ticket.TicketPriority.Name</span> </td>
+										}
 
 
-																	<td> @ticket.Created.ToString("dd-MMM-yyyy") </td>
-                                                                            <td>  <a asp-action="Details" asp-controller="Tickets"asp-route-id="@ticket.Id" class="btn btn-success shadow btn-xs sharp me-1"><i class="fa fa-eye"></i></a> </td>
-																      </tr>
-									} 
-															</tbody>
-														</table>
-													</div>
+																		<td> @ticket.Created.ToString("dd-MMM-yyyy") </td>
+																				<td>  <a asp-action="Details" asp-controller="Tickets"asp-route-id="@ticket.Id" class="btn btn-success shadow btn-xs sharp me-1"><i class="fa fa-eye"></i></a> </td>
+																		  </tr>
+								} 
+														 
+														</tbody>
+														 
+													</table>
 												</div>
-									
 											</div>
+												<!-- /Default accordion -->	
+											</div>
+											<div class="tab-pane fade " id="html" role="tabpanel" aria-labelledby="home-tab">
+												<div class="card-body pt-0 p-0 code-area">
+<!-- Default accordion -->
+<pre class="mb-0"><code class="language-html">
 
 
-		
+ 
