@@ -12,132 +12,159 @@
     <p class="mb-0">/ AssignDeveloper</p>
 </div>
 
- 
 
-<div class="">
-    <h3 class="mt-2 mb-4">Assign Developer</h3>
-    <div class="row">
+<div class="row">
+  <div class="col-md-8">
+    <div class="pb-3">
 
-        <div class="col-md-6">
+      <!--    Assign Developer              -->
 
-            <div class="card shadow mt-4">
-                
-                <div class="card-body">
-                    <form method="post" asp-action="AssignDeveloper" asp-controller="Tickets">
-                        <input asp-for="Ticket.Id" hidden/>
+<h3 class="mt-2 mb-4">Assign Developer</h3>
+<div class="row">
+  <div class="card shadow mt-4">
+    <div class="card-body">
+      <form method="post" asp-action="AssignDeveloper" asp-controller="Tickets">
+        <input asp-for="Ticket.Id" hidden />
 
-                        <div class="form-group">
-                            <label style="margin-bottom : 10px" class="col-form-label"><strong>Select Developer</strong></label>
+        <div class="form-group">
+          <label style="margin-bottom: 10px" class="col-form-label"
+            ><strong>Select Developer</strong></label
+          >
 
-                            <select required asp-for="DeveloperId" class="form-control" asp-items="@Model.Developers">
-                                <option></option>
-                            </select>
-                        </div>
-                        <div class="form-group mt-3">
-                            <input type="submit" value="Assign" class="btn btn-primary"/>
-                        </div>
-                    </form>
-                </div>
-            </div>
+          <select
+            required
+            asp-for="DeveloperId"
+            class="form-control"
+            asp-items="@Model.Developers"
+          >
+            <option></option>
+          </select>
         </div>
+        <div class="form-group mt-3">
+          <input type="submit" value="Assign" class="btn btn-primary" />
+        </div>
+      </form>
     </div>
+  </div>
+</div>
 
-
-
-<!-- Ticket Details  -->
+<!--    Assign Developer              -->
 
        
-        
-                @if (String.IsNullOrEmpty (  Model.Ticket.DeveloperUserId ))
-            {
-                    <div class="col-xl-4 col-lg-6 col-sm-6">
-                            <div class="card overflow-hidden">
-                                    <div class="card-header border-0 pb-0">
-                                        <h2 class="card-title">Current Developer</h2>
-                                    </div>
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <div class="profile-photo">
-                                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg" width="100" class="img-fluid rounded-circle" alt="">
-                                        </div>
-                                        <h3 class="mt-4 mb-1">Not Assigned</h3>
-                                    </div>
-                                </div>
-                               
-                            </div>
-                     </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
 
-        }else
-        {
-          <div class="col-xl-4 col-lg-6 col-sm-6">
-                               
-                                <div class="card overflow-hidden">
+          <!-- Detail -->
+ 
+  <div class="card">
+    <div class="card-header border-0 pb-0">
+      <h2 class="card-title">Ticket Details</h2>
+    </div>
+    <div class="card-body pb-0">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex px-0 justify-content-between">
+          <strong>Title</strong>
+          <span class="mb-0"> @Model.Ticket.Title</span>
+        </li>
 
-                                        <div class="card-header border-0 pb-0">
-                                                <h2 class="card-title">Current Developer</h2>
-                                        </div>
+        <li class="list-group-item d-flex px-0 justify-content-between">
+          <strong>Created</strong>
+          <span class="mb-0">
+                                        @Model.Ticket.Created.ToString("dd MMM, yyyy")</span
+          >
+        </li>
 
+        <li class="list-group-item d-flex px-0 justify-content-between">
+          <strong>Project Deadline:</strong>
+          <span class="mb-0">
+                                        @Model.Ticket.Project.EndDate.ToString("dd MMM, yyyy")
+          </span>
+        </li>
 
-                                    <div class="card-body">
+        <li class="list-group-item d-flex px-0 justify-content-between">
+          <strong>Priority:</strong>
+          <span class="mb-0"> @Model.Ticket.TicketPriority.Name </span>
+        </li>
 
-                                      
+        <li class="list-group-item d-flex px-0 justify-content-between">
+          <strong>Status:</strong>
+          <span class="mb-0"> @Model.Ticket.TicketStatus.Name </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+ 
+<!-- Detail -->
 
-                                        <div class="text-center">
-                                            <div class="profile-photo">
-                                                    <img src="https://cdn.pixabay.com/photo/2016/11/08/15/21/user-1808597_1280.png" width="100" class="img-fluid rounded-circle" alt="">
-                                            </div>
-                                                <h3 class="mt-4 mb-1">@Model.Ticket.DeveloperUser.FullName</h3>
-                                                <p class="">@Model.Ticket.DeveloperUser.Email</p>
-                                            <a class="btn btn-outline-primary btn-rounded mt-3 px-5">Profile</a>
-                                        </div>
-                                    </div>
+      </div>
+      <div class="col-md-6"> 
+          
+       <!-- Current Developer  -->
 
-                                   
-                                </div>
-                 </div>
+                @if (String.IsNullOrEmpty(Model.Ticket.DeveloperUserId))
+                {
+
+            <div class="card overflow-hidden">
+              <div class="card-header border-0 pb-0">
+                <h2 class="card-title">Current Developer</h2>
+              </div>
+              <div class="card-body">
+                <div class="text-center">
+                  <div class="profile-photo">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
+                      width="100"
+                      class="img-fluid rounded-circle"
+                      alt=""
+                    />
+                  </div>
+                  <h3 class="mt-4 mb-1">Not Assigned</h3>
+                </div>
+              </div>
+            </div>
+
+                }
+                else
+                {
+
+            <div class="card overflow-hidden">
+              <div class="card-header border-0 pb-0">
+                <h2 class="card-title">Current Developer</h2>
+              </div>
+
+              <div class="card-body">
+                <div class="text-center">
+                  <div class="profile-photo">
+                    <img
+                      src="https://cdn.pixabay.com/photo/2016/11/08/15/21/user-1808597_1280.png"
+                      width="100"
+                      class="img-fluid rounded-circle"
+                      alt=""
+                    />
+                  </div>
+                  <h3 class="mt-4 mb-1">@Model.Ticket.DeveloperUser.FullName</h3>
+                  <p class="">@Model.Ticket.DeveloperUser.Email</p>
+                      <a   asp-area="Identity" asp-page="/Account/Manage/Index" class="btn btn-outline-primary btn-rounded mt-3 px-5">Profile</a>
+                </div>
+              </div>
+            </div>
+
                 }
 
-       
 
-        <div class="col-12 col-md-8">
-                        <div class="card">
-                            <div class="card-header border-0 pb-0">
-                                <h2 class="card-title">Ticket Details</h2>
-                            </div>
-                            <div class="card-body pb-0">
+     <!-- Current Developer  -->
+      
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
 
-                                <ul class="list-group list-group-flush">
-
-                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <strong>Title</strong>
-                                        <span class="mb-0"> @Model.Ticket.Title</span>
-                                    </li>
+       <!--.md-4->
 
 
-                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <strong>Created</strong>
-                                        <span class="mb-0"> @Model.Ticket.Created.ToString("dd MMM, yyyy")</span>
-                                    </li>
-
-                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <strong>Project Deadline:</strong>
-                                        <span class="mb-0">  @Model.Ticket.Project.EndDate.ToString("dd MMM, yyyy") </span>
-                                    </li>
-
-                                     <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <strong>Priority:</strong>
-                                        <span class="mb-0"> @Model.Ticket.TicketPriority.Name </span>
-                                    </li>
-
-                                       <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <strong>Status:</strong>
-                                        <span class="mb-0"> @Model.Ticket.TicketStatus.Name </span>
-                                    </li>
-
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-
+  </div>
 </div>
+
+ 
+
