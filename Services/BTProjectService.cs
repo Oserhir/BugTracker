@@ -552,6 +552,17 @@ namespace TheBugTracker.Services
         }
         #endregion
 
+        #region Get User Info 
+   
+        public async Task<BTUser> GetUserInfoAsync(string? userId)
+        {
+            BTUser result = await _context.Users.FirstOrDefaultAsync( u => u.Id == userId) ;
+            return result;
+           
+        }
+        #endregion
+
+
 
     }
 }

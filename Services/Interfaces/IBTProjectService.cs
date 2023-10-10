@@ -52,6 +52,8 @@ namespace TheBugTracker.Services.Interfaces
 
         public Task UpdateProjectAsync(Project project);
 
+        public Task<BTUser> GetUserInfoAsync(string? UserId);
+
 
     }
 }
