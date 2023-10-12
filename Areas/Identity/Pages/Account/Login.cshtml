@@ -34,22 +34,36 @@
                                                         <input asp-for="Input.Password"  type="password" class="form-control" value="" placeholder="Password">
                                                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                                                     </div>
+                                              
                                                     <div class="form-group text-left mb-5 forget-main">
-                                                        <button style="background-color:#fd8d3d; color:white; border : none"  type="submit" class="btn btn-primary">Sign Me In</button>
+                                                        <button style="background-color:#fd8d3d; color:white; 
+                                                               border : none"  type="submit" class="btn btn-primary">Sign Me In</button>
 
-
+                                 
                                                         <span class="form-check d-inline-block">
                                                             <input type="checkbox" class="form-check-input" id="check1" name="example1">
                                                             <label class="form-check-label" for="check1">Remember me</label>
-                                                        </span>
-                                                        <button class="nav-link m-auto btn tp-btn-light btn-primary forget-tab " id="nav-forget-tab" data-bs-toggle="tab" data-bs-target="#nav-forget" type="button" role="tab" aria-controls="nav-forget" aria-selected="false">Forget Password ?</button> 	
-                                                    </div>
+                                                        </span>    
+                                                        @*   
+                                                        <button class="nav-link m-auto btn tp-btn-light btn-primary forget-tab " 
+                                                                 id="nav-forget-tab" data-bs-toggle="tab" data-bs-target="#nav-forget" 
+                                                                 type="button" role="tab" aria-controls="nav-forget" aria-selected="false">Forget Password ?</button> 	
+                                                            *@
+                                                    </div> 
+                                                  
                                                      
                                                 </form>
-                                                <div class="text-center bottom"> 
-                                                    <button style="background-color:#fd8d3d; color:white; border : none" class="btn btn-primary button-md btn-block" id="nav-sign-tab" data-bs-toggle="tab" data-bs-target="#nav-sign" type="button" role="tab" aria-controls="nav-sign" aria-selected="false">Create an account</button> 
 
+                                                <form method="post"  >
+                                                    <div class="text-center bottom"> 
+                                                    <button type="submit" asp-page="/Account/DemoLogin" asp-area="Identity"   style="background-color:#fd8d3d; color:white; border : none" 
+                                                          class="btn btn-primary button-md btn-block" id="nav-sign-tab" data-bs-toggle="tab" 
+                                                          data-bs-target="#nav-sign" type="button" role="tab" aria-controls="nav-sign" 
+                                                          aria-selected="false" >Demo Account Login</button> 
                                                 </div>
+                                                </form>
+
+
                                           </div>
                                           <div class="tab-pane fade" id="nav-forget" role="tabpanel" aria-labelledby="nav-forget-tab">
                                             <form class="dz-form">
@@ -66,14 +80,17 @@
                                                     <button class="btn btn-primary float-end">Submit</button>
                                                 </div>
                                             </form>
-                                             
                                             
-
+                                             @*
                                                 <div class="text-center bottom"> 
                                                     <form method="post">
-                                                         <button  type="submit" asp-page="/Account/Register" asp-area="Identity"   style="background-color:#fd8d3d; color:white; border : none" class="btn btn-primary button-md btn-block" id="nav-sign-tab" data-bs-toggle="tab" data-bs-target="#nav-sign" type="button" role="tab" aria-controls="nav-sign" aria-selected="false">Create an account</button> 
+                                                         <button  type="submit" asp-page="/Account/Register" asp-area="Identity"   
+                                                         style="background-color:#fd8d3d; color:white; border : none"
+                                                         class="btn btn-primary button-md btn-block" id="nav-sign-tab" data-bs-toggle="tab"
+                                                         data-bs-target="#nav-sign" type="button" role="tab" aria-controls="nav-sign"
+                                                         aria-selected="false">Demo Account Login</button> 
                                                     </form>
-                                                </div>
+                                                </div>  *@
                                           </div>
                                           
                                         </div>
@@ -92,7 +109,8 @@
                             </div>
                             <div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: block;">
                                 <div class="mCSB_draggerContainer">
-                                <div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 0px; display: block; height: 652px; max-height: 643px; top: 0px;">
+                                <div id="mCSB_1_dragger_vertical" class="mCSB_dragger" 
+                                    style="position: absolute; min-height: 0px; display: block; height: 652px; max-height: 643px; top: 0px;">
                                 <div class="mCSB_dragger_bar" style="line-height: 0px;"></div><div class="mCSB_draggerRail"></div></div></div>
                             </div>
                         </div>
@@ -103,7 +121,7 @@
         </div>
         <!-- Content END-->
 
-
+@* 
 <!-- 
 @{
     ViewData["Title"] = "Log in";
@@ -186,7 +204,7 @@
     </div>
 </div>
  -->
-
+ *@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

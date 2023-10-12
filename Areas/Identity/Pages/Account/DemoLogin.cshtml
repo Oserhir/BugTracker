@@ -1,0 +1,119 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Demo log in";
+
+    string DemoAdminUserName = "demoadmin@bugtracker.com";
+    string DemoProjectManagerUserName = "demopm@bugtracker.com";
+    string DemoDeveloperUserName = "demodev@bugtracker.com";
+    string DemoSubmitterUserName = "demosub@bugtracker.com";
+
+    string DemoUserPassword = "Abc&123!";
+}
+
+        <!-- Content -->
+        <div class="browse-job login-style3">
+            <!-- Coming Soon -->
+            <div class="bg-img-fix overflow-hidden" style="background:#fff url(https://rsgaccountants.com.au/wp-content/uploads/2019/07/accountant-accounting-businessman.jpg); background-size: cover; height: 100vh;">
+                <div class="row gx-0">
+                    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12 vh-100  " style="background-color:#181c22">
+                        <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 653px;" tabindex="0">
+                            <div id="mCSB_1_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr"  >
+                                <div class="login-form style-2" style="padding:20px;" >
+
+                                       <!--  Content  -->
+                                             <section>
+
+                                                 <div class="card-body text-center">
+                    <!-- Demo Admin -->
+                    <form id="demoAdmin" method="post" class="mt-2 mb-2">
+                        <div class="form-floating">
+                            <input asp-for="Input.Email" class="form-control" value=@DemoAdminUserName hidden="true" />
+                        </div>
+                        <div class="form-floating">
+                            <input asp-for="Input.Password" class="form-control" value=@DemoUserPassword hidden="true" />
+                        </div>
+                        <div>
+                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-danger">Admin</button>
+                        </div>
+                    </form>
+                    <!-- Demo PM -->
+                    <form id="demoPM" method="post" class="mt-4 mb-2">
+                        <div class="form-floating">
+                            <input asp-for="Input.Email" class="form-control" value=@DemoProjectManagerUserName hidden="true" />
+                        </div>
+                        <div class="form-floating">
+                            <input asp-for="Input.Password" class="form-control" value=@DemoUserPassword hidden="true" />
+                        </div>
+                        <div>
+                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-success">Project Manager</button>
+                        </div>
+                    </form>
+                    <!-- Demo Developer -->
+                    <form id="demoDeveloper" method="post" class="mt-4 mb-2">
+                        <div class="form-floating">
+                            <input asp-for="Input.Email" class="form-control" value=@DemoDeveloperUserName hidden="true" />
+                        </div>
+                        <div class="form-floating">
+                            <input asp-for="Input.Password" class="form-control" value=@DemoUserPassword hidden="true" />
+                        </div>
+                        <div>
+                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Developer</button>
+                        </div>
+                    </form>
+                    <!-- Demo Submitter -->
+                    <form id="demoSubmitter" method="post" class="mt-4 mb-2">
+                        <div class="form-floating">
+                            <input asp-for="Input.Email" class="form-control" value=@DemoSubmitterUserName hidden="true" />
+                        </div>
+                        <div class="form-floating">
+                            <input asp-for="Input.Password" class="form-control" value=@DemoUserPassword hidden="true" />
+                        </div>
+                        <div>
+                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-secondary">Submitter</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="text-center mt-4">
+                <a asp-page="./Login">Back to account log in</a>
+            </div>
+          
+                                             </section>
+                                       <!--  Content  -->
+
+                                          </div>
+                                       
+                                          </div>
+
+                                                </div>
+                                          </div>
+
+
+                                        </div>
+
+                                        </div>
+                                    </nav>
+
+                                </div>
+                            </div>
+                            <div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical" 
+                            style="display: block;">
+                                <div class="mCSB_draggerContainer">
+                                <div id="mCSB_1_dragger_vertical" class="mCSB_dragger" 
+                                    style="position: absolute; min-height: 0px; display: block; height: 652px; max-height: 643px; top: 0px;">
+                                <div class="mCSB_dragger_bar" style="line-height: 0px;"></div><div class="mCSB_draggerRail"></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Full Blog Page Contant -->
+        </div>
+        <!-- Content END-->
+
+ 
+@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+}
