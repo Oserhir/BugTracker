@@ -101,6 +101,13 @@ namespace TheBugTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AddProjectWithPMViewModel model)
         {
+
+            // Check for Demo User
+            if (await IsDemoUser())
+            {
+                return new RedirectResult("~/Identity/Account/AccessDenied");
+            }
+
             if (model != null)
             {
 
@@ -182,6 +189,13 @@ namespace TheBugTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(AddProjectWithPMViewModel model)
         {
+
+            // Check for Demo User
+            if (await IsDemoUser())
+            {
+                return new RedirectResult("~/Identity/Account/AccessDenied");
+            }
+
             if (model != null)
             {
                 try
@@ -254,6 +268,13 @@ namespace TheBugTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ArchiveConfirmed(int id)
         {
+
+            // Check for Demo User
+            if (await IsDemoUser())
+            {
+                return new RedirectResult("~/Identity/Account/AccessDenied");
+            }
+
             int companyId = User.Identity.GetCompanyId().Value;
 
             Project project = await _projectService.GetProjectByIdAsync(id, companyId);
@@ -293,6 +314,13 @@ namespace TheBugTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RestoreConfirmed(int id)
         {
+
+            // Check for Demo User
+            if (await IsDemoUser())
+            {
+                return new RedirectResult("~/Identity/Account/AccessDenied");
+            }
+
             int companyId = User.Identity.GetCompanyId().Value;
             var project = await _projectService.GetProjectByIdAsync(id, companyId);
 
@@ -389,6 +417,12 @@ namespace TheBugTracker.Controllers
         public async Task<IActionResult> AssignPM(AssignPMViewModel model)
         {
 
+            // Check for Demo User
+            if (await IsDemoUser())
+            {
+                return new RedirectResult("~/Identity/Account/AccessDenied");
+            }
+
             if (!string.IsNullOrEmpty(model.PMId))
             {
                 try
@@ -440,6 +474,12 @@ namespace TheBugTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AssignMembers(ProjectMembersViewModel model)
         {
+            // Check for Demo User
+            if (await IsDemoUser())
+            {
+                return new RedirectResult("~/Identity/Account/AccessDenied");
+            }
+
             if (model.SelectedUsers != null)
             {
                 List<string> memberIds = (await _projectService.GetAllProjectMembersExceptPMAsync(model.Project.Id))
@@ -472,7 +512,23 @@ namespace TheBugTracker.Controllers
             int companyId = User.Identity.GetCompanyId().Value;
 
             return (await _projectService.GetAllProjectsByCompanyAsync(companyId)).Any(p => p.Id == id);
-        } 
+        }
+        #endregion
+
+        #region Is Demo User
+        private async Task<bool> IsDemoUser()
+        {
+            // Check if Demo User
+            BTUser btUser = await _userManager.GetUserAsync(User);
+            if (await _userManager.IsInRoleAsync(btUser, nameof(Roles.DemoUser)))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion
     }
 }

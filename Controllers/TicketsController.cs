@@ -161,6 +161,13 @@ namespace TheBugTracker.Controllers
         public async Task<IActionResult> AssignDeveloper(AssignDeveloperViewModel model)
         {
 
+            // Check for Demo User
+            if (await IsDemoUser())
+            {
+                return new RedirectResult("~/Identity/Account/AccessDenied");
+            }
+
+
             if (model.DeveloperId != null)
             {
                 BTUser btUser = await _userManager.GetUserAsync(User);
@@ -243,6 +250,12 @@ namespace TheBugTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Description,ProjectId,TicketTypeId,TicketPriorityId")] Ticket ticket)
         {
+            // Check for Demo User
+            if (await IsDemoUser())
+            {
+                return new RedirectResult("~/Identity/Account/AccessDenied");
+            }
+
             BTUser btUser = await _userManager.GetUserAsync(User);
 
             if (ModelState.IsValid)
@@ -323,6 +336,12 @@ namespace TheBugTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Created,Updated,Archived,ProjectId,TicketTypeId,TicketPriorityId,TicketStatusId,OwnerUserId,DeveloperUserId")] Ticket ticket)
         {
+            // Check for Demo User
+            if (await IsDemoUser())
+            {
+                return new RedirectResult("~/Identity/Account/AccessDenied");
+            }
+
             if (id != ticket.Id)
             {
                 return NotFound();
@@ -396,6 +415,11 @@ namespace TheBugTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ArchiveConfirmed(int id)
         {
+            // Check for Demo User
+            if (await IsDemoUser())
+            {
+                return new RedirectResult("~/Identity/Account/AccessDenied");
+            }
 
             Ticket ticket = await _ticketService.GetTicketByIdAsync(id);
 
@@ -407,11 +431,16 @@ namespace TheBugTracker.Controllers
         }
         #endregion
 
-        #region Add Ticket Comment
+        #region //Post : Add Ticket Comment
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddTicketComment([Bind("Id, TicketId , Comment")] TicketComment ticketComment)
         {
+            // Check for Demo User
+            if (await IsDemoUser())
+            {
+                return new RedirectResult("~/Identity/Account/AccessDenied");
+            }
 
             if (ModelState.IsValid)
             {
@@ -441,12 +470,18 @@ namespace TheBugTracker.Controllers
 
         #endregion
 
-        #region Add Ticket Attachment
+        #region //Post: Add Ticket Attachment
         // POST: Tickets/AddTicketAttachment
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddTicketAttachment([Bind("Id,FormFile,Description,TicketId")] TicketAttachment ticketAttachment)
         {
+
+            // Check for Demo User
+            if (await IsDemoUser())
+            {
+                return new RedirectResult("~/Identity/Account/AccessDenied");
+            }
 
             string statusMessage;
 
@@ -526,6 +561,13 @@ namespace TheBugTracker.Controllers
         public async Task<IActionResult> RestoreConfirmed(int id)
         {
 
+            // Check for Demo User
+            if (await IsDemoUser())
+            {
+                return new RedirectResult("~/Identity/Account/AccessDenied");
+            }
+
+
             Ticket ticket = await _ticketService.GetTicketByIdAsync(id);
 
             ticket.Archived = false;
@@ -543,7 +585,23 @@ namespace TheBugTracker.Controllers
 
             return (await _ticketService.GetAllTicketsByCompanyAsync(companyId)).Any(t => t.Id == id);
 
-        } 
+        }
+        #endregion
+
+        #region Is Demo User
+        private async Task<bool> IsDemoUser()
+        {
+            // Check if Demo User
+            BTUser btUser = await _userManager.GetUserAsync(User);
+            if (await _userManager.IsInRoleAsync(btUser, nameof(Roles.DemoUser)))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TheBugTracker.Extensions;
 using TheBugTracker.Models;
+using TheBugTracker.Models.Enums;
 using TheBugTracker.Models.ViewModels;
 using TheBugTracker.Services.Interfaces;
 
@@ -62,6 +63,12 @@ namespace TheBugTracker.Controllers
         public async Task<IActionResult> ManageUserRoles(ManageUserRolesViewModel member)
         {
 
+            // Check for Demo User
+            if (await IsDemoUser())
+            {
+                return new RedirectResult("~/Identity/Account/AccessDenied");
+            }
+
             // Get the company Id
             int companyId = User.Identity.GetCompanyId().Value;
 
@@ -88,6 +95,20 @@ namespace TheBugTracker.Controllers
             return RedirectToAction(nameof(ManageUserRoles));
         }
 
-
+        #region Is Demo User
+        private async Task<bool> IsDemoUser()
+        {
+            // Check if Demo User
+            BTUser btUser = await _userManager.GetUserAsync(User);
+            if (await _userManager.IsInRoleAsync(btUser, nameof(Roles.DemoUser)))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion
     }
 }
