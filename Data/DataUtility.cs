@@ -86,7 +86,7 @@ namespace TheBugTracker.Data
             try
             {
                 IList<Company> defaultcompanies = new List<Company>() {
-                    new Company() { Name = "Company1", Description="This is default Company 1" },
+                    new Company() { Name = "OserhirDev", Description="Oserhir Software Development" },
                     new Company() { Name = "Company2", Description="This is default Company 2" },
                     new Company() { Name = "Company3", Description="This is default Company 3" },
                     new Company() { Name = "Company4", Description="This is default Company 4" },
@@ -98,7 +98,7 @@ namespace TheBugTracker.Data
                 await context.SaveChangesAsync();
 
                 //Get company Ids
-                company1Id = context.Companies.FirstOrDefault(p => p.Name == "Company1").Id;
+                company1Id = context.Companies.FirstOrDefault(p => p.Name == "OserhirDev").Id;
                 company2Id = context.Companies.FirstOrDefault(p => p.Name == "Company2").Id;
                 company3Id = context.Companies.FirstOrDefault(p => p.Name == "Company3").Id;
                 company4Id = context.Companies.FirstOrDefault(p => p.Name == "Company4").Id;
@@ -156,45 +156,45 @@ namespace TheBugTracker.Data
                      {
                          CompanyId = company1Id,
                          Name = "Build a Personal Porfolio",
-                         Description="Single page html, css & javascript page.  Serves as a landing page for candidates and contains a bio and links to all applications and challenges." ,
-                         StartDate = new DateTime(2021,8,20),
-                         EndDate = new DateTime(2021,8,20).AddMonths(1),
+                         Description="Online portfolio for Oserhir" ,
+                         StartDate = new DateTime(2023,8,20),
+                         EndDate = new DateTime(2023,10,20).AddMonths(1),
                          ProjectPriorityId = priorityLow
                      },
                      new Project()
                      {
-                         CompanyId = company2Id,
-                         Name = "Build a supplemental Blog Web Application",
-                         Description="Candidate's custom built web application using .Net Core with MVC, a postgres database and hosted in a heroku container.  The app is designed for the candidate to create, update and maintain a live blog site.",
-                         StartDate = new DateTime(2021,8,20),
-                         EndDate = new DateTime(2021,8,20).AddMonths(4),
+                         CompanyId = company1Id,
+                         Name = "Blog",
+                         Description="Oserhir blog",
+                         StartDate = new DateTime(2023,10,20),
+                         EndDate = new DateTime(2023,11,24).AddMonths(4),
                          ProjectPriorityId = priorityMedium
                      },
                      new Project()
                      {
                          CompanyId = company1Id,
                          Name = "Build an Issue Tracking Web Application",
-                         Description="A custom designed .Net Core application with postgres database.  The application is a multi tennent application designed to track issue tickets' progress.  Implemented with identity and user roles, Tickets are maintained in projects which are maintained by users in the role of projectmanager.  Each project has a team and team members.",
-                         StartDate = new DateTime(2021,8,20),
-                         EndDate = new DateTime(2021,8,20).AddMonths(6),
+                         Description="A bug tracking application to assist with software development",
+                         StartDate = new DateTime(2023,8,20),
+                         EndDate = new DateTime(2023,8,20).AddMonths(6),
                          ProjectPriorityId = priorityHigh
                      },
                      new Project()
                      {
-                         CompanyId = company2Id,
+                         CompanyId = company1Id,
                          Name = "Build an Address Book Web Application",
-                         Description="A custom designed .Net Core application with postgres database.  This is an application to serve as a rolodex of contacts for a given user..",
-                         StartDate = new DateTime(2021,8,20),
-                         EndDate = new DateTime(2021,8,20).AddMonths(2),
+                         Description="A custom designed .Net Core application with postgres database...",
+                         StartDate = new DateTime(2023,7,20),
+                         EndDate = new DateTime(2023,7,20).AddMonths(2),
                          ProjectPriorityId = priorityLow
                      },
                     new Project()
                      {
                          CompanyId = company1Id,
                          Name = "Build a Movie Information Web Application",
-                         Description="A custom designed .Net Core application with postgres database.  An API based application allows users to input and import movie posters and details including cast and crew information.",
-                         StartDate = new DateTime(2021,8,20),
-                         EndDate = new DateTime(2021,8,20).AddMonths(3),
+                         Description="Movie Pro is an app which demonstrates both retrieving and storing data from TMDB API",
+                         StartDate = new DateTime(2023,2,20),
+                         EndDate = new DateTime(2023,2,20).AddMonths(3),
                          ProjectPriorityId = priorityHigh
                      }
                 };
@@ -222,8 +222,8 @@ namespace TheBugTracker.Data
             {
                 UserName = "btadmin1@bugtracker.com",
                 Email = "btadmin1@bugtracker.com",
-                FirstName = "Bill",
-                LastName = "Appuser",
+                FirstName = "Oserhir",
+                LastName = "Youssef",
                 EmailConfirmed = true,
                 CompanyId = company1Id
             };
@@ -250,10 +250,10 @@ namespace TheBugTracker.Data
             {
                 UserName = "btadmin2@bugtracker.com",
                 Email = "btadmin2@bugtracker.com",
-                FirstName = "Steve",
-                LastName = "Appuser",
+                FirstName = "Perry",
+                LastName = "Lopez",
                 EmailConfirmed = true,
-                CompanyId = company2Id
+                CompanyId = company1Id
             };
             try
             {
@@ -279,8 +279,8 @@ namespace TheBugTracker.Data
             {
                 UserName = "ProjectManager1@bugtracker.com",
                 Email = "ProjectManager1@bugtracker.com",
-                FirstName = "John",
-                LastName = "Appuser",
+                FirstName = "Antonio",
+                LastName = "Oliver",
                 EmailConfirmed = true,
                 CompanyId = company1Id
             };
@@ -309,9 +309,9 @@ namespace TheBugTracker.Data
                 UserName = "ProjectManager2@bugtracker.com",
                 Email = "ProjectManager2@bugtracker.com",
                 FirstName = "Jane",
-                LastName = "Appuser",
+                LastName = "Bryer",
                 EmailConfirmed = true,
-                CompanyId = company2Id
+                CompanyId = company1Id
             };
             try
             {
@@ -337,8 +337,8 @@ namespace TheBugTracker.Data
             {
                 UserName = "Developer1@bugtracker.com",
                 Email = "Developer1@bugtracker.com",
-                FirstName = "Elon",
-                LastName = "Appuser",
+                FirstName = "Vitoria",
+                LastName = "Cunha",
                 EmailConfirmed = true,
                 CompanyId = company1Id
             };
@@ -366,10 +366,10 @@ namespace TheBugTracker.Data
             {
                 UserName = "Developer2@bugtracker.com",
                 Email = "Developer2@bugtracker.com",
-                FirstName = "James",
-                LastName = "Appuser",
+                FirstName = "Davi",
+                LastName = "Ferreira",
                 EmailConfirmed = true,
-                CompanyId = company2Id
+                CompanyId = company1Id
             };
             try
             {
@@ -427,7 +427,7 @@ namespace TheBugTracker.Data
                 FirstName = "Carol",
                 LastName = "Appuser",
                 EmailConfirmed = true,
-                CompanyId = company2Id
+                CompanyId = company1Id
             };
             try
             {
@@ -484,7 +484,7 @@ namespace TheBugTracker.Data
                 FirstName = "Bruce",
                 LastName = "Appuser",
                 EmailConfirmed = true,
-                CompanyId = company2Id
+                CompanyId = company1Id
             };
             try
             {
@@ -541,7 +541,7 @@ namespace TheBugTracker.Data
                 FirstName = "Sue",
                 LastName = "Appuser",
                 EmailConfirmed = true,
-                CompanyId = company2Id
+                CompanyId = company1Id
             };
             try
             {
@@ -604,7 +604,7 @@ namespace TheBugTracker.Data
                 FirstName = "Demo",
                 LastName = "ProjectManager",
                 EmailConfirmed = true,
-                CompanyId = company2Id
+                CompanyId = company1Id
             };
             try
             {
@@ -634,7 +634,7 @@ namespace TheBugTracker.Data
                 FirstName = "Demo",
                 LastName = "Developer",
                 EmailConfirmed = true,
-                CompanyId = company2Id
+                CompanyId = company1Id
             };
             try
             {
@@ -664,7 +664,7 @@ namespace TheBugTracker.Data
                 FirstName = "Demo",
                 LastName = "Submitter",
                 EmailConfirmed = true,
-                CompanyId = company2Id
+                CompanyId = company1Id
             };
             try
             {
@@ -694,7 +694,7 @@ namespace TheBugTracker.Data
                 FirstName = "Demo",
                 LastName = "NewUser",
                 EmailConfirmed = true,
-                CompanyId = company2Id
+                CompanyId = company1Id
             };
             try
             {
@@ -804,7 +804,7 @@ namespace TheBugTracker.Data
         {
             //Get project Ids
             int portfolioId = context.Projects.FirstOrDefault(p => p.Name == "Build a Personal Porfolio").Id;
-            int blogId = context.Projects.FirstOrDefault(p => p.Name == "Build a supplemental Blog Web Application").Id;
+            int blogId = context.Projects.FirstOrDefault(p => p.Name == "Blog").Id;
             int bugtrackerId = context.Projects.FirstOrDefault(p => p.Name == "Build an Issue Tracking Web Application").Id;
             int movieId = context.Projects.FirstOrDefault(p => p.Name == "Build a Movie Information Web Application").Id;
 
