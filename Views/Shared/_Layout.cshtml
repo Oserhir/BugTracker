@@ -222,19 +222,20 @@
                         </li>
 
                       <!-- End : Ticket Dropdown -->
+                        @if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
+                        {
+                            <li class="nav-item">
 
-                        <li class="nav-item">
-
-                                   <a asp-controller="UserRoles" asp-action="ManageUserRoles" class="d-flex align-items-center text-white text-decoration-none "  aria-expanded="false">
-                                                   <i class="fa fa-cog" aria-hidden="true"></i>
-                                                   <span  class="nav-link text-white" >Manage User Roles</span>
-                                    </a>
-                           <!-- 
-                            <i class="fa fa-cog" aria-hidden="true"></i>
-                            <a class="nav-link mx-2 active" aria-current="page" asp-controller="UserRoles" asp-action="ManageUserRoles" >Manage User Roles</a>
+                                <a asp-controller="UserRoles" asp-action="ManageUserRoles" class="d-flex align-items-center text-white text-decoration-none "  aria-expanded="false">
+                                    <i class="fa fa-cog" aria-hidden="true"></i>
+                                    <span  class="nav-link text-white" >Manage User Roles</span>
+                                </a>
+                                <!-- 
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                                <a class="nav-link mx-2 active" aria-current="page" asp-controller="UserRoles" asp-action="ManageUserRoles" >Manage User Roles</a>
                                 -->
-                        </li>
-
+                            </li>
+                        }
                     </ul>
                     <ul class="navbar-nav ms-auto d-none d-lg-inline-flex">
                         <partial name="_LoginPartial" />
