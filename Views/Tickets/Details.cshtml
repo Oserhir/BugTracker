@@ -105,6 +105,9 @@
               </div>
               <h3 class="mt-4 mb-1">Not Assigned</h3>
 
+                  @if( projectManager != null) {
+
+                  
                  @if (User.IsInRole(nameof(Roles.Admin)) || (btUser.Id ==
                       projectManager.Id))
                         {
@@ -113,6 +116,7 @@
                         class="btn btn-outline-primary btn-rounded mt-3 px-5"
                                 >Assign Developer</a
                       >
+                        }
                         }
             </div>
           </div>

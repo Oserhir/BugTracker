@@ -143,7 +143,7 @@ namespace TheBugTracker.Services
             {
 
                 List<Ticket> tickets = await _context.Projects
-                                       .Where(p => p.Id == companyId)
+                                       .Where(p => p.CompanyId == companyId)
                                        .SelectMany(p => p.Tickets)
                                                           .Include(t => t.Attachments)
                                                           .Include(t => t.Comments)
