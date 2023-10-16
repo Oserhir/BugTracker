@@ -27,11 +27,11 @@
                                                     </div>
                                                     <p>Enter your e-mail address and your password. </p>
                                                     <div class="form-group mb-3">
-                                                        <input asp-for="Input.Email"  type="email" class="form-control" value="" placeholder="Email" >
+                                                        <input asp-for="Input.Email"  type="email" class="form-control" value="demoadmin@bugtracker.com" placeholder="Email" >
                                                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                                                     </div>
                                                     <div class="form-group mb-3">
-                                                        <input asp-for="Input.Password"  type="password" class="form-control" value="" placeholder="Password">
+                                                        <input asp-for="Input.Password"  type="password" class="form-control" value="Abc&123!" placeholder="Password">
                                                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                                                     </div>
                                               
@@ -56,7 +56,8 @@
 
                                                 <form method="post"  >
                                                     <div class="text-center bottom"> 
-                                                    <button type="submit" asp-page="/Account/DemoLogin" asp-area="Identity"   style="background-color:#fd8d3d; color:white; border : none" 
+                                                    <button type="submit" asp-page="/Account/DemoLogin" asp-area="Identity"   
+                                                          style="background-color:#0060c4; color:white; border : none" 
                                                           class="btn btn-primary button-md btn-block" id="nav-sign-tab" data-bs-toggle="tab" 
                                                           data-bs-target="#nav-sign" type="button" role="tab" aria-controls="nav-sign" 
                                                           aria-selected="false" >Demo Account Login</button> 

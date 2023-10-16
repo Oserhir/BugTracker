@@ -60,11 +60,11 @@
                       <td>
                         <h6>@item.Name</h6>
                         <span>
-                          Created @Html.DisplayFor(modelItem => item.StartDate)
+                                          Created @item.StartDate.ToString( "dd MMM, yyyy"  ) 
                         </span>
                       </td>
 
-                      <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                          <td> @item.EndDate.ToString( "dd MMM, yyyy"  )  
                       <td>
                                             @Html.DisplayFor(modelItem => item.ProjectPriority.Name)
                       </td>
