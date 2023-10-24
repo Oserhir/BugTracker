@@ -6,6 +6,8 @@ A flexible application that allows a business to identify, report, and track bug
 
 <!--ts-->
 
+### Table of contents
+
 - [Login]()
 - [Demo Account Page]()
 - [Dashboard]()
