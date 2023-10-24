@@ -1,6 +1,7 @@
 # BugTracker
-A flexible application that allows a business to identify, report, and track bugs in their software.
+The Bug Tracker app is a tool used to report and track issues (bugs) in software development projects.
 
+The app was built with ASP.NET MVC, C# and SQL. The front end was developed with HTML, JavaScript, CSS and Bootstrap, using a bootstrap template as a foundation. The backend utilises MVC and C#, with a PostgreSQL database.
 
 <br>
 
